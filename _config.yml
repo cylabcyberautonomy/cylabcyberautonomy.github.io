@@ -1,12 +1,12 @@
-title: Just the Docs
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: CyLab CyberAutonomy Initiative
+description: The future of autonomous cybersecurity.
 theme: just-the-docs
 
 logo: "img/cyber-autonomy-initiative-logo_2.png"
 title_only_logo: false
 
 
-url: https://just-the-docs.github.io
+url: https://cylabcyberautonomy.github.io
 
 aux_links:
   CyLab Link: https://www.cylab.cmu.edu/research/cyber-autonomy-initiative/
