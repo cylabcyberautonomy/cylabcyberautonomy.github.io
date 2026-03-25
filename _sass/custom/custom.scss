@@ -1,0 +1,16 @@
+a,
+.nav-list .nav-list-item .nav-list-link {
+  color: #f78d2d;
+}
+
+a:hover,
+a:active,
+.nav-list .nav-list-item .nav-list-link:hover,
+.nav-list .nav-list-item .nav-list-link.active {
+  color: lighten(#f78d2d, 15%);
+}
+
+a strong,
+strong a {
+  color: darken(#f78d2d, 12%);
+}

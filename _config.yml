@@ -1,8 +1,14 @@
-title: Just the Docs Template
+title: Just the Docs
 description: A starter template for a Jeykll site using the Just the Docs theme!
 theme: just-the-docs
+
+logo: "img/cyber-autonomy-initiative-logo_2.png"
+title_only_logo: false
+
 
 url: https://just-the-docs.github.io
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  CyLab Link: https://www.cylab.cmu.edu/research/cyber-autonomy-initiative/
+
+color_scheme: dark
