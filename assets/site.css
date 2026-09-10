@@ -4,10 +4,10 @@
   --text-primary:#1a1a1a; --text-secondary:#5c5c5c; --text-muted:#8a8a8a;
   --border:#e3e1db;
   /* CyLab's own accent (cylab.cmu.edu's "orangepeel" theme): a warm gold, not red.
-     --gold is a darkened, text-safe shade (link/label text needs real contrast on
-     white); --gold-bright is the actual brand gold, used for fills/borders/rules
-     where it sits behind or next to dark ink rather than being the text itself. */
-  --gold:#8a5a00; --gold-bright:#fc9a00; --gold-ink:#1a1a1a;
+     --gold-bright (#fc9a00) is the actual brand color, used everywhere at rest.
+     --gold is a darker burnt-orange used only for hover/active states -- kept in
+     the orange family (not just a darkened yellow) so it doesn't read as brown. */
+  --gold:#e06406; --gold-bright:#fc9a00; --gold-ink:#1a1a1a;
   --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
 }
 @media (prefers-color-scheme: dark){
