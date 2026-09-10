@@ -62,7 +62,8 @@
   .ctl select{background:var(--surface-0);color:var(--text-primary);border:1px solid var(--border);
     border-radius:8px;padding:7px 9px;font-size:13.5px;font-family:inherit}
   .fig{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:20px 20px 16px;box-shadow:var(--shadow);margin-top:6px}
-  table.heat{border-collapse:separate;border-spacing:3px;width:100%;table-layout:fixed;font-variant-numeric:tabular-nums}
+  .table-scroll{overflow-x:auto}
+  table.heat{border-collapse:separate;border-spacing:3px;width:100%;min-width:560px;table-layout:fixed;font-variant-numeric:tabular-nums}
   table.heat th{font-weight:550;font-size:13px;color:var(--text-secondary);padding:4px 6px;text-align:center;vertical-align:bottom}
   table.heat th.rowh{width:130px;text-align:right;white-space:nowrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--text-primary)}
   table.heat th.rowh small{color:var(--text-muted);font-weight:400}
@@ -135,7 +136,7 @@
         <option value="i">Incalmo</option><option value="b">Shell</option>
         <option value="a">Artemis</option></select></div>
     </div>
-    <div class="fig"><table class="heat" id="heatG"></table><div class="legend" id="legG"></div></div>
+    <div class="fig"><div class="table-scroll"><table class="heat" id="heatG"></table></div><div class="legend" id="legG"></div></div>
   </section>
 
   <p>We also provide the cost for these experiments, in the interest of transparency.</p>
@@ -147,7 +148,7 @@
         <option value="i">Incalmo</option><option value="b">Shell</option>
         <option value="a">Artemis</option></select></div>
     </div>
-    <div class="fig"><table class="heat" id="heatC"></table><div class="legend" id="legC"></div></div>
+    <div class="fig"><div class="table-scroll"><table class="heat" id="heatC"></table></div><div class="legend" id="legC"></div></div>
   </section>
 
   <h2>What’s next?</h2>
