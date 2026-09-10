@@ -42,8 +42,6 @@ a:hover{color:var(--gold);text-decoration:none}
 
 /* ---- layout ---- */
 .wrap{max-width:780px;margin:0 auto;padding:56px 28px 90px}
-.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--gold-bright);margin-bottom:12px}
 h1{font-size:38px;line-height:1.08;letter-spacing:-.03em;font-weight:800;margin:0 0 14px}
 @media (min-width:640px){h1{font-size:50px}}
 h2{font-size:21px;letter-spacing:-.01em;font-weight:750;margin:0 0 8px}
