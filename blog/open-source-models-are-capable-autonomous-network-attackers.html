@@ -181,13 +181,6 @@ const STAT={
          ['full','Full-clear rate (%)'],['timeout','Timeout rate (%)']],
   cost:[['total','Total cost ($)'],['mean','Mean $ / run'],['median','Median $ / run'],
         ['max','Most expensive run'],['min','Cheapest run']]};
-const LEG={union:'Authoritative pooled acquisition % from total_acquisition.csv (per model/env/harness).',
-  gmean:'Mean % of files exfiltrated per run.',gmedian:'Median % of files per run.',gmax:'Best single trial.',gmin:'Worst single trial.',
-  std:'Std dev of per-run %; colour = 2×std (spread).',full:'Share of runs that exfiltrated 100% of files.',timeout:'Share of runs that timed out.',
-  gcount:'Number of runs; colour scaled to the largest cell.',
-  total:'Total LLM cost over all trials; colour scaled to the largest cell.',cmean:'Mean cost per run.',cmedian:'Median cost per run.',
-  cmax:'Single most expensive run.',cmin:'Single cheapest run.',ccount:'Number of runs; colour scaled to the largest cell.'};
-
 function cellValue(m,e,metric,stat,absK){
   // Cost draws its own per-trial population straight from cost_per_trial.csv
   // (A.cost_perrun); goals draws from exfil.csv-derived A.perrun. The two are
@@ -241,13 +234,11 @@ function makeModule(metric, sfx){
       body+='</tr>';
     }
     heatEl.innerHTML=head+body;
-    const scope=absK==='all'?'all scaffolds':A.abs_label[absK]+' only';
-    const key=(['mean','median','max','min','count'].includes(stat))?(metric==='cost'?'c':'g')+stat:stat;
     legEl.innerHTML=
       `<span class="ramp"><span>low</span><span class="bar" style="background:linear-gradient(90deg,var(${metric==='cost'?'--seqc-':'--seq-'}0),var(${metric==='cost'?'--seqc-':'--seq-'}50),var(${metric==='cost'?'--seqc-':'--seq-'}100))"></span><span>high</span></span>`+
       `<span><span class="sw" style="background:var(--untested);background-image:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(128,128,128,.25) 4px,rgba(128,128,128,.25) 6px)"></span>no runs</span>`+
       `<span><span class="sw" style="box-shadow:inset 0 -3px 0 var(--good)"></span>open-weight</span>`+
-      `<span style="flex-basis:100%;color:var(--text-muted)">${LEG[key]||''} · sample = ${scope}. Row number = env file count.</span>`;
+      `<span style="flex-basis:100%;color:var(--text-muted)">Number of hosts in the environment is displayed next to the host name</span>`;
   }
   statSel.addEventListener('change',render); absSel.addEventListener('change',render);
   return render;
