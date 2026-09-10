@@ -12,7 +12,7 @@
     --surface-0:#f4f4f2; --surface-1:#fcfcfb; --surface-2:#f0efec;
     --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#87867f;
     --border:#e2e1db; --accent:#fc9a00;
-    --seq-0:#eef4fd; --seq-25:#9ec5f4; --seq-50:#5598e7; --seq-75:#2a78d6; --seq-100:#104281;
+    --seq-0:#efedec; --seq-25:#ded0ba; --seq-50:#e0b36c; --seq-75:#f1a327; --seq-100:#fc9a00;
     --seqc-0:#fbeee6; --seqc-25:#f4c39e; --seqc-50:#eb8f52; --seqc-75:#d95926; --seqc-100:#8f3410;
     --untested:#e7e6e0; --good:#008300;
     --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);
@@ -22,7 +22,7 @@
     --surface-0:#141413; --surface-1:#1f1f1e; --surface-2:#2a2a27;
     --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8a8a80;
     --border:#33332f; --accent:#ffb347;
-    --seq-0:#12233c; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#86b6ef;
+    --seq-0:#292723; --seq-25:#675132; --seq-50:#bd8028; --seq-75:#f19e27; --seq-100:#ffb347;
     --seqc-0:#3a1e0f; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
     --untested:#2a2a27; --good:#3aa53a;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
@@ -54,7 +54,7 @@
   .module .mhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
   .module .mhead .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
     padding:2px 8px;border-radius:999px;color:#fff}
-  .tag.goals{background:var(--seq-75)} .tag.cost{background:var(--seqc-75)}
+  .tag.goals{background:var(--seq-75);color:var(--text-primary)} .tag.cost{background:var(--seqc-75)}
   .controls{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end;background:var(--surface-1);
     border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin:12px 0 6px}
   .ctl{display:flex;flex-direction:column;gap:4px}
@@ -230,7 +230,8 @@ function makeModule(metric, sfx){
       for(const m of M){
         const c=cells[m+'|'+e];
         if(!c){body+=`<td class="cell nt">n/a</td>`;continue;}
-        const norm=c.rel?(mx>0?100*c.cv/mx:0):c.cv, col=seqColor(norm,metric), ink=norm>=45?'#fff':'var(--text-primary)';
+        const norm=c.rel?(mx>0?100*c.cv/mx:0):c.cv, col=seqColor(norm,metric),
+      ink=(metric==='goals')?'var(--text-primary)':(norm>=45?'#fff':'var(--text-primary)');
         body+=`<td class="cell" style="background:${col};color:${ink}"><div class="pc">${c.disp}</div></td>`;
       }
       body+='</tr>';
