@@ -25,15 +25,15 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--surface-0);color:var(--text-primary);
   font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   border-top:4px solid var(--gold-bright);}
-a{color:var(--gold);text-decoration:none}
-a:hover{color:var(--gold-bright);text-decoration:underline}
+a{color:var(--gold-bright);text-decoration:none}
+a:hover{color:var(--gold);text-decoration:none}
 
 /* ---- nav ---- */
 .site-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:20px 28px;background:var(--surface-0);border-bottom:1px solid var(--border);flex-wrap:wrap}
 .site-nav .brand{font-weight:800;letter-spacing:-.01em;color:var(--text-primary);font-size:15.5px;
   text-transform:uppercase;letter-spacing:.03em}
-.site-nav .brand span{color:var(--gold)}
+.site-nav .brand span{color:var(--gold-bright)}
 .site-nav .brand:hover{text-decoration:none;color:var(--text-primary)}
 .site-nav .links{display:flex;gap:28px;font-size:14.5px;font-weight:650}
 .site-nav .links a{color:var(--text-secondary);padding-bottom:3px;border-bottom:2px solid transparent}
@@ -43,7 +43,7 @@ a:hover{color:var(--gold-bright);text-decoration:underline}
 /* ---- layout ---- */
 .wrap{max-width:780px;margin:0 auto;padding:56px 28px 90px}
 .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:12px}
+  color:var(--gold-bright);margin-bottom:12px}
 h1{font-size:38px;line-height:1.08;letter-spacing:-.03em;font-weight:800;margin:0 0 14px}
 @media (min-width:640px){h1{font-size:50px}}
 h2{font-size:21px;letter-spacing:-.01em;font-weight:750;margin:0 0 8px}
@@ -57,7 +57,7 @@ p{color:var(--text-secondary);max-width:66ch}
   transition:transform .12s ease, box-shadow .12s ease}
 .card:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,.06),0 14px 32px rgba(0,0,0,.08);
   text-decoration:none;border-left-color:var(--gold)}
-.card .meta{font-size:11.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.card .meta{font-size:11.5px;font-weight:700;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .card strong{font-size:18px;letter-spacing:-.01em}
 .card p{margin:9px 0 0}
 
@@ -67,5 +67,5 @@ p{color:var(--text-secondary);max-width:66ch}
 
 footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--border);
   font-size:13px;color:var(--text-muted)}
-footer a{color:var(--text-secondary)}
-footer a:hover{color:var(--gold)}
+footer a{color:var(--text-secondary);text-decoration:none}
+footer a:hover{color:var(--gold-bright)}
