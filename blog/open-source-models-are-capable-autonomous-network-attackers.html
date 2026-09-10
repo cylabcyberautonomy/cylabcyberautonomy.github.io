@@ -11,8 +11,8 @@
     color-scheme:light;
     --surface-0:#f4f4f2; --surface-1:#fcfcfb; --surface-2:#f0efec;
     --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#87867f;
-    --border:#e2e1db; --accent:#8a5a00;
-    --seq-0:#eef4fd; --seq-25:#9ec5f4; --seq-50:#5598e7; --seq-75:#2a78d6; --seq-100:#104281;
+    --border:#e2e1db; --accent:#fc9a00;
+    --seq-0:#fffbeb; --seq-25:#fde68a; --seq-50:#f59e0b; --seq-75:#d97706; --seq-100:#b45309;
     --seqc-0:#fbeee6; --seqc-25:#f4c39e; --seqc-50:#eb8f52; --seqc-75:#d95926; --seqc-100:#8f3410;
     --untested:#e7e6e0; --good:#008300;
     --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);
@@ -22,7 +22,7 @@
     --surface-0:#141413; --surface-1:#1f1f1e; --surface-2:#2a2a27;
     --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8a8a80;
     --border:#33332f; --accent:#ffb347;
-    --seq-0:#12233c; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#86b6ef;
+    --seq-0:#3d3005; --seq-25:#6b4e06; --seq-50:#9f6b04; --seq-75:#d48702; --seq-100:#ffa929;
     --seqc-0:#3a1e0f; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
     --untested:#2a2a27; --good:#3aa53a;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
@@ -46,8 +46,8 @@
   .lede{font-size:18px;line-height:1.55;color:var(--text-primary);
     border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;margin:18px 0}
   .viz-root h2{margin-top:34px}
-  .viz-root a{color:var(--accent);text-decoration:none}
-  .viz-root a:hover{text-decoration:underline}
+  .viz-root a{color:var(--text-primary);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:2px}
+  .viz-root a:hover{text-decoration-color:var(--text-primary)}
   .viz-root ul{max-width:72ch;padding-left:20px}
   .viz-root li{margin:8px 0;color:var(--text-secondary)}
   .viz-root li b{color:var(--text-primary)}
@@ -83,7 +83,7 @@
     font-size:14px}
   .post-nav .brand{font-weight:800;color:var(--text-primary);text-transform:uppercase;
     letter-spacing:.03em;font-size:13.5px}
-  .post-nav .brand span{color:var(--accent)}
+  .post-nav .brand span{color:var(--text-primary);border-bottom:3px solid var(--accent);padding-bottom:1px}
   .post-nav .brand:hover{text-decoration:none;color:var(--text-primary)}
   .post-nav .links{display:flex;gap:24px;font-weight:650}
   .post-nav .links a{color:var(--text-secondary);padding-bottom:3px;border-bottom:2px solid transparent}
