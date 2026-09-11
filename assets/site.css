@@ -59,8 +59,7 @@ h1{font-size:38px;line-height:1.08;letter-spacing:-.03em;font-weight:800;margin:
 @media (min-width:640px){h1{font-size:50px}}
 h2{font-size:21px;letter-spacing:-.01em;font-weight:750;margin:0 0 8px}
 p{color:var(--text-secondary);max-width:66ch}
-.tagline{font-size:19px;line-height:1.6;color:var(--text-primary);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;margin:22px 0}
+.tagline{font-size:19px;line-height:1.6;color:var(--text-primary);margin:22px 0}
 
 /* ---- post card ---- */
 .card{display:block;background:var(--surface-1);border:1px solid var(--border);border-left:4px solid var(--gold-bright);
