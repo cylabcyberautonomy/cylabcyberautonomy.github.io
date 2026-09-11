@@ -16,7 +16,7 @@
 <script defer src="../assets/theme.js"></script>
 <title>Open-source models are capable autonomous network attackers</title>
 <style>
-  .viz-root{
+  :root{
     color-scheme:light;
     --surface-0:#f4f4f2; --surface-1:#fcfcfb; --surface-2:#f0efec;
     --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#87867f;
@@ -26,26 +26,26 @@
     --untested:#e7e6e0;
     --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);
   }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .viz-root{
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
     color-scheme:dark;
-    --surface-0:#141413; --surface-1:#1f1f1e; --surface-2:#2a2a27;
-    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8a8a80;
-    --border:#33332f; --accent:#ffb347;
-    --seq-0:#12233c; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#86b6ef;
-    --seqc-0:#3a1e0f; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
-    --untested:#2a2a27;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+    --surface-0:#0d1117; --surface-1:#161b22; --surface-2:#1c2129;
+    --text-primary:#e6edf3; --text-secondary:#9198a1; --text-muted:#6e7681;
+    --border:#30363d; --accent:#f0a020;
+    --seq-0:#0f1f36; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#8ab8f0;
+    --seqc-0:#33190c; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
+    --untested:#1c2129;
+    --shadow:0 1px 2px rgba(0,0,0,.55),0 6px 20px rgba(0,0,0,.4);
  } }
   /* explicit override from the theme toggle, wins over prefers-color-scheme either way */
-  :root[data-theme="dark"] .viz-root{
+  :root[data-theme="dark"]{
     color-scheme:dark;
-    --surface-0:#141413; --surface-1:#1f1f1e; --surface-2:#2a2a27;
-    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8a8a80;
-    --border:#33332f; --accent:#ffb347;
-    --seq-0:#12233c; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#86b6ef;
-    --seqc-0:#3a1e0f; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
-    --untested:#2a2a27;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+    --surface-0:#0d1117; --surface-1:#161b22; --surface-2:#1c2129;
+    --text-primary:#e6edf3; --text-secondary:#9198a1; --text-muted:#6e7681;
+    --border:#30363d; --accent:#f0a020;
+    --seq-0:#0f1f36; --seq-25:#184f95; --seq-50:#256abf; --seq-75:#3987e5; --seq-100:#8ab8f0;
+    --seqc-0:#33190c; --seqc-25:#7a3818; --seqc-50:#b8501f; --seqc-75:#eb8f52; --seqc-100:#f4c39e;
+    --untested:#1c2129;
+    --shadow:0 1px 2px rgba(0,0,0,.55),0 6px 20px rgba(0,0,0,.4);
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--surface-0);color:var(--text-primary);
