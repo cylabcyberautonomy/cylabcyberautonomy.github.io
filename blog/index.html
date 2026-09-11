@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TDQ596HZR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
+<script defer src="../assets/theme.js"></script>
 </head>
 <body>
 <nav class="site-nav">
@@ -22,6 +24,7 @@
     <a href="/">Home</a>
     <a class="current" href="/blog/">Blog</a>
     <a href="https://github.com/cylabcyberautonomy" target="_blank" rel="noopener">GitHub</a>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </div>
 </nav>
 
