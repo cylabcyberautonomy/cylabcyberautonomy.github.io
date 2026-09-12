@@ -275,7 +275,7 @@ footer {
 
 .footer-content-grid{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     box-sizing: border-box;
     width: 100%;

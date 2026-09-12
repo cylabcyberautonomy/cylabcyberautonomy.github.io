@@ -6,8 +6,7 @@
     (function () {
         var t;
         try { t = localStorage.getItem("theme"); } catch (e) {}
-        if (!t) { t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }
-        document.documentElement.setAttribute("data-theme", t);
+        document.documentElement.setAttribute("data-theme", t || "dark");
     })();
   </script>
 
