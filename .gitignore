@@ -11,7 +11,7 @@ ehthumbs.db
 Gemfile.lock
 
 beautiful-jekyll-theme-*.gem
-vendor
+/vendor
 .bundle
 
 claude_changelog.txt
