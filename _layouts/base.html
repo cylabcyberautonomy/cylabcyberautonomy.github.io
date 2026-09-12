@@ -11,7 +11,14 @@
 
   {% include footer.html %}
 
-  <script src="{{ '/assets/js/balatro.js' | relative_url }}"></script>
+{% if page.figures %}
+  <script src="{{ '/assets/js/vendor/vega.min.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/vendor/vega-lite.min.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/vendor/vega-embed.min.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/figures.js' | relative_url }}"></script>
+{% endif %}
+  <script src="{{ '/assets/js/background.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/nav.js' | relative_url }}"></script>
 </body>
 </html>

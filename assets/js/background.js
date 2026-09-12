@@ -6,14 +6,14 @@
             this.opts = Object.assign({
                 container: document.body,
                 colours: {
-                    c1: "#181717",
-                    c2: "#131313",
-                    c3: "#313131"
+                    c1: "#0C0C0C",
+                    c2: "#070707",
+                    c3: "#1C1C1C"
                 },
-                speed: 1.0,
+                speed: 0.15,
                 spinAmount: 0.5,
                 contrast: 1.2,
-                pixelSizeFac: 100.0,
+                pixelSizeFac: 250.0,
                 spinEase: 0.5,
                 zoom: 30.0,
                 offsetX: -0.12,

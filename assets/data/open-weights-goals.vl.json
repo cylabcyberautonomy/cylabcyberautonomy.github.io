@@ -1,0 +1,206 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "/assets/data/open-weights-runs.json"
+  },
+  "params": [
+    {
+      "name": "harness",
+      "value": "Incalmo",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Incalmo",
+          "Shell",
+          "Artemis"
+        ],
+        "name": "Harness "
+      }
+    },
+    {
+      "name": "stat",
+      "value": "mean",
+      "bind": {
+        "input": "select",
+        "options": [
+          "mean",
+          "median",
+          "max",
+          "min",
+          "stdev"
+        ],
+        "labels": [
+          "Mean % exfiltrated",
+          "Median %",
+          "Best trial",
+          "Worst trial",
+          "Std dev"
+        ],
+        "name": "Statistic "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.harness === harness"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "exfiltrated",
+          "as": "mean"
+        },
+        {
+          "op": "median",
+          "field": "exfiltrated",
+          "as": "median"
+        },
+        {
+          "op": "max",
+          "field": "exfiltrated",
+          "as": "max"
+        },
+        {
+          "op": "min",
+          "field": "exfiltrated",
+          "as": "min"
+        },
+        {
+          "op": "stdev",
+          "field": "exfiltrated",
+          "as": "stdev"
+        },
+        {
+          "op": "count",
+          "as": "runs"
+        }
+      ],
+      "groupby": [
+        "model",
+        "env",
+        "hosts"
+      ]
+    },
+    {
+      "calculate": "stat === 'mean' ? datum.mean : stat === 'median' ? datum.median : stat === 'max' ? datum.max : stat === 'min' ? datum.min : datum.stdev",
+      "as": "raw"
+    },
+    {
+      "calculate": "isFinite(datum.raw) ? datum.raw : 0",
+      "as": "value"
+    },
+    {
+      "calculate": "datum.env + ' (' + datum.hosts + ')'",
+      "as": "envLabel"
+    }
+  ],
+  "width": 720,
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": null
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "envLabel",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "hosts",
+            "order": "ascending"
+          }
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues",
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "legend": {
+            "title": "%",
+            "gradientLength": 160
+          }
+        },
+        "tooltip": [
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "envLabel",
+            "title": "Environment"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Value"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "envLabel",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "hosts",
+            "order": "ascending"
+          }
+        },
+        "text": {
+          "field": "value",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.value > 55",
+            "value": "#FFFFFF"
+          },
+          "value": "#0D1B2A"
+        }
+      }
+    }
+  ]
+}

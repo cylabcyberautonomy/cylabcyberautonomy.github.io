@@ -11,7 +11,7 @@ authors:
   - Bryan Parno
   - Jignesh Patel
   - vyas-sekar
-  - Justine Sherry Martins
+  - Justine Sherry
 venue: Vision
 published_in: Technical Report, Carnegie Mellon University, March 2026
 links:
