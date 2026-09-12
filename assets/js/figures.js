@@ -6,6 +6,20 @@
 
     const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
+    const LIBS = ["vega.min.js", "vega-lite.min.js", "vega-embed.min.js"];
+
+    const script = (src) => new Promise((ok, no) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.onload = ok;
+        s.onerror = () => no(new Error("could not load " + src));
+        document.head.appendChild(s);
+    });
+
+    let loading;
+    const ensureLibs = () => loading || (loading = LIBS.reduce(
+        (p, f) => p.then(() => script("/assets/js/vendor/" + f)), Promise.resolve()));
+
     const fail = (el, msg, err) => {
         el.innerHTML = '<div class="figure-placeholder">' + msg + '</div>';
         E(msg, err || "");
@@ -110,8 +124,11 @@
 
     const renderAll = () => {
         const els = document.querySelectorAll("[data-vega]");
+        if (!els.length) return;
         L("found", els.length, "figure(s)");
-        els.forEach(render);
+        ensureLibs()
+            .then(() => els.forEach(render))
+            .catch(err => els.forEach(el => fail(el, "Figure failed: " + err.message, err)));
     };
 
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderAll);

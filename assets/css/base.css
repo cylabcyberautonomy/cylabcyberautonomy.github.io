@@ -144,6 +144,18 @@ html.theming nav a,
 html.theming .nav-toggle{
     transition: background-color var(--theme-fade) ease, backdrop-filter var(--theme-fade) ease;
 }
+
+a,
+.person-name,
+.vega-embed summary svg{
+    transition: color var(--theme-fade) ease, border-color var(--theme-fade) ease, fill var(--theme-fade) ease;
+}
+
+html.theming a,
+html.theming .person-name,
+html.theming .vega-embed summary svg{
+    transition: none;
+}
 body {
     font-family: var(--font-body);
 
