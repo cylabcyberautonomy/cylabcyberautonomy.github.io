@@ -634,11 +634,6 @@ a.entry-title:hover{
     color: var(--primary-color);
 }
 
-@media (max-width: 700px){
-    .people-grid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 
 /* home page css */
@@ -669,4 +664,48 @@ a.entry-title:hover{
 .sidebar p{
     font-size: 14px;
     color: var(--primary-color);
+}
+
+
+@media (max-width: 700px){
+    nav{
+        justify-content: flex-start;
+    }
+    nav ul{
+        overflow-x: auto;
+    }
+    nav ul li{
+        flex: 0 0 auto;
+    }
+    nav ul li.nav-toggle-item{
+        order: -1;
+    }
+    nav a{
+        width: auto;
+    }
+
+    .content-grid{
+        flex-direction: column;
+    }
+    .sidebar{
+        border-left: 0;
+        border-top: 1px solid var(--primary-color);
+    }
+    .content{
+        padding: var(--space-lg) var(--space-md);
+    }
+    .content p{
+        padding: 0;
+    }
+    .content ul,
+    .content ol{
+        padding: 0 0 0 var(--space-xl);
+    }
+
+    .people-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-content-grid{
+        padding: 0.5rem var(--space-md);
+    }
 }

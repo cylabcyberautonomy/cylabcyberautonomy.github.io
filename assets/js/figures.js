@@ -76,6 +76,12 @@
         } catch (e) { W("could not enumerate datasets:", e.message); }
     };
 
+    const observe = (el) => {
+        if (el._ro || typeof ResizeObserver !== "function") return;
+        el._ro = new ResizeObserver(() => { if (el._view) el._view.resize().run(); });
+        el._ro.observe(el);
+    };
+
     const render = (el) => {
         const src = el.dataset.vega;
         if (!src) return;
@@ -116,6 +122,7 @@
             })
             .then(res => {
                 el._view = res.view;
+                observe(el);
                 L("embed resolved");
                 if (VERBOSE) inspect(el, res.view);
             })

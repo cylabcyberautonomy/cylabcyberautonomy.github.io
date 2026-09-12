@@ -95,7 +95,7 @@
       "as": "envLabel"
     }
   ],
-  "width": 720,
+  "width": "container",
   "height": 360,
   "autosize": {
     "type": "fit",
