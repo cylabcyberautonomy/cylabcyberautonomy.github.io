@@ -92,7 +92,7 @@ html{
   --nav-font: 21px;
   --nav-pad-y: 14px;
   --nav-item-size: calc(var(--nav-font) + 2 * var(--nav-pad-y));
-  --icon-size: 48px;
+  --icon-size: 32px;
   --space-xs: 0.35rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
