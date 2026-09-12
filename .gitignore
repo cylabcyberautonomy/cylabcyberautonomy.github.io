@@ -11,3 +11,8 @@ ehthumbs.db
 Gemfile.lock
 
 beautiful-jekyll-theme-*.gem
+vendor
+.bundle
+
+claude_changelog.txt
+.jekyll-cache

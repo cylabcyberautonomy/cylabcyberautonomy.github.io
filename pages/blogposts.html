@@ -1,0 +1,13 @@
+---
+layout: blog
+title: Blog
+description: Notes and updates from the CyLab Cyber Autonomy Initiative.
+permalink: /blogposts/
+---
+
+{% assign entries = site.posts | sort: 'date' | reverse %}
+{% assign years = entries | group_by_exp: "entry", "entry.date | date: '%Y'" %}
+{% for year in years %}
+<h2>{{ year.name }}</h2>
+{% for entry in year.items %}{% include entry-card.html entry=entry %}{% endfor %}
+{% endfor %}

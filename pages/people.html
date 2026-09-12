@@ -1,0 +1,20 @@
+---
+layout: people
+title: People
+description: Faculty, researchers and students of the CyLab Cyber Autonomy Initiative.
+permalink: /people/
+---
+
+{% for section in site.data.people %}
+<h2>{{ section.title }}</h2>
+<div class="people-grid">
+    {% for person in section.members %}
+    <div class="person">
+        {% if person.website %}<a href="{{ person.website }}">{% endif %}
+        <img src="{{ person.photo | default: '/assets/img/people/placeholder.svg' | relative_url }}" alt="{{ person.name }}">
+        <p class="person-name">{{ person.name }}</p>
+        {% if person.website %}</a>{% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
