@@ -33,12 +33,17 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 ## What did we find?
 
+When we first ran experiments with open weight models for Incalmo a year ago, we observed that "[ Open weight ] models do not follow instructions and are unable to execute shell commands correctly." Open source models have come a long way from when we first evaluated them for offensive cyber tasks.
+
+The open weight models with the minimal harness (highlighted in green) showed that a bare shell
+alone can reach up to 100% average goal completion on an environment. 
+
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
 <p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Use the toggle below the chart to switch the labeled regions between grouping by harness or by model. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
-The open weight models with the minimal harness (highlighted in green) showed that a bare shell
-alone can reach up to 100% average goal completion on an environment. However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
+
+However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
 
 With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run be reliably lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
 
