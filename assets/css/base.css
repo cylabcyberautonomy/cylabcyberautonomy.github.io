@@ -761,6 +761,15 @@ a.entry-title:hover{
     .content table{
         white-space: nowrap;
     }
+    /* charts: let the (now bottom-oriented) legend keep its natural width and
+       scroll horizontally instead of forcing the whole chart to shrink to fit,
+       which was squashing the legend rather than just widening the figure */
+    .content .figure{
+        overflow-x: auto;
+    }
+    .content .figure svg{
+        max-width: none;
+    }
 
     .people-grid{
         grid-template-columns: repeat(2, 1fr);

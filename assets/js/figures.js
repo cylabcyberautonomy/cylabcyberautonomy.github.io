@@ -58,6 +58,21 @@
         return cfg;
     };
 
+    // A spec with `"width": "container"` shrinks its plot to fit the phone,
+    // starving discrete columns (e.g. 3 model columns with un-rotated labels)
+    // until their labels collide - CSS can't fix that, since it's the actual
+    // rendered plot that's too narrow, not oversized content being squashed.
+    // A spec that wants a floor under that on narrow screens sets top-level
+    // `_minMobileWidth` to the smallest plot width (px) its labels need; below
+    // that the plot renders at that fixed width instead of the container's,
+    // and el's own `overflow-x: auto` (see base.css) lets it scroll into view.
+    const applyMinMobileWidth = (spec, el) => {
+        const minWidth = spec._minMobileWidth;
+        if (!minWidth || spec.width !== "container") return spec;
+        spec.width = Math.max(el.offsetWidth || 0, minWidth);
+        return spec;
+    };
+
     // Vega-Lite's global config.legend doesn't propagate orient/direction/columns
     // (those are layout properties, not the styling ones config.legend actually
     // supports) - they have to be set per-encoding. On narrow screens, move every
@@ -145,7 +160,12 @@
                     });
             })
             .then(spec => {
-                if (isMobile()) { spec = patchLegendsForMobile(spec); L("mobile: legends moved to bottom"); }
+                if (isMobile()) {
+                    spec = patchLegendsForMobile(spec);
+                    spec = applyMinMobileWidth(spec, el);
+                    L("mobile: legends moved to bottom, width=", spec.width);
+                }
+                delete spec._minMobileWidth;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
