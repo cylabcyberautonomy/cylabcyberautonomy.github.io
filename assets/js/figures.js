@@ -120,6 +120,52 @@
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
                 }
+
+                // Opt-in escape hatch: Vega-Lite has no way to conditionally show/hide
+                // a legend based on a bound param, and a layered spec that gates
+                // different layers to different param values (so the same "color"/
+                // "shape" channel means a different field per mode) ends up with one
+                // duplicate legend per layer instead of one merged legend per field.
+                // A spec that wants exactly one legend per (field, color-or-shape)
+                // pair, toggling visibility with the param, sets `_legendVisibilitySignal`
+                // to {param, layers}: layers maps each gated layer's index (in this
+                // spec's own top-level `layer` array) to the param value under which
+                // that layer (and so its legend) should be visible. We compile to raw
+                // Vega ourselves, dedupe + patch the legends accordingly, and hand
+                // vegaEmbed the compiled spec instead of the original Vega-Lite JSON.
+                const toggle = spec._legendVisibilitySignal;
+                if (toggle && typeof vegaLite !== "undefined" && vegaLite.compile) {
+                    const clean = JSON.parse(JSON.stringify(spec));
+                    delete clean._legendVisibilitySignal;
+                    const compiled = vegaLite.compile(clean, { config: theme() }).spec;
+                    const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+                    const seen = new Set();
+                    const kept = [];
+                    (compiled.legends || []).forEach(legend => {
+                        const ref = legend.fill || legend.shape;
+                        const m = /^layer_(\d+)_/.exec(ref || "");
+                        const value = m && toggle.layers[m[1]];
+                        if (!value) { kept.push(legend); return; } // not one of our gated layers
+                        const kind = legend.fill ? "fill" : "shape";
+                        const fieldKey = (legend.title || "").toString().toLowerCase();
+                        const dedupKey = fieldKey + ":" + kind;
+                        if (seen.has(dedupKey)) return; // duplicate legend for a field+kind we already kept
+                        seen.add(dedupKey);
+                        legend.title = cap(fieldKey);
+                        legend.encode = legend.encode || {};
+                        legend.encode.legend = legend.encode.legend || {};
+                        legend.encode.legend.update = legend.encode.legend.update || {};
+                        legend.encode.legend.update.opacity = { signal: toggle.param + " === '" + value + "' ? 1 : 0" };
+                        kept.push(legend);
+                    });
+                    compiled.legends = kept;
+                    L("legend-toggle: kept", kept.length, "legend(s) for param", toggle.param);
+                    return vegaEmbed(el, compiled, {
+                        config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1, mode: "vega",
+                        actions: { export: true, source: false, compiled: false, editor: false }
+                    });
+                }
+
                 return vegaEmbed(el, spec, {
                     config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1,
                     actions: { export: true, source: false, compiled: false, editor: false }

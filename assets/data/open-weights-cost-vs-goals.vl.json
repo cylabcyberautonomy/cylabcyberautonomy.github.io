@@ -196,8 +196,7 @@
       "mark": {
         "type": "rect",
         "cornerRadius": 80,
-        "opacity": 0.28,
-        "fill": "#898781"
+        "opacity": 0.28
       },
       "encoding": {
         "x": {
@@ -236,7 +235,16 @@
             "type": "quantitative",
             "title": "Runs (all harnesses)"
           }
-        ]
+        ],
+        "color": {
+          "field": "model",
+          "type": "nominal",
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ]
+        }
       }
     },
     {
@@ -268,6 +276,9 @@
         {
           "calculate": "datum.env + ' (' + datum.hosts + ')'",
           "as": "envLabel"
+        },
+        {
+          "filter": "groupBy === 'harness'"
         }
       ],
       "mark": {
@@ -318,6 +329,129 @@
               "GLM 5.2",
               "Kimi K3",
               "Qwen 3.8 Max"
+            ],
+            "range": [
+              "circle",
+              "triangle-up",
+              "square"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "envLabel",
+            "title": "Environment"
+          },
+          {
+            "field": "meanCost",
+            "type": "quantitative",
+            "format": "$,.2f",
+            "title": "Mean cost / run"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "mean",
+              "field": "cost",
+              "as": "meanCost"
+            },
+            {
+              "op": "mean",
+              "field": "exfiltrated",
+              "as": "meanGoals"
+            },
+            {
+              "op": "count",
+              "as": "runs"
+            }
+          ],
+          "groupby": [
+            "model",
+            "harness",
+            "env",
+            "hosts"
+          ]
+        },
+        {
+          "calculate": "datum.env + ' (' + datum.hosts + ')'",
+          "as": "envLabel"
+        },
+        {
+          "filter": "groupBy === 'model'"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "opacity": 0.75
+      },
+      "encoding": {
+        "x": {
+          "field": "meanCost",
+          "type": "quantitative",
+          "title": "Cost",
+          "scale": {
+            "zero": true
+          },
+          "axis": {
+            "format": "$,.2f"
+          }
+        },
+        "y": {
+          "field": "meanGoals",
+          "type": "quantitative",
+          "title": "% goals achieved",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "model",
+          "type": "nominal",
+          "title": "Model",
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ]
+        },
+        "shape": {
+          "field": "harness",
+          "type": "nominal",
+          "title": "Harness",
+          "scale": {
+            "domain": [
+              "Incalmo",
+              "Artemis",
+              "Shell"
             ],
             "range": [
               "circle",
@@ -475,5 +609,20 @@
         }
       }
     }
-  ]
+  ],
+  "_legendVisibilitySignal": {
+    "param": "groupBy",
+    "layers": {
+      "0": "harness",
+      "1": "model",
+      "2": "harness",
+      "3": "model"
+    }
+  },
+  "resolve": {
+    "scale": {
+      "color": "independent",
+      "shape": "independent"
+    }
+  }
 }
