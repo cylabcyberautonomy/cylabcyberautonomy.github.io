@@ -2,10 +2,10 @@
 title: Open Weight Models Are Capable Autonomous Network Attackers
 authors: [lakshmi-adiga, marko-morrison, vyas-sekar]
 figures: true
-description: We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper.
+description: We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper.
 ---
 
-We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
+We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
 5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. The models can now chain exploits without specialized harnesses, yet with Incalmo we see dramatic performance improvements and reduced cost.
 
 ### Why open weight models?
@@ -33,7 +33,7 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 ### What did we find?
 
-When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open source models have come a long way from when we first evaluated them for offensive cyber tasks.
+When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open weight models have come a long way from when we first evaluated them for offensive cyber tasks.
 
 The open weight models with the minimal harness (highlighted in green) showed that a bare shell
 alone can reach up to 100% average goal completion on an environment. 
@@ -67,13 +67,13 @@ To analyze even more dimensions of this data, check out the raw dataset
 
 ### What's next?
 
-Open source models have proven themselves capable of complex offensive security tasks in complex
+Open weight models have proven themselves capable of complex offensive security tasks in complex
 network environments, and we are excited to see more innovation leveraging the specific advantages
-of open source models for applications in this space, such as penetration testing.
+of open weight models for applications in this space, such as penetration testing.
 
-Considering the success of open source models in our benchmark set, we have already started
-exploring how we can make these challenges more discriminatory to assess the limits of open source
-model's offensive capabilities, as well as their defensive capabilities.
+Considering the success of open weight models in our benchmark set, we have already started
+exploring how we can make these challenges more discriminatory to assess the limits of open weight
+models' offensive capabilities, as well as their defensive capabilities.
 
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
