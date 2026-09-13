@@ -69,3 +69,9 @@ labeled gray regions show where each harness's runs cluster overall, spanning on
 around its mean cost and mean goals achieved across every model and environment.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
+
+The same points, but the gray regions now group by model instead of harness: each spans one
+standard deviation around that model's mean cost and mean goals achieved across every harness and
+environment.
+
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-by-model.vl.json"></div>
