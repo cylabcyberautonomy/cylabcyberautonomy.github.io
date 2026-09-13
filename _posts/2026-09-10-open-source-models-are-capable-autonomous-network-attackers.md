@@ -49,8 +49,6 @@ To make these results easier to explore, the heatmap below breaks performance do
 Each cell below is one model/environment pair, colored by percent of goals accomplished for the harness selected in the dropdown. Switch the statistic dropdown to see the mean, median, best
 trial, worst trial, or standard deviation across each cell's trials instead of the default mean.
 
-This view makes it possible to see not only which models perform best overall, but also where performance varies across environments and how consistently each configuration succeeds.
-
 <div class="figure" data-vega="/assets/data/open-weights-goals.vl.json"></div>
 
 We also provide the cost for these experiments, in the interest of transparency.
