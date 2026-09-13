@@ -145,6 +145,18 @@
         if (typeof vegaEmbed !== "function") { fail(el, "vegaEmbed not loaded"); return; }
         if (el._view) { try { el._view.finalize(); } catch (e) {} el._view = null; }
         el.innerHTML = "";
+        // vegaEmbed adds its own classes (.vega-embed, .has-actions, ...) directly
+        // onto whatever element it's given, rather than wrapping it - so embedding
+        // straight into `el` (.figure) would make .figure and .vega-embed the same
+        // node. That breaks the scroll-container pattern used elsewhere on this
+        // site (e.g. .table-wrap > table): .figure needs to stay pinned to the
+        // viewport width so its overflow-x:auto has something to scroll against,
+        // while .vega-embed needs to size to its actual (possibly wider) content
+        // so the export button - position:absolute against .vega-embed's own box -
+        // lands on the chart's real corner instead of the viewport's. A plain
+        // inner div gives each element its own job.
+        const inner = document.createElement("div");
+        el.appendChild(inner);
 
         fetch(src)
             .then(r => { L("spec fetch:", r.status); return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status + " " + src)); })
@@ -170,7 +182,7 @@
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
                 }
-                return vegaEmbed(el, spec, {
+                return vegaEmbed(inner, spec, {
                     config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1,
                     actions: { export: true, source: false, compiled: false, editor: false }
                 });
