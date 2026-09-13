@@ -2,7 +2,7 @@
 title: Open Weight Models Are Capable Autonomous Network Attackers
 authors: [lakshmi-adiga, marko-morrison, vyas-sekar]
 figures: true
-description: We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found that they are exceedingly capable at executing multi-stage network attacks.
+description: We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper.
 ---
 
 We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
