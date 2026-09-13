@@ -27,11 +27,15 @@ real-world enterprises.
 We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as
 autonomous offensive security agents, using 3 different agentic harnesses.
 
+<div class="table-wrap" markdown="1">
+
 | Harness | Agent structure | Interface to the LLM | Key mechanism |
 | --- | --- | --- | --- |
 | [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | Actions are executed via a C2 server |
 | [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Note/TODO system for long-horizon runs, plus a triage module that validates findings |
 | Bash Shell | Single agent | One tool: a raw shell | Commands are executed directly, with no higher-level abstraction |
+
+</div>
 
 - [Incalmo](https://arxiv.org/abs/2501.16466): An offensive security agent harness that provides an
   action library to the LLM, consisting of high level actions like "LateralMove, Reconnaissance",

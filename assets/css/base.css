@@ -407,6 +407,11 @@ html[data-theme="light"] .icon-cmu{
     background-color: rgba(255, 255, 255, 0.1);
     font-size: 13px;
 }
+.content .table-wrap{
+    border: 1px solid var(--secondary-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
 .content table{
     width: 100%;
     border-collapse: collapse;
@@ -418,7 +423,15 @@ html[data-theme="light"] .icon-cmu{
     padding: var(--space-sm) var(--space-md);
     text-align: left;
     vertical-align: top;
+    border-right: 1px solid var(--secondary-color);
     border-bottom: 1px solid var(--secondary-color);
+}
+.content th:last-child,
+.content td:last-child{
+    border-right: none;
+}
+.content tr:last-child td{
+    border-bottom: none;
 }
 .content th{
     font-family: var(--font-display);
@@ -427,10 +440,10 @@ html[data-theme="light"] .icon-cmu{
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--secondary-color);
-    border-bottom: 2px solid var(--primary-color);
+    background-color: var(--panel-bg);
 }
-.content > table{ --flow: var(--space-lg); }
-.content > table + *{ --flow: var(--space-lg); }
+.content > .table-wrap{ --flow: var(--space-lg); }
+.content > .table-wrap + *{ --flow: var(--space-lg); }
 
 
 .vega-embed{
@@ -725,9 +738,10 @@ a.entry-title:hover{
     .content ol{
         padding: 0 0 0 var(--space-xl);
     }
-    .content table{
-        display: block;
+    .content .table-wrap{
         overflow-x: auto;
+    }
+    .content table{
         white-space: nowrap;
     }
 
