@@ -23,7 +23,7 @@ autonomous offensive security agents, using 3 different agentic harnesses.
 | --- | --- | --- | --- |
 | [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | Actions are executed via a C2 server |
 | [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Shell (via spawned sub-agents), coordinated through a shared note/TODO system |
-| Bash Shell | Single agent | One tool: a raw bash shell | Commands are executed directly through shell, with no higher-level abstraction |
+| Bash Shell | Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
 
 </div>
 
