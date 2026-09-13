@@ -1,14 +1,14 @@
 ---
-title: Open Source Models Are Capable Autonomous Network Attackers
+title: Open Weight Models Are Capable Autonomous Network Attackers
 authors: [lakshmi-adiga, marko-morrison, vyas-sekar]
 figures: true
 description: We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found that they are exceedingly capable at executing multi-stage network attacks.
 ---
 
 We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found that they are exceedingly capable at executing multi-stage network attacks.
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. The models can now chain exploits without specialized harnesses, however, Incalmo drastically improves performance and reduces cost.
 
-### Why open source?
+### Why open weight models?
 
 There's a pervasive assumption that the frontier of foundation models' cyber capabilities lies with
 closed source models, such as Claude's Mythos and OpenAI's GPT 5.6 models.
@@ -22,11 +22,16 @@ If frontier open source models display similar capabilities to closed source mod
 network security agents, it opens the door to making agentic security safer and more tractable for
 real-world enterprises.
 
-### Experiment setup
+### How did we test them?
 
-We test the capabilities of 3 frontier open source models (Kimi K3, Qwen 3.8 Max, and GLM 5.2) as
-autonomous offensive security agents. We test them using 3 different agentic harnesses: Incalmo,
-Artemis, and Bash Shell.
+We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as
+autonomous offensive security agents, using 3 different agentic harnesses.
+
+| Harness | Agent structure | Interface to the LLM | Key mechanism |
+| --- | --- | --- | --- |
+| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | Actions are executed via a C2 server |
+| [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Note/TODO system for long-horizon runs, plus a triage module that validates findings |
+| Bash Shell | Single agent | One tool: a raw shell | Commands are executed directly, with no higher-level abstraction |
 
 - [Incalmo](https://arxiv.org/abs/2501.16466): An offensive security agent harness that provides an
   action library to the LLM, consisting of high level actions like "LateralMove, Reconnaissance",

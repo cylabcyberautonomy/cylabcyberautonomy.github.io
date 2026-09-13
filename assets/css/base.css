@@ -407,6 +407,30 @@ html[data-theme="light"] .icon-cmu{
     background-color: rgba(255, 255, 255, 0.1);
     font-size: 13px;
 }
+.content table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: var(--primary-color);
+}
+.content th,
+.content td{
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--secondary-color);
+}
+.content th{
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+.content > table{ --flow: var(--space-lg); }
+.content > table + *{ --flow: var(--space-lg); }
 
 
 .vega-embed{
@@ -700,6 +724,11 @@ a.entry-title:hover{
     .content ul,
     .content ol{
         padding: 0 0 0 var(--space-xl);
+    }
+    .content table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
     .people-grid{
