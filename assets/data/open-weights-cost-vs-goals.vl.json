@@ -6,34 +6,6 @@
   "transform": [
     {
       "filter": "isValid(datum.cost)"
-    },
-    {
-      "aggregate": [
-        {
-          "op": "mean",
-          "field": "cost",
-          "as": "meanCost"
-        },
-        {
-          "op": "mean",
-          "field": "exfiltrated",
-          "as": "meanGoals"
-        },
-        {
-          "op": "count",
-          "as": "runs"
-        }
-      ],
-      "groupby": [
-        "model",
-        "harness",
-        "env",
-        "hosts"
-      ]
-    },
-    {
-      "calculate": "datum.env + ' (' + datum.hosts + ')'",
-      "as": "envLabel"
     }
   ],
   "width": "container",
@@ -42,77 +14,202 @@
     "type": "fit",
     "contains": "padding"
   },
-  "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 130,
-    "opacity": 0.85
-  },
-  "encoding": {
-    "x": {
-      "field": "meanCost",
-      "type": "quantitative",
-      "title": "Mean cost per run ($)",
-      "scale": {
-        "zero": true
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "mean",
+              "field": "cost",
+              "as": "meanCost"
+            },
+            {
+              "op": "mean",
+              "field": "exfiltrated",
+              "as": "meanGoals"
+            },
+            {
+              "op": "count",
+              "as": "runs"
+            }
+          ],
+          "groupby": [
+            "model",
+            "harness",
+            "env",
+            "hosts"
+          ]
+        },
+        {
+          "calculate": "datum.env + ' (' + datum.hosts + ')'",
+          "as": "envLabel"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 70,
+        "opacity": 0.4
       },
-      "axis": {
-        "format": "$,.2f"
+      "encoding": {
+        "x": {
+          "field": "meanCost",
+          "type": "quantitative",
+          "title": "Mean cost per run ($)",
+          "scale": {
+            "zero": true
+          },
+          "axis": {
+            "format": "$,.2f"
+          }
+        },
+        "y": {
+          "field": "meanGoals",
+          "type": "quantitative",
+          "title": "Mean % of goals achieved",
+          "scale": {
+            "domain": [0, 100]
+          }
+        },
+        "color": {
+          "field": "model",
+          "type": "nominal",
+          "title": "Model",
+          "sort": ["GLM 5.2", "Kimi K3", "Qwen 3.8 Max"]
+        },
+        "shape": {
+          "field": "harness",
+          "type": "nominal",
+          "title": "Harness",
+          "scale": {
+            "domain": ["Incalmo", "Artemis", "Shell"],
+            "range": ["circle", "triangle-up", "square"]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "envLabel",
+            "title": "Environment"
+          },
+          {
+            "field": "meanCost",
+            "type": "quantitative",
+            "format": "$,.2f",
+            "title": "Mean cost / run"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
       }
     },
-    "y": {
-      "field": "meanGoals",
-      "type": "quantitative",
-      "title": "Mean % of goals achieved",
-      "scale": {
-        "domain": [0, 100]
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "mean",
+              "field": "cost",
+              "as": "meanCost"
+            },
+            {
+              "op": "mean",
+              "field": "exfiltrated",
+              "as": "meanGoals"
+            },
+            {
+              "op": "count",
+              "as": "runs"
+            }
+          ],
+          "groupby": [
+            "model",
+            "harness"
+          ]
+        },
+        {
+          "calculate": "'Average across environments'",
+          "as": "kind"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 340,
+        "opacity": 0.95,
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "meanCost",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "meanGoals",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "model",
+          "type": "nominal",
+          "sort": ["GLM 5.2", "Kimi K3", "Qwen 3.8 Max"]
+        },
+        "shape": {
+          "field": "harness",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Incalmo", "Artemis", "Shell"],
+            "range": ["circle", "triangle-up", "square"]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "kind",
+            "title": " "
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "meanCost",
+            "type": "quantitative",
+            "format": "$,.2f",
+            "title": "Mean cost / run"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
       }
-    },
-    "color": {
-      "field": "model",
-      "type": "nominal",
-      "title": "Model",
-      "sort": ["GLM 5.2", "Kimi K3", "Qwen 3.8 Max"]
-    },
-    "shape": {
-      "field": "harness",
-      "type": "nominal",
-      "title": "Harness",
-      "scale": {
-        "domain": ["Incalmo", "Artemis", "Shell"],
-        "range": ["circle", "triangle-up", "square"]
-      }
-    },
-    "tooltip": [
-      {
-        "field": "model",
-        "title": "Model"
-      },
-      {
-        "field": "harness",
-        "title": "Harness"
-      },
-      {
-        "field": "envLabel",
-        "title": "Environment"
-      },
-      {
-        "field": "meanCost",
-        "type": "quantitative",
-        "format": "$,.2f",
-        "title": "Mean cost / run"
-      },
-      {
-        "field": "meanGoals",
-        "type": "quantitative",
-        "format": ".1f",
-        "title": "Mean % goals achieved"
-      },
-      {
-        "field": "runs",
-        "type": "quantitative",
-        "title": "Runs"
-      }
-    ]
-  }
+    }
+  ]
 }

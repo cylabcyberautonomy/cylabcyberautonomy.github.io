@@ -81,7 +81,8 @@ You can find the data we collected from these experiments
 
 ### Cost vs. goals achieved
 
-Each point is one model/harness/environment combination: mean cost per run on the x-axis against
-mean percent of goals achieved on the y-axis. Color marks the model, shape marks the harness.
+Mean cost per run on the x-axis against mean percent of goals achieved on the y-axis. Color marks
+the model, shape marks the harness. The small faint points are individual model/harness/environment
+combinations; the large solid points are each model/harness pair's average across all environments.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
