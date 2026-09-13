@@ -45,7 +45,7 @@
             }
           ],
           "groupby": [
-            "harness"
+            "model"
           ]
         },
         {
@@ -87,8 +87,8 @@
         },
         "tooltip": [
           {
-            "field": "harness",
-            "title": "Harness"
+            "field": "model",
+            "title": "Model"
           },
           {
             "field": "meanCost",
@@ -105,16 +105,16 @@
           {
             "field": "runs",
             "type": "quantitative",
-            "title": "Runs (all models)"
+            "title": "Runs (all harnesses)"
           }
         ],
         "color": {
-          "field": "harness",
+          "field": "model",
           "type": "nominal",
           "sort": [
-            "Incalmo",
-            "Artemis",
-            "Shell"
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
           ]
         }
       }
@@ -180,24 +180,24 @@
           }
         },
         "color": {
-          "field": "harness",
-          "type": "nominal",
-          "title": "Harness",
-          "sort": [
-            "Incalmo",
-            "Artemis",
-            "Shell"
-          ]
-        },
-        "shape": {
           "field": "model",
           "type": "nominal",
           "title": "Model",
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ]
+        },
+        "shape": {
+          "field": "harness",
+          "type": "nominal",
+          "title": "Harness",
           "scale": {
             "domain": [
-              "GLM 5.2",
-              "Kimi K3",
-              "Qwen 3.8 Max"
+              "Incalmo",
+              "Artemis",
+              "Shell"
             ],
             "range": [
               "circle",
@@ -265,7 +265,7 @@
             }
           ],
           "groupby": [
-            "harness"
+            "model"
           ]
         },
         {
@@ -290,7 +290,7 @@
           "type": "quantitative"
         },
         "text": {
-          "field": "harness"
+          "field": "model"
         }
       }
     }
