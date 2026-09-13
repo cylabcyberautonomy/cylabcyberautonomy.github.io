@@ -36,20 +36,21 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
 Each point is one model/harness/environment combination: mean cost per run on the x-axis against
-that environment's best trial (highest % of goals achieved out of every trial run there) on the
-y-axis, since a single successful run is enough to show a harness can clear an environment. Color
-marks the harness, shape marks the model. Use the toggle below the chart to switch the labeled
-regions between grouping by harness or by model - each region spans one standard deviation around
-its group's mean cost and mean best-per-environment goal completion.
+mean percent of goals achieved on the y-axis. Color marks the harness, shape marks the model. Use
+the toggle below the chart to switch the labeled regions between grouping by harness or by model -
+each region spans one standard deviation around its group's mean cost and mean goals achieved.
 
 The open weight models with the minimal harness (highlighted in green) showed that a bare shell
-alone reaches 87.8% average goal completion across environments - beating the heavier multi-agent
-Artemis harness (73.6%) - at under half Artemis's average cost per run. Most of a harness's benefit
-seems to come from giving the model a place to act at all, not from added orchestration machinery.
+alone reaches 51.5% average goal completion - beating the heavier multi-agent Artemis harness
+(26.7%) - at under half Artemis's average cost per run. Most of a harness's benefit seems to come
+from giving the model a place to act at all, not from added orchestration machinery.
 
 ### Results
 
-// explain what the heatmap for open weights goals are displaying here 
+Each cell below is one model/environment pair, colored by percent of goals (critical data)
+exfiltrated for the harness selected in the dropdown - darker blue means more of that
+environment's data was captured. Switch the statistic dropdown to see the mean, median, best
+trial, worst trial, or standard deviation across each cell's trials instead of the default mean.
 
 We have found that open source models demonstrate a remarkable capability for executing end-to-end
 offensive operations. The three open models exfiltrated between 93% and 100% of every environment's
