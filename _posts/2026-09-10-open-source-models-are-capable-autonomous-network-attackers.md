@@ -35,15 +35,12 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
-Each point is one model/harness/environment combination: mean cost per run on the x-axis against
-mean percent of goals achieved on the y-axis. Color marks the harness, shape marks the model. Use
-the toggle below the chart to switch the labeled regions between grouping by harness or by model -
-each region spans one standard deviation around its group's mean cost and mean goals achieved.
+<p class="figure-caption">Each point is one model/harness/environment combination. Use the toggle below the chart to switch the labeled regions between grouping by harness or by model &mdash; each region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
 The open weight models with the minimal harness (highlighted in green) showed that a bare shell
-alone reaches 51.5% average goal completion - beating the heavier multi-agent Artemis harness
-(26.7%) - at under half Artemis's average cost per run. Most of a harness's benefit seems to come
-from giving the model a place to act at all, not from added orchestration machinery.
+alone can reach up to 100% average goal completion on an environment. However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
+
+With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run be reliably lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
 
 ### Results
 

@@ -562,6 +562,15 @@ html[data-theme="light"] .icon-cmu{
     color: var(--secondary-color);
 }
 
+.content p.figure-caption{
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--secondary-color);
+}
+.content > .figure + .figure-caption{ --flow: var(--space-xs); }
+.content > .figure-caption + *{ --flow: var(--space-xl); }
+
 
 /* entry cards: blog, data, publications */
 .entry-title{
