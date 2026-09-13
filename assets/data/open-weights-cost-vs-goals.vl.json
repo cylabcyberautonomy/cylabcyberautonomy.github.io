@@ -152,7 +152,7 @@
         "x": {
           "field": "meanCost",
           "type": "quantitative",
-          "title": "Mean cost per run ($)",
+          "title": "Cost",
           "scale": {
             "zero": true
           },
@@ -163,7 +163,7 @@
         "y": {
           "field": "meanGoals",
           "type": "quantitative",
-          "title": "Mean % of goals achieved",
+          "title": "% goals achieved",
           "scale": {
             "domain": [0, 100]
           }
