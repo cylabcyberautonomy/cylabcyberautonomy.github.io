@@ -49,10 +49,7 @@ seems to come from giving the model a place to act at all, not from added orches
 
 ### Results
 
-Each cell below is one model/environment pair, colored by percent of goals (critical data)
-exfiltrated for the harness selected in the dropdown - darker blue means more of that
-environment's data was captured. Switch the statistic dropdown to see the mean, median, best
-trial, worst trial, or standard deviation across each cell's trials instead of the default mean.
+// explain what the heatmap for open weights goals are displaying here 
 
 We have found that open source models demonstrate a remarkable capability for executing end-to-end
 offensive operations. The three open models exfiltrated between 93% and 100% of every environment's
