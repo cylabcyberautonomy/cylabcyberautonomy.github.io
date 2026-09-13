@@ -68,8 +68,7 @@
       "mark": {
         "type": "rect",
         "cornerRadius": 80,
-        "fill": "#898781",
-        "opacity": 0.22
+        "opacity": 0.28
       },
       "encoding": {
         "x": {
@@ -108,7 +107,16 @@
             "type": "quantitative",
             "title": "Runs (all models)"
           }
-        ]
+        ],
+        "color": {
+          "field": "harness",
+          "type": "nominal",
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ]
+        }
       }
     },
     {
@@ -165,22 +173,37 @@
           "type": "quantitative",
           "title": "% goals achieved",
           "scale": {
-            "domain": [0, 100]
+            "domain": [
+              0,
+              100
+            ]
           }
         },
         "color": {
-          "field": "model",
-          "type": "nominal",
-          "title": "Model",
-          "sort": ["GLM 5.2", "Kimi K3", "Qwen 3.8 Max"]
-        },
-        "shape": {
           "field": "harness",
           "type": "nominal",
           "title": "Harness",
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ]
+        },
+        "shape": {
+          "field": "model",
+          "type": "nominal",
+          "title": "Model",
           "scale": {
-            "domain": ["Incalmo", "Artemis", "Shell"],
-            "range": ["circle", "triangle-up", "square"]
+            "domain": [
+              "GLM 5.2",
+              "Kimi K3",
+              "Qwen 3.8 Max"
+            ],
+            "range": [
+              "circle",
+              "triangle-up",
+              "square"
+            ]
           }
         },
         "tooltip": [

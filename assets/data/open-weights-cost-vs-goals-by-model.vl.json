@@ -68,8 +68,7 @@
       "mark": {
         "type": "rect",
         "cornerRadius": 80,
-        "fill": "#898781",
-        "opacity": 0.22
+        "opacity": 0.28
       },
       "encoding": {
         "x": {
@@ -108,7 +107,16 @@
             "type": "quantitative",
             "title": "Runs (all harnesses)"
           }
-        ]
+        ],
+        "color": {
+          "field": "model",
+          "type": "nominal",
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ]
+        }
       }
     },
     {
