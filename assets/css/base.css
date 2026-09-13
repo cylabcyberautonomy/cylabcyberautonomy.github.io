@@ -107,6 +107,9 @@ html{
   --seq-50: #4292C6;
   --seq-75: #2171B5;
   --seq-100: #08306B;
+  --cat-1: #3987e5;
+  --cat-2: #d95926;
+  --cat-3: #199e70;
 
   transition:
     --primary-color var(--theme-fade) ease,
@@ -129,6 +132,9 @@ html[data-theme="light"] {
   --seq-50: #4292C6;
   --seq-75: #2171B5;
   --seq-100: #08306B;
+  --cat-1: #2a78d6;
+  --cat-2: #eb6834;
+  --cat-3: #1baf7a;
   --page-bg: #F5F5F5;
   --panel-bg: rgba(255, 255, 255, 0.60);
   --on-accent: #FFFFFF;

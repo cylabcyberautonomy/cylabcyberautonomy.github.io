@@ -28,6 +28,7 @@
 
     const theme = () => {
         const ramp = ["--seq-0", "--seq-50", "--seq-100"].map(css).filter(Boolean);
+        const cats = ["--cat-1", "--cat-2", "--cat-3"].map(css).filter(Boolean);
         const cfg = {
             background: "transparent",
             font: css("--font-body") || "sans-serif",
@@ -43,9 +44,12 @@
                 labelFontSize: 12, titleFontSize: 12
             },
             title: { color: css("--primary-color"), font: css("--font-display"), fontSize: 14 },
-            view: { stroke: "transparent" }
+            view: { stroke: "transparent" },
+            point: { stroke: css("--page-bg"), strokeWidth: 2 }
         };
-        if (ramp.length === 3) cfg.range = { heatmap: ramp };
+        if (ramp.length === 3 || cats.length === 3) cfg.range = {};
+        if (ramp.length === 3) cfg.range.heatmap = ramp;
+        if (cats.length === 3) cfg.range.category = cats;
         return cfg;
     };
 

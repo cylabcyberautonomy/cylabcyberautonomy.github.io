@@ -78,3 +78,10 @@ You can find the data we collected from these experiments
 [here]({{ '/data/open-weights-attacker-dataset/' | relative_url }}).
 
 <p class="foot-note">Frontier closed-source models such as Anthropic's Claude Fable 5.1 and OpenAI's GPT-5.6 refuse to execute multi-stage network attacks.</p>
+
+### Cost vs. goals achieved
+
+Each point is one model/harness/environment combination: mean cost per run on the x-axis against
+mean percent of goals achieved on the y-axis. Color marks the model, shape marks the harness.
+
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
