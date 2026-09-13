@@ -64,16 +64,9 @@ You can find the data we collected from these experiments
 ### Cost vs. goals achieved
 
 Mean cost per run on the x-axis against mean percent of goals achieved on the y-axis. Color marks
-the harness, shape marks the model. Each point is one model/harness/environment combination; the
-labeled regions are color-matched to their harness and show where its runs cluster overall,
-spanning one standard deviation around its mean cost and mean goals achieved across every model
-and environment.
+the harness, shape marks the model. Each point is one model/harness/environment combination. Use
+the toggle below the chart to switch the labeled regions between grouping by harness (color-matched
+to their harness) and grouping by model (plain gray, since color here is reserved for harness) -
+each region spans one standard deviation around its group's mean cost and mean goals achieved.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
-
-The same points, but color now marks the model and shape marks the harness. The labeled regions
-are color-matched to their model and group by model instead of harness: each spans one standard
-deviation around that model's mean cost and mean goals achieved across every harness and
-environment.
-
-<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-by-model.vl.json"></div>
