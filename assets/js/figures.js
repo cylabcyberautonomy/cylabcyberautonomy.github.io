@@ -6,6 +6,10 @@
 
     const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
+    // matches the site's own mobile breakpoint (assets/css/base.css)
+    const MOBILE_BP = 700;
+    const isMobile = () => window.innerWidth <= MOBILE_BP;
+
     const LIBS = ["vega.min.js", "vega-lite.min.js", "vega-embed.min.js"];
 
     const script = (src) => new Promise((ok, no) => {
@@ -54,6 +58,26 @@
         return cfg;
     };
 
+    // Vega-Lite's global config.legend doesn't propagate orient/direction/columns
+    // (those are layout properties, not the styling ones config.legend actually
+    // supports) - they have to be set per-encoding. On narrow screens, move every
+    // color/shape legend under the plot instead of letting it eat into the plot's
+    // width from the right, which is what squashes a categorical-legend chart
+    // (like the scatterplot) on a phone.
+    const patchLegendsForMobile = (spec) => {
+        const bottomLegend = { orient: "bottom", direction: "horizontal", columns: 0 };
+        const patchEncoding = (enc) => {
+            if (!enc) return;
+            ["color", "shape", "size", "opacity"].forEach((ch) => {
+                if (enc[ch] && enc[ch].field) {
+                    enc[ch].legend = Object.assign({}, enc[ch].legend, bottomLegend);
+                }
+            });
+        };
+        (spec.layer || [spec]).forEach((layer) => patchEncoding(layer.encoding));
+        return spec;
+    };
+
     const inspect = (el, view) => {
         const svg = el.querySelector("svg");
         L("view size:", view.width(), "x", view.height());
@@ -82,8 +106,13 @@
     };
 
     const observe = (el) => {
+        el._mobile = isMobile();
         if (el._ro || typeof ResizeObserver !== "function") return;
-        el._ro = new ResizeObserver(() => { if (el._view) el._view.resize().run(); });
+        el._ro = new ResizeObserver(() => {
+            const nowMobile = isMobile();
+            if (nowMobile !== el._mobile) { el._mobile = nowMobile; render(el); return; }
+            if (el._view) el._view.resize().run();
+        });
         el._ro.observe(el);
     };
 
@@ -116,6 +145,7 @@
                     });
             })
             .then(spec => {
+                if (isMobile()) { spec = patchLegendsForMobile(spec); L("mobile: legends moved to bottom"); }
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
