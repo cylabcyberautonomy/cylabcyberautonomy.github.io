@@ -42,7 +42,7 @@ alone can reach up to 100% average goal completion on an environment. However, t
 
 With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run be reliably lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
 
-When comparing GLM 5.2, Kimi K3, and Qwen3.8 Max, regardless of the harness they each had similar success rates however Kimi K3 had much more variable cost, at one point going up to an average of $16 per run with ARTEMIS. 
+When comparing GLM 5.2, Kimi K3, and Qwen3.8 Max, regardless of the harness they each had similar success rates however Kimi K3 had much more variable cost; at one point going up to an average of $16 per run with ARTEMIS. 
 
 ### Deep Dive
 
