@@ -33,7 +33,7 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 ## What did we find?
 
-When we first ran experiments with open weight models for Incalmo a year ago, we observed that "[ Open weight ] models do not follow instructions and are unable to execute shell commands correctly." Open source models have come a long way from when we first evaluated them for offensive cyber tasks.
+When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open source models have come a long way from when we first evaluated them for offensive cyber tasks.
 
 The open weight models with the minimal harness (highlighted in green) showed that a bare shell
 alone can reach up to 100% average goal completion on an environment. 
