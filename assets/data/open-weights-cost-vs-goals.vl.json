@@ -48,16 +48,6 @@
               "as": "stdCost"
             },
             {
-              "op": "mean",
-              "field": "exfiltrated",
-              "as": "meanGoals"
-            },
-            {
-              "op": "stdev",
-              "field": "exfiltrated",
-              "as": "stdGoals"
-            },
-            {
               "op": "count",
               "as": "runs"
             }
@@ -65,6 +55,57 @@
           "groupby": [
             "harness"
           ]
+        },
+        {
+          "lookup": "harness",
+          "from": {
+            "data": {
+              "url": "/assets/data/open-weights-runs.json",
+              "format": {
+                "type": "json"
+              },
+              "transform": [
+                {
+                  "filter": "isValid(datum.cost)"
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "max",
+                      "field": "exfiltrated",
+                      "as": "envMaxGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "harness",
+                    "env"
+                  ]
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "mean",
+                      "field": "envMaxGoals",
+                      "as": "meanGoals"
+                    },
+                    {
+                      "op": "stdev",
+                      "field": "envMaxGoals",
+                      "as": "stdGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "harness"
+                  ]
+                }
+              ]
+            },
+            "key": "harness",
+            "fields": [
+              "meanGoals",
+              "stdGoals"
+            ]
+          }
         },
         {
           "calculate": "max(0, datum.meanCost - datum.stdCost)",
@@ -121,7 +162,7 @@
             "field": "meanGoals",
             "type": "quantitative",
             "format": ".1f",
-            "title": "Mean % goals achieved"
+            "title": "Mean of per-env best % goals"
           },
           {
             "field": "runs",
@@ -155,16 +196,6 @@
               "as": "stdCost"
             },
             {
-              "op": "mean",
-              "field": "exfiltrated",
-              "as": "meanGoals"
-            },
-            {
-              "op": "stdev",
-              "field": "exfiltrated",
-              "as": "stdGoals"
-            },
-            {
               "op": "count",
               "as": "runs"
             }
@@ -172,6 +203,57 @@
           "groupby": [
             "model"
           ]
+        },
+        {
+          "lookup": "model",
+          "from": {
+            "data": {
+              "url": "/assets/data/open-weights-runs.json",
+              "format": {
+                "type": "json"
+              },
+              "transform": [
+                {
+                  "filter": "isValid(datum.cost)"
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "max",
+                      "field": "exfiltrated",
+                      "as": "envMaxGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "model",
+                    "env"
+                  ]
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "mean",
+                      "field": "envMaxGoals",
+                      "as": "meanGoals"
+                    },
+                    {
+                      "op": "stdev",
+                      "field": "envMaxGoals",
+                      "as": "stdGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "model"
+                  ]
+                }
+              ]
+            },
+            "key": "model",
+            "fields": [
+              "meanGoals",
+              "stdGoals"
+            ]
+          }
         },
         {
           "calculate": "max(0, datum.meanCost - datum.stdCost)",
@@ -229,7 +311,7 @@
             "field": "meanGoals",
             "type": "quantitative",
             "format": ".1f",
-            "title": "Mean % goals achieved"
+            "title": "Mean of per-env best % goals"
           },
           {
             "field": "runs",
@@ -249,9 +331,9 @@
               "as": "meanCost"
             },
             {
-              "op": "mean",
+              "op": "max",
               "field": "exfiltrated",
-              "as": "meanGoals"
+              "as": "maxGoals"
             },
             {
               "op": "count",
@@ -289,9 +371,9 @@
           }
         },
         "y": {
-          "field": "meanGoals",
+          "field": "maxGoals",
           "type": "quantitative",
-          "title": "% goals achieved",
+          "title": "Best % goals achieved (per env)",
           "scale": {
             "domain": [
               0,
@@ -346,10 +428,10 @@
             "title": "Mean cost / run"
           },
           {
-            "field": "meanGoals",
+            "field": "maxGoals",
             "type": "quantitative",
             "format": ".1f",
-            "title": "Mean % goals achieved"
+            "title": "Best % goals achieved"
           },
           {
             "field": "runs",
@@ -372,21 +454,62 @@
               "op": "stdev",
               "field": "cost",
               "as": "stdCost"
-            },
-            {
-              "op": "mean",
-              "field": "exfiltrated",
-              "as": "meanGoals"
-            },
-            {
-              "op": "stdev",
-              "field": "exfiltrated",
-              "as": "stdGoals"
             }
           ],
           "groupby": [
             "harness"
           ]
+        },
+        {
+          "lookup": "harness",
+          "from": {
+            "data": {
+              "url": "/assets/data/open-weights-runs.json",
+              "format": {
+                "type": "json"
+              },
+              "transform": [
+                {
+                  "filter": "isValid(datum.cost)"
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "max",
+                      "field": "exfiltrated",
+                      "as": "envMaxGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "harness",
+                    "env"
+                  ]
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "mean",
+                      "field": "envMaxGoals",
+                      "as": "meanGoals"
+                    },
+                    {
+                      "op": "stdev",
+                      "field": "envMaxGoals",
+                      "as": "stdGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "harness"
+                  ]
+                }
+              ]
+            },
+            "key": "harness",
+            "fields": [
+              "meanGoals",
+              "stdGoals"
+            ]
+          }
         },
         {
           "calculate": "min(100, datum.meanGoals + datum.stdGoals)",
@@ -430,21 +553,62 @@
               "op": "stdev",
               "field": "cost",
               "as": "stdCost"
-            },
-            {
-              "op": "mean",
-              "field": "exfiltrated",
-              "as": "meanGoals"
-            },
-            {
-              "op": "stdev",
-              "field": "exfiltrated",
-              "as": "stdGoals"
             }
           ],
           "groupby": [
             "model"
           ]
+        },
+        {
+          "lookup": "model",
+          "from": {
+            "data": {
+              "url": "/assets/data/open-weights-runs.json",
+              "format": {
+                "type": "json"
+              },
+              "transform": [
+                {
+                  "filter": "isValid(datum.cost)"
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "max",
+                      "field": "exfiltrated",
+                      "as": "envMaxGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "model",
+                    "env"
+                  ]
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "mean",
+                      "field": "envMaxGoals",
+                      "as": "meanGoals"
+                    },
+                    {
+                      "op": "stdev",
+                      "field": "envMaxGoals",
+                      "as": "stdGoals"
+                    }
+                  ],
+                  "groupby": [
+                    "model"
+                  ]
+                }
+              ]
+            },
+            "key": "model",
+            "fields": [
+              "meanGoals",
+              "stdGoals"
+            ]
+          }
         },
         {
           "calculate": "min(100, datum.meanGoals + datum.stdGoals)",
