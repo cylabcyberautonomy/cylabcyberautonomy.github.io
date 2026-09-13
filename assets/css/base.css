@@ -770,6 +770,16 @@ a.entry-title:hover{
     .content .figure svg{
         max-width: none;
     }
+    /* vega-embed's own "..." export-menu button is position:absolute against
+       .vega-embed's own box (top right corner) - if that box stays 100% of
+       the (narrower) scroll container while its svg overflows wider, the
+       button lands wherever the container's right edge happens to be instead
+       of the chart's actual top-right corner. Let it hug the svg's real
+       (possibly wider) width so the button tracks the content, not the
+       viewport. */
+    .content .figure .vega-embed{
+        width: max-content;
+    }
 
     .people-grid{
         grid-template-columns: repeat(2, 1fr);

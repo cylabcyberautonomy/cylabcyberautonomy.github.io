@@ -31,7 +31,7 @@ These agents are evaluated on the MHBench cyber ranges, a set of network environ
 least one multi-stage exploit. Further detail on the construction and scoring criteria of each of
 these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
-## What did we find?
+### What did we find?
 
 When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open source models have come a long way from when we first evaluated them for offensive cyber tasks.
 
