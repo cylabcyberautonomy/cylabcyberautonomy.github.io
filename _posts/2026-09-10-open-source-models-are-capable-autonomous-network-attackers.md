@@ -70,7 +70,4 @@ model's offensive capabilities, as well as their defensive capabilities.
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
-You can find the data we collected from these experiments
-[here]({{ '/data/open-weights-attacker-dataset/' | relative_url }}).
-
 <p class="foot-note">Frontier closed-source models such as Anthropic's Claude Fable 5.1 and OpenAI's GPT-5.6 refuse to execute multi-stage network attacks.</p>
