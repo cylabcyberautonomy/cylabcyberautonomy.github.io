@@ -46,7 +46,7 @@
             title: { color: css("--primary-color"), font: css("--font-display"), fontSize: 14 },
             text: { color: css("--primary-color"), font: css("--font-display") },
             view: { stroke: "transparent" },
-            point: { stroke: css("--page-bg"), strokeWidth: 2 }
+            point: { stroke: null }
         };
         if (ramp.length === 3 || cats.length === 3) cfg.range = {};
         if (ramp.length === 3) cfg.range.heatmap = ramp;
