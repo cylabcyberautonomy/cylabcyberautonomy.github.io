@@ -65,8 +65,7 @@ You can find the data we collected from these experiments
 
 Mean cost per run on the x-axis against mean percent of goals achieved on the y-axis. Color marks
 the model, shape marks the harness. Each point is one model/harness/environment combination; the
-labeled gray regions trace where each harness's runs actually cluster (across every model and
-environment), with the most extreme 10% of cost outliers excluded so a few pricey timeout runs
-don't blow the shape out to cover the whole chart.
+labeled gray regions show where each harness's runs cluster overall, spanning one standard deviation
+around its mean cost and mean goals achieved across every model and environment.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
