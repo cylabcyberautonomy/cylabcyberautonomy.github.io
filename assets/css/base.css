@@ -780,6 +780,23 @@ a.entry-title:hover{
     .content .figure .vega-embed{
         width: max-content;
     }
+    /* ...and since that box is now as wide as the (scrollable) chart, its
+       top-right corner starts off-screen: the export button would only be
+       reachable after scrolling the figure all the way right. Flip it - and
+       the menu it opens - to the top-left corner, which is always in view,
+       moving has-actions' reserved gutter to the left side with it. */
+    .content .figure .vega-embed.has-actions{
+        padding-right: 0;
+        padding-left: 38px;
+    }
+    .content .figure .vega-embed summary{
+        left: 0;
+        right: auto;
+    }
+    .content .figure .vega-embed .vega-actions{
+        left: -9px;
+        right: auto;
+    }
 
     .people-grid{
         grid-template-columns: repeat(2, 1fr);

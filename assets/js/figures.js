@@ -93,6 +93,21 @@
         return spec;
     };
 
+    // A tooltip is a hover affordance, and a touch screen has no hover: every
+    // tap on a mark pops one up, and it sits there until you happen to tap
+    // somewhere else. Drop them on phones - both by dropping the encodings
+    // (so the marks carry no tooltip data at all) and by turning off the
+    // handler at embed time, since either alone is enough but the pair leaves
+    // nothing to go wrong. Desktop keeps its tooltips: the specs on disk are
+    // untouched, and this only runs behind the isMobile() check in render().
+    const stripTooltipsForMobile = (spec) => {
+        (spec.layer || [spec]).forEach((layer) => {
+            if (layer.encoding) delete layer.encoding.tooltip;
+        });
+        if (spec.encoding) delete spec.encoding.tooltip;
+        return spec;
+    };
+
     const inspect = (el, view) => {
         const svg = el.querySelector("svg");
         L("view size:", view.width(), "x", view.height());
@@ -174,16 +189,19 @@
             .then(spec => {
                 if (isMobile()) {
                     spec = patchLegendsForMobile(spec);
+                    spec = stripTooltipsForMobile(spec);
                     spec = applyMinMobileWidth(spec, el);
-                    L("mobile: legends moved to bottom, width=", spec.width);
+                    L("mobile: legends moved to bottom, tooltips off, width=", spec.width);
                 }
                 delete spec._minMobileWidth;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
                 }
+                // tooltip: the second half of stripTooltipsForMobile - see there.
                 return vegaEmbed(inner, spec, {
                     config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1,
+                    tooltip: !isMobile(),
                     actions: { export: true, source: false, compiled: false, editor: false }
                 });
             })
