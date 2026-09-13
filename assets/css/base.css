@@ -68,6 +68,8 @@
 
 html{
     background-color: var(--page-bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 
 }
 
