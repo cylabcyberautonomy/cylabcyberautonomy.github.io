@@ -44,6 +44,7 @@
                 labelFontSize: 12, titleFontSize: 12
             },
             title: { color: css("--primary-color"), font: css("--font-display"), fontSize: 14 },
+            text: { color: css("--primary-color"), font: css("--font-display") },
             view: { stroke: "transparent" },
             point: { stroke: css("--page-bg"), strokeWidth: 2 }
         };
