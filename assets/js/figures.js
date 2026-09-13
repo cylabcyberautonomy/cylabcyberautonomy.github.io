@@ -115,6 +115,30 @@
         return spec;
     };
 
+    // The shape legend (model) carries no colour of its own - colour is a
+    // separate channel there (harness) - so Vega-Lite falls back to the point
+    // mark's defaults for its symbols, and theme() sets point.stroke to null.
+    // That leaves the symbols drawn in nothing much at all, which is why they
+    // vanish against the dark background. Paint them with --secondary-color,
+    // which is a light grey in dark mode and a dark grey in light mode, so
+    // they read in either theme; theme changes re-render, so this follows.
+    // Fill and stroke both, since which one a symbol uses depends on its
+    // shape. The colour legend is deliberately untouched - those symbols
+    // carry the category colours and have to keep them.
+    const patchShapeLegend = (spec) => {
+        const ink = css("--secondary-color");
+        if (!ink) return spec;
+        (spec.layer || [spec]).forEach((layer) => {
+            const enc = layer.encoding;
+            if (enc && enc.shape && enc.shape.field) {
+                enc.shape.legend = Object.assign({}, enc.shape.legend, {
+                    symbolFillColor: ink, symbolStrokeColor: ink
+                });
+            }
+        });
+        return spec;
+    };
+
     const inspect = (el, view) => {
         const svg = el.querySelector("svg");
         L("view size:", view.width(), "x", view.height());
@@ -194,6 +218,7 @@
                     });
             })
             .then(spec => {
+                spec = patchShapeLegend(spec);
                 if (isMobile()) {
                     spec = patchLegendsForMobile(spec);
                     spec = applyMinMobileWidth(spec, el);
