@@ -10,6 +10,13 @@
     const MOBILE_BP = 700;
     const isMobile = () => window.innerWidth <= MOBILE_BP;
 
+    // Layout follows the width breakpoint above, but "can this thing hover?"
+    // is a different question and width is a bad proxy for it: a tablet, or a
+    // phone turned sideways, is well past 700px and still has no pointer to
+    // hover with. (hover: hover) asks the device directly. Assume it can hover
+    // where the query isn't supported, which just keeps today's behaviour.
+    const canHover = () => !window.matchMedia || window.matchMedia("(hover: hover)").matches;
+
     const LIBS = ["vega.min.js", "vega-lite.min.js", "vega-embed.min.js"];
 
     const script = (src) => new Promise((ok, no) => {
@@ -95,12 +102,12 @@
 
     // A tooltip is a hover affordance, and a touch screen has no hover: every
     // tap on a mark pops one up, and it sits there until you happen to tap
-    // somewhere else. Drop them on phones - both by dropping the encodings
-    // (so the marks carry no tooltip data at all) and by turning off the
-    // handler at embed time, since either alone is enough but the pair leaves
-    // nothing to go wrong. Desktop keeps its tooltips: the specs on disk are
-    // untouched, and this only runs behind the isMobile() check in render().
-    const stripTooltipsForMobile = (spec) => {
+    // somewhere else. Drop them wherever the device can't hover - both by
+    // dropping the encodings (so the marks carry no tooltip data at all) and
+    // by turning off the handler at embed time, since either alone is enough
+    // but the pair leaves nothing to go wrong. Anything with a real pointer
+    // keeps its tooltips; the specs on disk are untouched either way.
+    const stripTooltips = (spec) => {
         (spec.layer || [spec]).forEach((layer) => {
             if (layer.encoding) delete layer.encoding.tooltip;
         });
@@ -189,19 +196,22 @@
             .then(spec => {
                 if (isMobile()) {
                     spec = patchLegendsForMobile(spec);
-                    spec = stripTooltipsForMobile(spec);
                     spec = applyMinMobileWidth(spec, el);
-                    L("mobile: legends moved to bottom, tooltips off, width=", spec.width);
+                    L("mobile: legends moved to bottom, width=", spec.width);
+                }
+                if (!canHover()) {
+                    spec = stripTooltips(spec);
+                    L("no hover available: tooltips stripped");
                 }
                 delete spec._minMobileWidth;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
                 }
-                // tooltip: the second half of stripTooltipsForMobile - see there.
+                // tooltip: the second half of stripTooltips - see there.
                 return vegaEmbed(inner, spec, {
                     config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1,
-                    tooltip: !isMobile(),
+                    tooltip: canHover(),
                     actions: { export: true, source: false, compiled: false, editor: false }
                 });
             })
