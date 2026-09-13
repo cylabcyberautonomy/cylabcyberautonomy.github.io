@@ -6,7 +6,7 @@ description: We ran three of the latest open source models on our cyber ranges (
 ---
 
 We ran three of the latest open source models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. The models can now chain exploits without specialized harnesses, and with Incalmo we see dramatic performance improvements and reduced cost.
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. The models can now chain exploits without specialized harnesses, yet with Incalmo we see dramatic performance improvements and reduced cost.
 
 ### Why open weight models?
 
@@ -33,14 +33,9 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 ## What did we find?
 
-Mean cost per run on the x-axis against mean percent of goals achieved on the y-axis. Color marks
-the harness, shape marks the model. Each point is one model/harness/environment combination. Use
-the toggle below the chart to switch the labeled regions between grouping by harness (color-matched
-to their harness, shown by default) and grouping by model (plain gray, since color here is reserved
-for harness) - each region spans one standard deviation around its group's mean cost and mean goals
-achieved.
-
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
+
+
 
 ### Results
 
