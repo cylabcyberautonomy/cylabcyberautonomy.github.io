@@ -11,9 +11,16 @@
 
   {% include footer.html %}
 
-  <script src="{{ '/assets/js/figures.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/background.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/nav.js' | relative_url }}"></script>
+  {%- comment -%}
+    Pages serves assets with cache-control: max-age=600, so a phone keeps
+    running the previous build's JS for ten minutes after a deploy - long
+    enough to look like the deploy simply didn't work. site.time changes
+    every build, so each deploy asks for a URL the browser has never seen.
+  {%- endcomment -%}
+  {%- assign rev = site.time | date: '%s' -%}
+  <script src="{{ '/assets/js/figures.js' | relative_url }}?v={{ rev }}"></script>
+  <script src="{{ '/assets/js/background.js' | relative_url }}?v={{ rev }}"></script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}?v={{ rev }}"></script>
+  <script src="{{ '/assets/js/nav.js' | relative_url }}?v={{ rev }}"></script>
 </body>
 </html>
