@@ -58,7 +58,7 @@ We also provide the cost for these experiments, in the interest of transparency.
 <div class="figure" data-vega="/assets/data/open-weights-cost.vl.json"></div>
 
 To analyze even more dimensions of this data, check out the raw dataset
-[here]({{ '/data/open-weights-attacker-dataset/' | relative_url }}).
+[here]({{ '/data/open-weights-attacker-dataset/' | relative_url }})!
 
 ### What's next?
 
