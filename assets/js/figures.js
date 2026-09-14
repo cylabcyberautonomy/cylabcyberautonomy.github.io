@@ -177,17 +177,55 @@
     // MIN_PANEL keeps the panels legible on a phone instead of letting three
     // of them divide a 360px screen; el's own `overflow-x: auto` scrolls when
     // that floor makes the figure wider than the screen.
+    // A faceted chart laid out in a row spends width, which is the one thing a
+    // phone has none of: three panels side by side either shrink past
+    // legibility or push the figure into a horizontal scroll. A spec that
+    // reads as well stacked sets `_mobileStack` and gets one column on narrow
+    // screens, trading the scarce axis for the plentiful one. Its `spacing`
+    // should be a {row, column} pair, since stacking swaps which one applies.
+    const stackFacets = (spec) => {
+        if (!spec._mobileStack || !spec.facet) return spec;
+        // `columns` is a sibling of `facet`, not a property of it - Vega-Lite
+        // ignores it silently in the wrong place.
+        spec.columns = 1;
+        // Laid out in a row, every panel sits on the same bottom edge and can
+        // share one x axis. Stacked, the shared axis is drawn under the last
+        // panel only, leaving the two above it with nothing to read against -
+        // so each cell gets its own. The scale stays shared, so they are still
+        // directly comparable.
+        spec.resolve = spec.resolve || {};
+        spec.resolve.axis = Object.assign({}, spec.resolve.axis, { x: "independent" });
+        if (spec._fitPanels) spec._fitPanels = 1;
+        return spec;
+    };
+
     const MIN_PANEL = 150;
     // room the shared y axis (labels + title) and the outer padding need, which
     // sits outside the panels and so can't be divided among them
     const FACET_CHROME = 68;
+    // vega-embed reserves this much to the right of every chart for its export
+    // button (.vega-embed.has-actions). It is outside the svg but inside the
+    // scroll container, so a chart sized to the container's full width
+    // overflows by exactly this much.
+    const ACTIONS_GUTTER = 38;
     const fitPanels = (spec, el) => {
         const n = spec._fitPanels;
         if (!n || !spec.spec) return spec;
         const avail = el.offsetWidth || 0;
         if (!avail) return spec;
-        const gaps = (spec.spacing || 0) * (n - 1);
-        spec.spec.width = Math.max(Math.floor((avail - gaps - FACET_CHROME) / n), MIN_PANEL);
+        // spacing is either a number or a {row, column} pair; only the column
+        // half sits between panels laid out in a row. Multiplying the object
+        // itself gives NaN, which silently collapses the view to 0x0.
+        const spacing = spec.spacing && typeof spec.spacing === "object"
+            ? (spec.spacing.column || 0) : (spec.spacing || 0);
+        const gaps = spacing * (n - 1);
+        // A spec whose marks deliberately reach outside their panel (the
+        // Incalmo ring, say) declares how much room that needs in total as
+        // `_panelBleed`; without it the panels are sized as if the chart ended
+        // at their edges and the figure overflows by exactly that much.
+        const bleed = spec._panelBleed || 0;
+        const room = avail - gaps - FACET_CHROME - bleed - ACTIONS_GUTTER;
+        spec.spec.width = Math.max(Math.floor(room / n), MIN_PANEL);
         return spec;
     };
 
@@ -367,6 +405,7 @@
             .then(spec => {
                 spec = patchShapeLegend(spec);
                 if (isMobile()) {
+                    spec = stackFacets(spec);
                     spec = patchLegendsForMobile(spec);
                     spec = applyMinMobileWidth(spec, el);
                     L("mobile: legends moved to bottom, width=", spec.width);
@@ -382,6 +421,8 @@
                 }
                 delete spec._minMobileWidth;
                 delete spec._fitPanels;
+                delete spec._mobileStack;
+                delete spec._panelBleed;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }

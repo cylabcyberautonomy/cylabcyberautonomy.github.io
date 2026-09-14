@@ -8,7 +8,10 @@
       "filter": "isValid(datum.cost)"
     }
   ],
-  "spacing": 0,
+  "spacing": {
+    "row": 26,
+    "column": 0
+  },
   "facet": {
     "field": "harness",
     "type": "nominal",
@@ -18,12 +21,12 @@
       "Incalmo",
       "Artemis"
     ],
-    "columns": 3,
     "header": {
       "labelExpr": "''",
       "labelPadding": 0
     }
   },
+  "columns": 3,
   "spec": {
     "width": 240,
     "height": 300,
@@ -376,5 +379,7 @@
       }
     ]
   },
-  "_fitPanels": 3
+  "_fitPanels": 3,
+  "_panelBleed": 60,
+  "_mobileStack": true
 }
