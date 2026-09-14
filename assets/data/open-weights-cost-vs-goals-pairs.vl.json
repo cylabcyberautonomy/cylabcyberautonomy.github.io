@@ -52,12 +52,12 @@
         ],
         "mark": {
           "type": "rule",
-          "stroke": "$ink-dim",
+          "stroke": "$hairline",
           "strokeWidth": 1
         },
         "encoding": {
           "x": {
-            "value": -9
+            "value": -25
           },
           "y": {
             "value": 0
@@ -65,7 +65,17 @@
           "y2": {
             "value": "height"
           }
-        }
+        },
+        "_comment": [
+          "A separator in the gutter to the left of every panel but the first.",
+          "-25, not half of `spacing`: the facet layout uses bounds:full, so the",
+          "gutter is widened to clear the x axis labels overhanging each panel's",
+          "edges - and the rule itself counts towards those bounds, so moving it",
+          "left widens the gutter again. -25 is the fixed point that measurement",
+          "settles on: a 46px gutter with the rule dead centre in it. At the old -9",
+          "it sat hard against the panel to its right and read as that panel's y",
+          "axis. Re-measure if spacing or the axis label format changes."
+        ]
       },
       {
         "transform": [
