@@ -5,8 +5,11 @@ figures: true
 description: We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper.
 ---
 
-We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 Max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
+GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our cyber ranges, with Qwen 3.8 Max leading in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
+
+<div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
+
+<p class="figure-caption">Each cell holds the mean percentage of goals achieved for that model/harness pair, averaged over every environment and trial. Qwen 3.8 Max leads on all three. </p>
 
 ### Why open weight models?
 
@@ -32,12 +35,8 @@ these cyber ranges can be found [here](https://arxiv.org/abs/2501.16466).
 
 ### What did we find?
 
-GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our cyber ranges, with Qwen 3.8 Max leading in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
-
-<div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
-
-<p class="figure-caption">Each cell holds the mean percentage of goals achieved for that model/harness pair, averaged over every environment and trial. Qwen 3.8 Max leads on all three. </p>
-
+We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 Max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
 When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open weight models have come a long way from when we first evaluated them for offensive cyber tasks.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
@@ -64,13 +63,13 @@ We also provide the cost for these experiments, in the interest of transparency.
 To analyze even more dimensions of this data, check out the raw dataset
 [here]({{ '/data/open-weights-attacker-dataset/' | relative_url }})!
 
-## What does this mean for security practitioners?
+### What does this mean for security practitioners?
 
 Open-weight models are now a practical alternative for red team and penetration testing assistance when frontier models refuse offensive-security tasks. On-prem hosted open-weight models also let organizations keep sensitive network data private while integrating agentic workflows into pentesting.
 
-## What does this mean for security policy?
+### What does this mean for security policy?
 
-We now have visibility into the abilities of cyber-offensive capable models without provider-enforced guardrails. Open-weight models are already extremely capable at executing real, multi-stage network attacks. As these models become cheaper and more capable, sophisticated offensive security capabilities will become more widespread, beyond the control of centralized model providers.
+We now have visibility into the abilities of cyber-offensive capable models without provider-enforced guardrails. Open-weight models are already extremely capable at executing real, multi-stage network attacks. Sophisticated offensive security capabilities will become more widespread, beyond the control of centralized model providers.
 
 ### What's next?
 
