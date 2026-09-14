@@ -6,27 +6,22 @@
   "transform": [
     {
       "filter": "isValid(datum.cost)"
-    },
-    {
-      "calculate": "indexof([\"Shell\", \"Incalmo\", \"Artemis\"], datum.harness)",
-      "as": "harnessOrder"
     }
   ],
-  "spacing": 18,
+  "spacing": 0,
   "facet": {
     "field": "harness",
     "type": "nominal",
     "title": null,
-    "sort": {
-      "field": "harnessOrder",
-      "op": "min",
-      "order": "ascending"
-    },
+    "sort": [
+      "Shell",
+      "Incalmo",
+      "Artemis"
+    ],
     "columns": 3,
     "header": {
-      "labelFontSize": 13,
-      "labelFontWeight": 700,
-      "labelAnchor": "middle"
+      "labelExpr": "''",
+      "labelPadding": 0
     }
   },
   "spec": {
@@ -34,6 +29,19 @@
     "height": 300,
     "layer": [
       {
+        "_comment": [
+          "Rings Incalmo only - the harness the post is arguing for. Its sides land",
+          "in the two gutters, where the dividers used to be, just turned up and",
+          "joined at the ends.",
+          "Reaching into the gutter counts towards the panel's bounds, and the facet",
+          "layout (bounds:full) then widens the gutter to match - so the offset and",
+          "the gutter chase each other. -26 with spacing 0 is the fixed point that",
+          "measurement settles on: ~50px gutters with the sides centred in them to",
+          "within the stroke's own width. `spacing` is 0 because the gutter is now",
+          "produced entirely by these bounds; re-measure if either changes.",
+          "y stays within 0..child_height on purpose: reaching below would push the",
+          "axis down by the same amount every time, which never converges."
+        ],
         "transform": [
           {
             "aggregate": [
@@ -43,39 +51,32 @@
               }
             ],
             "groupby": [
-              "harnessOrder"
+              "harness"
             ]
           },
           {
-            "filter": "datum.harnessOrder > 0"
+            "filter": "datum.harness === 'Incalmo'"
           }
         ],
         "mark": {
-          "type": "rule",
-          "stroke": "$hairline",
-          "strokeWidth": 1
-        },
-        "encoding": {
+          "type": "rect",
+          "cornerRadius": 10,
+          "fill": null,
+          "stroke": "$hairline-strong",
+          "strokeWidth": 1.5,
           "x": {
-            "value": -25
+            "expr": "-26"
+          },
+          "x2": {
+            "expr": "child_width + 26"
           },
           "y": {
-            "value": 0
+            "expr": "0"
           },
           "y2": {
-            "value": "height"
+            "expr": "child_height"
           }
-        },
-        "_comment": [
-          "A separator in the gutter to the left of every panel but the first.",
-          "-25, not half of `spacing`: the facet layout uses bounds:full, so the",
-          "gutter is widened to clear the x axis labels overhanging each panel's",
-          "edges - and the rule itself counts towards those bounds, so moving it",
-          "left widens the gutter again. -25 is the fixed point that measurement",
-          "settles on: a 46px gutter with the rule dead centre in it. At the old -9",
-          "it sat hard against the panel to its right and read as that panel's y",
-          "axis. Re-measure if spacing or the axis label format changes."
-        ]
+        }
       },
       {
         "transform": [
@@ -259,6 +260,16 @@
             "scale": {
               "domain": [
                 0,
+                116
+              ]
+            },
+            "axis": {
+              "values": [
+                0,
+                20,
+                40,
+                60,
+                80,
                 100
               ]
             }
@@ -309,6 +320,45 @@
               "title": "Runs"
             }
           ]
+        }
+      },
+      {
+        "_comment": [
+          "The panel name, in pixel coordinates inside the plot area.",
+          "Anything drawn outside it pushes Vega's own labels further out,",
+          "so this is the only place a mark and a title can share a box."
+        ],
+        "transform": [
+          {
+            "aggregate": [
+              {
+                "op": "count",
+                "as": "n"
+              }
+            ],
+            "groupby": [
+              "harness"
+            ]
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 13,
+          "fontWeight": 700,
+          "baseline": "middle",
+          "align": "center",
+          "color": "$ink",
+          "x": {
+            "expr": "child_width / 2"
+          },
+          "y": {
+            "expr": "16"
+          }
+        },
+        "encoding": {
+          "text": {
+            "field": "harness"
+          }
         }
       }
     ]

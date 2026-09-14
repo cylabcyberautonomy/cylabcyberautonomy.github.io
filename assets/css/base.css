@@ -165,6 +165,9 @@ html{
      instead - 1.4:1 either way, darker than the page in light mode and
      lighter than it in dark. */
   --hairline: #353535;
+  /* the same separator, turned up: used to ring the panel the post is
+     singling out. ~2.4:1 against the page either way. */
+  --hairline-strong: #555555;
   --cat-1: #3987e5;
   --cat-2: #d95926;
   --cat-3: #199e70;
@@ -219,6 +222,7 @@ html[data-theme="light"] {
   --ink-on-warm-low: #3B1A02;
   --ink-on-warm-high: #FFFFFF;
   --hairline: #D2D2D2;
+  --hairline-strong: #A0A0A0;
   --cat-1: #2a78d6;
   --cat-2: #eb6834;
   --cat-3: #1baf7a;
