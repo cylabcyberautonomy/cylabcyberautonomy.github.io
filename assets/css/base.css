@@ -873,32 +873,25 @@ a.entry-title:hover{
     .content .figure svg{
         max-width: none;
     }
-    /* vega-embed's own "..." export-menu button is position:absolute against
-       .vega-embed's own box (top right corner) - if that box stays 100% of
-       the (narrower) scroll container while its svg overflows wider, the
-       button lands wherever the container's right edge happens to be instead
-       of the chart's actual top-right corner. Let it hug the svg's real
-       (possibly wider) width so the button tracks the content, not the
-       viewport. */
-    .content .figure .vega-embed{
-        width: max-content;
-    }
-    /* ...and since that box is now as wide as the (scrollable) chart, its
-       top-right corner starts off-screen: the export button would only be
-       reachable after scrolling the figure all the way right. Flip it - and
-       the menu it opens - to the top-left corner, which is always in view,
-       moving has-actions' reserved gutter to the left side with it. */
+    /* vega-embed's "..." export button is position:absolute against
+       .vega-embed's own box. Leaving that box at the scroll container's width
+       - rather than letting it hug the (wider) chart - keeps the button at
+       the top right of what is actually on screen, so it is reachable without
+       scrolling the figure sideways to find it.
+
+       has-actions' reserved 38px gutter goes too. It cannot do its job here
+       anyway - the chart is wider than the figure and scrolls underneath the
+       button whatever the padding is - so all it bought was a strip of empty
+       space to scroll past. Instead the button gets a small solid chip, which
+       keeps it legible over whatever part of the chart ends up behind it. */
     .content .figure .vega-embed.has-actions{
         padding-right: 0;
-        padding-left: 38px;
     }
     .content .figure .vega-embed summary{
-        left: 0;
-        right: auto;
-    }
-    .content .figure .vega-embed .vega-actions{
-        left: -9px;
-        right: auto;
+        padding: 2px 4px;
+        border-radius: 4px !important;
+        background-color: var(--page-bg) !important;
+        opacity: 0.85 !important;
     }
 
     .people-grid{

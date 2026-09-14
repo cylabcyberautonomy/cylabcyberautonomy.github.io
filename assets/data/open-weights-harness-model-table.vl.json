@@ -41,6 +41,19 @@
       "as": "isBest"
     },
     {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "meanGoals",
+          "as": "tableMax"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.meanGoals >= datum.tableMax - 0.0001",
+      "as": "isTop"
+    },
+    {
       "calculate": "datum.model === 'GLM 5.2' ? 'first' : datum.model === 'Qwen 3.8 Max' ? 'last' : 'mid'",
       "as": "colPos"
     },
@@ -99,10 +112,16 @@
           }
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$seq-75"
-          },
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$seq-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$seq-75"
+            }
+          ],
           "value": "$seq-0"
         }
       }
@@ -151,10 +170,16 @@
           }
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$seq-75"
-          },
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$seq-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$seq-75"
+            }
+          ],
           "value": "$seq-0"
         }
       }
@@ -203,10 +228,16 @@
           }
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$seq-75"
-          },
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$seq-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$seq-75"
+            }
+          ],
           "value": "$seq-0"
         }
       }
@@ -255,10 +286,16 @@
           }
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$seq-75"
-          },
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$seq-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$seq-75"
+            }
+          ],
           "value": "$seq-0"
         }
       }
@@ -307,10 +344,16 @@
           }
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$seq-75"
-          },
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$seq-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$seq-75"
+            }
+          ],
           "value": "$seq-0"
         }
       }

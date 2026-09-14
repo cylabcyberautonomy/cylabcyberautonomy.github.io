@@ -193,14 +193,6 @@
           "type": "quantitative",
           "format": ".0f"
         },
-        "comment": [
-          "The label sits on its own cell, not on the page, so it follows the",
-          "cell rather than the page's ink - but the ramp inverts between",
-          "themes, so which ink reads on which end inverts with it. The two",
-          "ink-on-seq tokens carry that; 70 is the crossover on the ramp, and",
-          "holds in both themes because both ramps share a contrast ladder.",
-          "Worst case either way is about 4:1."
-        ],
         "color": {
           "condition": {
             "test": "datum.value > 70",
@@ -208,7 +200,15 @@
           },
           "value": "$ink-on-seq-low"
         }
-      }
+      },
+      "_comment": [
+        "The label sits on its own cell, not on the page, so it follows the",
+        "cell rather than the page's ink - but the ramp inverts between",
+        "themes, so which ink reads on which end inverts with it. The two",
+        "ink-on-seq tokens carry that; 70 is the crossover on the ramp, and",
+        "holds in both themes because both ramps share a contrast ladder.",
+        "Worst case either way is about 4:1."
+      ]
     }
   ],
   "_minMobileWidth": 470

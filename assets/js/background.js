@@ -177,8 +177,18 @@
         }
 
         resize() {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
+            // The canvas is stretched over the viewport by CSS (width/height
+            // 100%), so its backing store has to be sized in *device* pixels,
+            // not CSS pixels. Sizing it in CSS pixels meant that on any screen
+            // with a pixel ratio above 1 - a retina laptop, a 4K monitor, or
+            // just a reader zoomed in - the shader rendered at half resolution
+            // and the browser scaled it up, which softened the pattern's hard
+            // pixel edges into a smear. Capped at 2 because this is background
+            // texture: past that the fragment count grows faster than anyone
+            // can see the difference.
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            this.canvas.width = Math.round(window.innerWidth * dpr);
+            this.canvas.height = Math.round(window.innerHeight * dpr);
             this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
         }
 

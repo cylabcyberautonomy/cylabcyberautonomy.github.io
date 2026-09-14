@@ -99,8 +99,16 @@
     },
     {
       "joinaggregate": [
-        { "op": "min", "field": "value", "as": "valueMin" },
-        { "op": "max", "field": "value", "as": "valueMax" }
+        {
+          "op": "min",
+          "field": "value",
+          "as": "valueMin"
+        },
+        {
+          "op": "max",
+          "field": "value",
+          "as": "valueMax"
+        }
       ]
     }
   ],
@@ -199,16 +207,6 @@
           "type": "quantitative",
           "format": "$,.2f"
         },
-        "comment": [
-          "The label sits on its own cell, not on the page, so it follows the",
-          "cell rather than the page's ink - but the ramp inverts between",
-          "themes, so which ink reads on which end inverts with it. The two",
-          "ink-on-warm tokens carry that. Unlike the goals heatmap this scale",
-          "has no fixed domain - it is whatever the selected harness and",
-          "statistic happen to span - so the crossover is a fraction of the",
-          "ramp rather than an absolute value. 0.75 is the best joint choice",
-          "across both themes; worst case is about 3.4:1."
-        ],
         "color": {
           "condition": {
             "test": "datum.value > datum.valueMin + 0.75 * (datum.valueMax - datum.valueMin)",
@@ -216,7 +214,17 @@
           },
           "value": "$ink-on-warm-low"
         }
-      }
+      },
+      "_comment": [
+        "The label sits on its own cell, not on the page, so it follows the",
+        "cell rather than the page's ink - but the ramp inverts between",
+        "themes, so which ink reads on which end inverts with it. The two",
+        "ink-on-warm tokens carry that. Unlike the goals heatmap this scale",
+        "has no fixed domain - it is whatever the selected harness and",
+        "statistic happen to span - so the crossover is a fraction of the",
+        "ramp rather than an absolute value. 0.75 is the best joint choice",
+        "across both themes; worst case is about 3.4:1."
+      ]
     }
   ],
   "_minMobileWidth": 470
