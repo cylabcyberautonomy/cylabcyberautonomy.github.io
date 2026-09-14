@@ -80,6 +80,16 @@
         return spec;
     };
 
+    // Where the actual marks live. A plain spec is its own unit; a layered one
+    // keeps them in .layer; a faceted one wraps the whole child chart (layers
+    // and all) in .spec. The patches below all walk marks, so they all need to
+    // find them the same way - without this, a faceted spec silently skips
+    // every one of them, tooltip-stripping included.
+    const units = (spec) => {
+        const inner = spec.spec || spec;
+        return inner.layer || [inner];
+    };
+
     // Vega-Lite's global config.legend doesn't propagate orient/direction/columns
     // (those are layout properties, not the styling ones config.legend actually
     // supports) - they have to be set per-encoding. On narrow screens, move every
@@ -96,7 +106,7 @@
                 }
             });
         };
-        (spec.layer || [spec]).forEach((layer) => patchEncoding(layer.encoding));
+        units(spec).forEach((u) => patchEncoding(u.encoding));
         return spec;
     };
 
@@ -108,10 +118,9 @@
     // but the pair leaves nothing to go wrong. Anything with a real pointer
     // keeps its tooltips; the specs on disk are untouched either way.
     const stripTooltips = (spec) => {
-        (spec.layer || [spec]).forEach((layer) => {
-            if (layer.encoding) delete layer.encoding.tooltip;
+        units(spec).forEach((u) => {
+            if (u.encoding) delete u.encoding.tooltip;
         });
-        if (spec.encoding) delete spec.encoding.tooltip;
         return spec;
     };
 
@@ -128,8 +137,8 @@
     const patchShapeLegend = (spec) => {
         const ink = css("--secondary-color");
         if (!ink) return spec;
-        (spec.layer || [spec]).forEach((layer) => {
-            const enc = layer.encoding;
+        units(spec).forEach((u) => {
+            const enc = u.encoding;
             if (enc && enc.shape && enc.shape.field) {
                 enc.shape.legend = Object.assign({}, enc.shape.legend, {
                     symbolFillColor: ink, symbolStrokeColor: ink
