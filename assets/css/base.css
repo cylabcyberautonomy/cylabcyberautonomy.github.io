@@ -82,13 +82,35 @@ html{
 @property --panel-bg { syntax: "<color>"; inherits: true; initial-value: rgba(0, 0, 0, 0.45); }
 @property --on-accent { syntax: "<color>"; inherits: true; initial-value: #191919; }
 
+/* The palette is declared exactly once, in the --ink/--surface/--seq/--cat
+   variables below and their light-mode counterparts further down. Nothing
+   else in the site should hard-code a colour.
+
+   Each of those has a matching *paint* alias (--primary-color, --page-bg,
+   ...) that is `transition`ed, so a theme switch cross-fades the page rather
+   than snapping. The alias is what CSS paints with; the raw variable is what
+   JavaScript reads. That split matters: getComputedStyle on a transitioning
+   custom property returns wherever the fade currently is, so anything that
+   read --primary-color during a switch got a half-faded grey and froze it
+   into the chart it was drawing. The raw variables never transition, so they
+   always report the theme the page is actually in. See assets/js/figures.js.
+
+   Rule of thumb: paint from the alias, read from the raw variable. */
 :root {
-  --primary-color: white;
-  --secondary-color: rgb(196, 196, 196);
-  --accent-color: #F79030;
-  --page-bg: #191919;
-  --panel-bg: rgba(0, 0, 0, 0.45);
-  --on-accent: #191919;
+  --ink: white;
+  --ink-dim: rgb(196, 196, 196);
+  --ink-on-accent: #191919;
+  --accent: #F79030;
+  --surface: #191919;
+  --surface-panel: rgba(0, 0, 0, 0.45);
+
+  --primary-color: var(--ink);
+  --secondary-color: var(--ink-dim);
+  --accent-color: var(--accent);
+  --page-bg: var(--surface);
+  --panel-bg: var(--surface-panel);
+  --on-accent: var(--ink-on-accent);
+
   --theme-fade: 0.3s;
   --page-width: 1024px;
   --nav-font: 21px;
@@ -122,11 +144,29 @@ html{
   color-scheme: dark;
 }
 
+/* Every transition on the site is timed off --theme-fade, so turning that
+   down is enough to take the motion out of a theme switch - no blanket
+   `* { transition: none }` override needed. The animated background is
+   handled separately, in assets/js/background.js. */
+@media (prefers-reduced-motion: reduce){
+  :root{ --theme-fade: 0.001s; }
+}
+
+/* Keyboard focus. The browser default is a thin ring that all but disappears
+   against both of this site's backgrounds, and the nav links and toggle paint
+   their own hover state, so give focus a visible one of its own. :focus-visible
+   rather than :focus keeps it off mouse clicks. */
+:focus-visible{
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 html[data-theme="light"] {
   color-scheme: light;
-  --primary-color: #0A0A0A;
-  --secondary-color: #454545;
-  --accent-color: #C2410C;
+  --ink: #0A0A0A;
+  --ink-dim: #454545;
+  --ink-on-accent: #FFFFFF;
+  --accent: #C2410C;
   --seq-0: #DEEBF7;
   --seq-25: #9ECAE1;
   --seq-50: #4292C6;
@@ -135,9 +175,8 @@ html[data-theme="light"] {
   --cat-1: #2a78d6;
   --cat-2: #eb6834;
   --cat-3: #1baf7a;
-  --page-bg: #F5F5F5;
-  --panel-bg: rgba(255, 255, 255, 0.60);
-  --on-accent: #FFFFFF;
+  --surface: #F5F5F5;
+  --surface-panel: rgba(255, 255, 255, 0.60);
 }
 
 html[data-theme="light"] canvas{
@@ -460,6 +499,39 @@ html[data-theme="light"] .icon-cmu{
 .vega-embed svg{
     max-width: 100%;
     height: auto;
+}
+
+/* --- chart chrome ---------------------------------------------------------
+   Vega stamps a role class onto every group it draws, which splits a chart
+   cleanly in two: the chrome (axes, legends, chart and facet-panel titles)
+   and the data marks. The chrome is page furniture and should follow the
+   page's ink exactly the way body text does, so it is coloured here rather
+   than through the embed config in figures.js.
+
+   Doing it in CSS is what makes a theme switch instant. The embed config is
+   only consulted when a chart is built, so a config-only chart keeps the ink
+   it was born with until something re-renders it - which is why axis and
+   legend labels used to stay white on the light background after a toggle.
+   A CSS rule has no such gap, it cross-fades along with the rest of the page
+   because --primary-color is itself a transitioned property, and it applies
+   to every chart added later without anyone having to wire it up.
+
+   The `fill` and `stroke` CSS properties outrank the presentational
+   fill="..." attributes Vega writes into the SVG, so no !important is needed.
+   Data marks (role-mark) are deliberately left alone: their colour is data,
+   not decoration. Anything a spec needs to paint itself in theme colours can
+   ask for them by name - see the $token note in assets/js/figures.js. */
+.vega-embed :is(.role-axis-label, .role-axis-title,
+                .role-legend-label, .role-legend-title,
+                .role-title-text, .role-title-subtitle) text{
+    fill: var(--primary-color);
+}
+.vega-embed :is(.role-axis-domain, .role-axis-tick) line{
+    stroke: var(--secondary-color);
+}
+.vega-embed .role-axis-grid line{
+    stroke: var(--secondary-color);
+    opacity: 0.22;
 }
 .vega-embed .vega-actions a{
     color: var(--primary-color);

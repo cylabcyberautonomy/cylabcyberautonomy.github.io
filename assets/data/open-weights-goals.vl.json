@@ -193,9 +193,15 @@
           "type": "quantitative",
           "format": ".0f"
         },
+        "comment": [
+          "Deliberately theme-independent: the label sits on its own cell, not",
+          "on the page, so it follows the cell's colour rather than the page's",
+          "ink. 70 is where the blues ramp (fixed domain 0-100) gets dark enough",
+          "for white to beat #0D1B2A on contrast."
+        ],
         "color": {
           "condition": {
-            "test": "datum.value > 55",
+            "test": "datum.value > 70",
             "value": "#FFFFFF"
           },
           "value": "#0D1B2A"

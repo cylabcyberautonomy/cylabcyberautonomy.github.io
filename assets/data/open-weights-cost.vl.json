@@ -96,6 +96,12 @@
     {
       "calculate": "datum.env + ' (' + datum.hosts + ')'",
       "as": "envLabel"
+    },
+    {
+      "joinaggregate": [
+        { "op": "min", "field": "value", "as": "valueMin" },
+        { "op": "max", "field": "value", "as": "valueMax" }
+      ]
     }
   ],
   "width": "container",
@@ -193,7 +199,20 @@
           "type": "quantitative",
           "format": "$,.2f"
         },
+        "comment": [
+          "These two are the only deliberately theme-independent colours here:",
+          "the label sits on its own cell, not on the page, so it follows the",
+          "cell's colour rather than the page's ink. Unlike the goals heatmap",
+          "this scale has no fixed domain - it is whatever the selected harness",
+          "and statistic happen to span - so the switch point is expressed as a",
+          "fraction of the ramp rather than an absolute value. 0.75 is where the",
+          "oranges ramp gets dark enough for white to beat #3B1A02 on contrast."
+        ],
         "color": {
+          "condition": {
+            "test": "datum.value > datum.valueMin + 0.75 * (datum.valueMax - datum.valueMin)",
+            "value": "#FFFFFF"
+          },
           "value": "#3B1A02"
         }
       }

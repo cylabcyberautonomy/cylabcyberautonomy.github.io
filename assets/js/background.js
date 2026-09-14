@@ -241,7 +241,28 @@
     window.BalatroShader = BalatroShader;
 
     document.addEventListener("DOMContentLoaded", () => {
-        new BalatroShader();
+        const shader = new BalatroShader();
+        if (!shader.gl) return;
+
+        // An animated full-viewport WebGL field is exactly what "reduce motion"
+        // is about. Let one frame draw so the page still gets its texture, then
+        // stop on the next: the reader gets a still background rather than a
+        // moving one, instead of an empty canvas.
+        const still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+        const freeze = () => { shader.resume(); requestAnimationFrame(() => shader.pause()); };
+        const settle = () => { if (still && still.matches) freeze(); else shader.resume(); };
+        if (still) {
+            if (still.addEventListener) still.addEventListener("change", settle);
+            else if (still.addListener) still.addListener(settle);
+        }
+        settle();
+
+        // Nothing is on screen to animate for while the tab is in the
+        // background, and a requestAnimationFrame loop that keeps a GPU busy
+        // there is a battery cost for no one's benefit.
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) shader.pause(); else settle();
+        });
     });
 })();
 

@@ -31,31 +31,73 @@
     const ensureLibs = () => loading || (loading = LIBS.reduce(
         (p, f) => p.then(() => script("/assets/js/vendor/" + f)), Promise.resolve()));
 
+    // A spec is fetched once per page and re-used for every later render of it
+    // - a theme switch and a breakpoint crossing both re-render, and neither
+    // changes what is on disk. A failed fetch is dropped from the cache so it
+    // can be retried rather than failing forever.
+    const specs = new Map();
+    const loadSpec = (src) => {
+        if (!specs.has(src)) {
+            specs.set(src, fetch(src)
+                .then(r => { L("spec fetch:", r.status, src); return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status + " " + src)); })
+                .catch(err => { specs.delete(src); throw err; }));
+        }
+        return specs.get(src);
+    };
+
     const fail = (el, msg, err) => {
+        if (el._view) { try { el._view.finalize(); } catch (e) {} el._view = null; }
+        el.style.position = "";
         el.innerHTML = '<div class="figure-placeholder">' + msg + '</div>';
         E(msg, err || "");
         if (err && err.stack) E(err.stack);
     };
 
+    // The page's ink, read from the raw (never-transitioned) palette variables
+    // rather than the --primary-color/--secondary-color paint aliases. Those
+    // aliases cross-fade on a theme switch, and getComputedStyle reports a
+    // transitioning custom property as wherever the fade has got to - so a
+    // chart drawn mid-switch used to bake in a half-faded grey, or, if it got
+    // there first, the colour of the theme being left behind. See the palette
+    // note at the top of assets/css/base.css.
+    const ink = () => css("--ink");
+    const inkDim = () => css("--ink-dim");
+
+    // Most of this is belt-and-braces: the axis/legend/title colours below are
+    // also set in CSS (see "chart chrome" in base.css), which is what makes a
+    // theme switch instant. They stay here because the config is what the
+    // exported PNG is rendered from, and CSS does not reach that.
+    //
+    // `header` covers the panel titles of a faceted chart. They are not axis
+    // titles, legend titles or the chart title, so none of the other blocks
+    // apply and Vega's own default - black - wins by default; that is why the
+    // facet labels used to sit invisibly on the dark background.
     const theme = () => {
         const ramp = ["--seq-0", "--seq-50", "--seq-100"].map(css).filter(Boolean);
         const cats = ["--cat-1", "--cat-2", "--cat-3"].map(css).filter(Boolean);
+        const fg = ink(), dim = inkDim();
+        const disp = css("--font-display");
         const cfg = {
             background: "transparent",
             font: css("--font-body") || "sans-serif",
             axis: {
-                labelColor: css("--primary-color"), titleColor: css("--primary-color"),
-                labelFont: css("--font-display"), titleFont: css("--font-display"),
+                labelColor: fg, titleColor: fg,
+                labelFont: disp, titleFont: disp,
                 labelFontSize: 12, titleFontSize: 12,
-                domainColor: css("--secondary-color"), tickColor: css("--secondary-color"), grid: false
+                domainColor: dim, tickColor: dim, grid: false
             },
             legend: {
-                labelColor: css("--primary-color"), titleColor: css("--primary-color"),
-                labelFont: css("--font-body"), titleFont: css("--font-display"),
+                labelColor: fg, titleColor: fg,
+                labelFont: css("--font-body"), titleFont: disp,
                 labelFontSize: 12, titleFontSize: 12
             },
-            title: { color: css("--primary-color"), font: css("--font-display"), fontSize: 14 },
-            text: { color: css("--primary-color"), font: css("--font-display") },
+            header: {
+                labelColor: fg, titleColor: fg,
+                labelFont: disp, titleFont: disp,
+                labelFontSize: 12, titleFontSize: 12
+            },
+            title: { color: fg, subtitleColor: fg, font: disp, fontSize: 14 },
+            text: { color: fg, font: disp },
             view: { stroke: "transparent" },
             point: { stroke: null }
         };
@@ -63,6 +105,36 @@
         if (ramp.length === 3) cfg.range.heatmap = ramp;
         if (cats.length === 3) cfg.range.category = cats;
         return cfg;
+    };
+
+    // A spec can name a palette colour anywhere a colour is allowed by writing
+    // the CSS variable without its leading dashes: "$ink", "$ink-dim",
+    // "$surface", "$accent", "$seq-75", "$cat-2", and so on. They are resolved
+    // against the current theme every time the chart is drawn, so a spec that
+    // has to paint something itself - a cell stroke, a hand-placed rule -
+    // still follows the theme instead of freezing one mode's hex code into the
+    // JSON. Anything that is genuinely theme-independent (text sitting on top
+    // of a coloured cell, say, where the cell is the background rather than
+    // the page) should stay a literal hex code.
+    //
+    // Walking the whole spec also deep-copies it, which is what lets the
+    // fetched spec be cached and re-used: render() mutates its copy.
+    const TOKEN = /^\$([a-z][a-z0-9-]*)$/;
+    const resolvePalette = (v) => {
+        if (typeof v === "string") {
+            const m = TOKEN.exec(v);
+            if (!m) return v;
+            const val = css("--" + m[1]);
+            if (!val) { W("unknown palette token " + v + " - left as-is"); return v; }
+            return val;
+        }
+        if (Array.isArray(v)) return v.map(resolvePalette);
+        if (v && typeof v === "object") {
+            const out = {};
+            Object.keys(v).forEach(k => { out[k] = resolvePalette(v[k]); });
+            return out;
+        }
+        return v;
     };
 
     // A spec with `"width": "container"` shrinks its plot to fit the phone,
@@ -150,20 +222,20 @@
     // separate channel there (harness) - so Vega-Lite falls back to the point
     // mark's defaults for its symbols, and theme() sets point.stroke to null.
     // That leaves the symbols drawn in nothing much at all, which is why they
-    // vanish against the dark background. Paint them with --secondary-color,
+    // vanish against the dark background. Paint them with the dim ink,
     // which is a light grey in dark mode and a dark grey in light mode, so
     // they read in either theme; theme changes re-render, so this follows.
     // Fill and stroke both, since which one a symbol uses depends on its
     // shape. The colour legend is deliberately untouched - those symbols
     // carry the category colours and have to keep them.
     const patchShapeLegend = (spec) => {
-        const ink = css("--secondary-color");
-        if (!ink) return spec;
+        const dim = inkDim();
+        if (!dim) return spec;
         units(spec).forEach((u) => {
             const enc = u.encoding;
             if (enc && enc.shape && enc.shape.field) {
                 enc.shape.legend = Object.assign({}, enc.shape.legend, {
-                    symbolFillColor: ink, symbolStrokeColor: ink
+                    symbolFillColor: dim, symbolStrokeColor: dim
                 });
             }
         });
@@ -225,8 +297,15 @@
         L("container width before embed:", el.offsetWidth);
 
         if (typeof vegaEmbed !== "function") { fail(el, "vegaEmbed not loaded"); return; }
-        if (el._view) { try { el._view.finalize(); } catch (e) {} el._view = null; }
-        el.innerHTML = "";
+
+        // Whatever is already on screen stays there until the replacement is
+        // ready, so a re-render (a theme switch, a breakpoint crossing) swaps
+        // rather than blinking through an empty box. The incoming chart is
+        // measured and drawn out of view but still laid out - visibility,
+        // not display, so text metrics are real - at the same width it will
+        // occupy once it takes over.
+        const old = el.firstElementChild;
+        const oldView = el._view;
         // vegaEmbed adds its own classes (.vega-embed, .has-actions, ...) directly
         // onto whatever element it's given, rather than wrapping it - so embedding
         // straight into `el` (.figure) would make .figure and .vega-embed the same
@@ -238,18 +317,33 @@
         // lands on the chart's real corner instead of the viewport's. A plain
         // inner div gives each element its own job.
         const inner = document.createElement("div");
+        if (old) {
+            el.style.position = "relative";
+            inner.style.cssText = "position:absolute;top:0;left:0;width:100%;visibility:hidden";
+        }
         el.appendChild(inner);
 
-        fetch(src)
-            .then(r => { L("spec fetch:", r.status); return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status + " " + src)); })
-            .then(spec => {
+        // Bound inputs (the harness/statistic dropdowns) are chart state, not
+        // page state: re-embedding builds a brand new view that starts at each
+        // param's declared default. Carry the current values over so switching
+        // theme doesn't silently reset the reader's selection.
+        const carried = {};
+        if (oldView && el._params) el._params.forEach(n => {
+            try { carried[n] = oldView.signal(n); } catch (e) {}
+        });
+
+        loadSpec(src)
+            .then(raw => {
+                // resolvePalette deep-copies, so the cached spec is never touched
+                const spec = resolvePalette(raw);
+                el._params = (spec.params || []).filter(p => p.bind).map(p => p.name);
                 L("spec keys:", Object.keys(spec).join(","), " data.url=", spec.data && spec.data.url);
+                if (!VERBOSE) return spec;
                 return fetch(spec.data.url)
                     .then(r => { L("data fetch:", r.status, spec.data.url); return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status + " " + spec.data.url)); })
                     .then(rows => {
                         L("data rows:", rows.length, " sample=", JSON.stringify(rows[0]));
-                        const hs = [...new Set(rows.map(r => r.harness))];
-                        L("distinct harness values:", hs);
+                        L("distinct harness values:", [...new Set(rows.map(r => r.harness))]);
                         return spec;
                     });
             })
@@ -283,7 +377,19 @@
                 });
             })
             .then(res => {
+                Object.keys(carried).forEach(n => {
+                    try { res.view.signal(n, carried[n]); } catch (e) { W("could not restore", n, e.message); }
+                });
+                if (Object.keys(carried).length) res.view.run();
+
+                if (old) {
+                    if (oldView) { try { oldView.finalize(); } catch (e) {} }
+                    old.remove();
+                    inner.removeAttribute("style");
+                    el.style.position = "";
+                }
                 el._view = res.view;
+                live.add(el);
                 observe(el);
                 L("embed resolved");
                 if (VERBOSE) inspect(el, res.view);
@@ -291,7 +397,20 @@
             .catch(err => fail(el, "Figure failed: " + (err && err.message ? err.message : err), err));
     };
 
+    // nav.js navigates by replacing the panel's markup, which throws away the
+    // old page's figures without telling anyone. Their Vega views would go on
+    // holding datasets, listeners and a ResizeObserver each, so tear down
+    // anything that is no longer in the document before drawing the new page.
+    const live = new Set();
+    const sweep = () => live.forEach((el) => {
+        if (el.isConnected) return;
+        if (el._view) { try { el._view.finalize(); } catch (e) {} el._view = null; }
+        if (el._ro) { try { el._ro.disconnect(); } catch (e) {} el._ro = null; }
+        live.delete(el);
+    });
+
     const renderAll = () => {
+        sweep();
         const els = document.querySelectorAll("[data-vega]");
         if (!els.length) return;
         L("found", els.length, "figure(s)");
@@ -303,6 +422,16 @@
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderAll);
     else renderAll();
     document.addEventListener("content:swapped", renderAll);
-    new MutationObserver(m => { if (m.some(x => x.attributeName === "data-theme")) renderAll(); })
-        .observe(document.documentElement, { attributes: true });
+
+    // Axis, legend and title colours follow the theme from CSS and need no
+    // help here. This re-render is for what CSS cannot reach: the colour
+    // scales the marks are drawn from (--cat-* and --seq-*), which are baked
+    // into the view when it is compiled. theme.js flips a class and the
+    // attribute in the same tick, so coalesce the burst into one render.
+    let themeRender;
+    new MutationObserver(m => {
+        if (!m.some(x => x.attributeName === "data-theme")) return;
+        clearTimeout(themeRender);
+        themeRender = setTimeout(renderAll, 50);
+    }).observe(document.documentElement, { attributes: true });
 })();
