@@ -10,13 +10,13 @@
   ],
   "spacing": 18,
   "facet": {
-    "field": "model",
+    "field": "harness",
     "type": "nominal",
     "title": null,
     "sort": [
-      "GLM 5.2",
-      "Kimi K3",
-      "Qwen 3.8 Max"
+      "Incalmo",
+      "Artemis",
+      "Shell"
     ],
     "columns": 3,
     "header": {
@@ -101,13 +101,13 @@
             "field": "y1"
           },
           "color": {
-            "field": "harness",
+            "field": "model",
             "type": "nominal",
-            "title": "Harness",
+            "title": "Model",
             "sort": [
-              "Incalmo",
-              "Artemis",
-              "Shell"
+              "GLM 5.2",
+              "Kimi K3",
+              "Qwen 3.8 Max"
             ],
             "legend": {
               "orient": "bottom",
@@ -116,12 +116,12 @@
             }
           },
           "stroke": {
-            "field": "harness",
+            "field": "model",
             "type": "nominal",
             "sort": [
-              "Incalmo",
-              "Artemis",
-              "Shell"
+              "GLM 5.2",
+              "Kimi K3",
+              "Qwen 3.8 Max"
             ],
             "legend": null
           },
@@ -216,13 +216,13 @@
             }
           },
           "color": {
-            "field": "harness",
+            "field": "model",
             "type": "nominal",
-            "title": "Harness",
+            "title": "Model",
             "sort": [
-              "Incalmo",
-              "Artemis",
-              "Shell"
+              "GLM 5.2",
+              "Kimi K3",
+              "Qwen 3.8 Max"
             ],
             "legend": {
               "orient": "bottom",

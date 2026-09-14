@@ -82,6 +82,6 @@ take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
 
-<p class="figure-caption">The same points as the chart at the top of the post, split into one panel per model so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the harness, and all three panels share the same axes, so regions can be compared across models by position as well as within a model by colour.</p>
+<p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p>
 
 <p class="foot-note">Frontier closed-source models such as Anthropic's Claude Fable 5.1 and OpenAI's GPT-5.6 refuse to execute multi-stage network attacks.</p>
