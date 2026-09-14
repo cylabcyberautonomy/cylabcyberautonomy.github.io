@@ -39,5 +39,3 @@ plugins:
 #
 subscribe:
   url: https://lists.andrew.cmu.edu/mailman/listinfo/cylab-cyberautonomy
-  note: One email per new post, run on CMU Mailman. The same page handles
-    unsubscribing and keeps the archives.
