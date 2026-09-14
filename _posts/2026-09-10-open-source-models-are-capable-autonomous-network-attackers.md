@@ -2,10 +2,10 @@
 title: Open Weight Models Are Capable Autonomous Network Attackers
 authors: [lakshmi-adiga, marko-morrison, vyas-sekar]
 figures: true
-description: GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our cyber ranges, with Qwen 3.8 Max leading in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
+description: We ran GLM 5.2, Kimi K3, and Qwen 3.8 Max on our cyber range benchmark MHBench. Qwen 3.8 Max leads in performance across all harnesses. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
 ---
 
-GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our cyber ranges, with Qwen 3.8 Max leading in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
+We ran three of the latest open weight models (Kimi K3, Qwen 3.8 Max, and GLM 5.2) on our cyber range benchmark MHBench and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. Qwen 3.8 Max leads in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
 
 <div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
 
