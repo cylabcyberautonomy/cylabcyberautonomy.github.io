@@ -3,6 +3,18 @@
   "data": {
     "url": "/assets/data/open-weights-runs.json"
   },
+  "params": [
+    {
+      "_comment": "How far the Incalmo ring reaches past its panel. 26 lands its sides in the gutters of the three-column layout; stacked there are no gutters to land in, so _mobileParams turns it down to a plain margin.",
+      "name": "ringBleed",
+      "value": 26
+    },
+    {
+      "_comment": "How far the shared y axis is pushed off the first panel. Side by side it is one axis for all three and sat flush against Shell, reading as Shell's own; stacked, every panel has its own, so the gap is just a gap.",
+      "name": "yAxisGap",
+      "value": 14
+    }
+  ],
   "transform": [
     {
       "filter": "isValid(datum.cost)"
@@ -70,10 +82,10 @@
           "stroke": "$hairline-strong",
           "strokeWidth": 1.5,
           "x": {
-            "expr": "-26"
+            "expr": "-ringBleed"
           },
           "x2": {
-            "expr": "child_width + 26"
+            "expr": "child_width + ringBleed"
           },
           "y": {
             "expr": "-14"
@@ -286,7 +298,9 @@
                 100
               ],
               "domain": false,
-              "offset": 14,
+              "offset": {
+                "expr": "yAxisGap"
+              },
               "_comment": "Positive: pushes the shared y axis away from the first panel. It is the axis for all three, but sitting flush against Shell it read as Shell's own."
             }
           },
@@ -381,5 +395,9 @@
   },
   "_fitPanels": 3,
   "_panelBleed": 60,
-  "_mobileStack": true
+  "_mobileStack": true,
+  "_mobileParams": {
+    "ringBleed": 8,
+    "yAxisGap": 0
+  }
 }

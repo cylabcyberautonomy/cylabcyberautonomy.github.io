@@ -183,6 +183,20 @@
     // reads as well stacked sets `_mobileStack` and gets one column on narrow
     // screens, trading the scarce axis for the plentiful one. Its `spacing`
     // should be a {row, column} pair, since stacking swaps which one applies.
+    // A spec can declare params whose value should differ on a phone - the
+    // reach of a mark that is sized for a wide layout, say - as
+    // `_mobileParams: {name: value}`. Overriding the declared value keeps the
+    // number that matters in the spec next to the mark that uses it, rather
+    // than as a magic constant in here.
+    const applyMobileParams = (spec) => {
+        const overrides = spec._mobileParams;
+        if (!overrides || !spec.params) return spec;
+        spec.params.forEach((p) => {
+            if (Object.prototype.hasOwnProperty.call(overrides, p.name)) p.value = overrides[p.name];
+        });
+        return spec;
+    };
+
     const stackFacets = (spec) => {
         if (!spec._mobileStack || !spec.facet) return spec;
         // `columns` is a sibling of `facet`, not a property of it - Vega-Lite
@@ -405,6 +419,7 @@
             .then(spec => {
                 spec = patchShapeLegend(spec);
                 if (isMobile()) {
+                    spec = applyMobileParams(spec);
                     spec = stackFacets(spec);
                     spec = patchLegendsForMobile(spec);
                     spec = applyMinMobileWidth(spec, el);
@@ -423,6 +438,7 @@
                 delete spec._fitPanels;
                 delete spec._mobileStack;
                 delete spec._panelBleed;
+                delete spec._mobileParams;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
