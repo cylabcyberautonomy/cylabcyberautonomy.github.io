@@ -80,6 +80,7 @@ html{
 @property --accent-color { syntax: "<color>"; inherits: true; initial-value: #F79030; }
 @property --page-bg { syntax: "<color>"; inherits: true; initial-value: #191919; }
 @property --panel-bg { syntax: "<color>"; inherits: true; initial-value: rgba(0, 0, 0, 0.45); }
+@property --raised-bg { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.07); }
 @property --on-accent { syntax: "<color>"; inherits: true; initial-value: #191919; }
 
 /* The palette is declared exactly once, in the --ink/--surface/--seq/--cat
@@ -103,12 +104,19 @@ html{
   --accent: #F79030;
   --surface: #191919;
   --surface-panel: rgba(0, 0, 0, 0.45);
+  /* A raised surface, for something sitting on top of the page rather than
+     recessed into it - a table header, say. --surface-panel darkens in dark
+     mode and lightens in light mode, which is right for the frosted nav but
+     backwards here: a header wants to read as lifted in both themes. This
+     one lightens in dark mode and stays the brighter white in light. */
+  --surface-raised: rgba(255, 255, 255, 0.07);
 
   --primary-color: var(--ink);
   --secondary-color: var(--ink-dim);
   --accent-color: var(--accent);
   --page-bg: var(--surface);
   --panel-bg: var(--surface-panel);
+  --raised-bg: var(--surface-raised);
   --on-accent: var(--ink-on-accent);
 
   --theme-fade: 0.3s;
@@ -151,6 +159,12 @@ html{
   --ink-on-seq-high: #0D1B2A;
   --ink-on-warm-low: #FFFFFF;
   --ink-on-warm-high: #3B1A02;
+  /* A separator, not a border: something the eye groups by without reading it
+     as a line of its own. --ink-dim is far too loud for that (it sits ~9:1
+     against the page in both themes), so this is a step off the surface
+     instead - 1.4:1 either way, darker than the page in light mode and
+     lighter than it in dark. */
+  --hairline: #353535;
   --cat-1: #3987e5;
   --cat-2: #d95926;
   --cat-3: #199e70;
@@ -159,7 +173,8 @@ html{
     --primary-color var(--theme-fade) ease,
     --secondary-color var(--theme-fade) ease,
     --page-bg var(--theme-fade) ease,
-    --panel-bg var(--theme-fade) ease;
+    --panel-bg var(--theme-fade) ease,
+    --raised-bg var(--theme-fade) ease;
 }
 
 html{
@@ -203,11 +218,13 @@ html[data-theme="light"] {
   --ink-on-seq-high: #FFFFFF;
   --ink-on-warm-low: #3B1A02;
   --ink-on-warm-high: #FFFFFF;
+  --hairline: #D2D2D2;
   --cat-1: #2a78d6;
   --cat-2: #eb6834;
   --cat-3: #1baf7a;
   --surface: #F5F5F5;
   --surface-panel: rgba(255, 255, 255, 0.60);
+  --surface-raised: rgba(255, 255, 255, 0.60);
 }
 
 html[data-theme="light"] canvas{
@@ -517,8 +534,8 @@ html[data-theme="light"] .icon-cmu{
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--secondary-color);
-    background-color: var(--panel-bg);
+    color: var(--primary-color);
+    background-color: var(--raised-bg);
 }
 .content > .table-wrap{ --flow: var(--space-lg); }
 .content > .table-wrap + *{ --flow: var(--space-lg); }
