@@ -130,7 +130,7 @@
           "field": "value",
           "type": "quantitative",
           "scale": {
-            "scheme": "blues",
+            "scheme": "theme-cool",
             "domain": [
               0,
               100
@@ -194,17 +194,19 @@
           "format": ".0f"
         },
         "comment": [
-          "Deliberately theme-independent: the label sits on its own cell, not",
-          "on the page, so it follows the cell's colour rather than the page's",
-          "ink. 70 is where the blues ramp (fixed domain 0-100) gets dark enough",
-          "for white to beat #0D1B2A on contrast."
+          "The label sits on its own cell, not on the page, so it follows the",
+          "cell rather than the page's ink - but the ramp inverts between",
+          "themes, so which ink reads on which end inverts with it. The two",
+          "ink-on-seq tokens carry that; 70 is the crossover on the ramp, and",
+          "holds in both themes because both ramps share a contrast ladder.",
+          "Worst case either way is about 4:1."
         ],
         "color": {
           "condition": {
             "test": "datum.value > 70",
-            "value": "#FFFFFF"
+            "value": "$ink-on-seq-high"
           },
-          "value": "#0D1B2A"
+          "value": "$ink-on-seq-low"
         }
       }
     }

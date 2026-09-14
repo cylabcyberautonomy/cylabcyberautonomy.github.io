@@ -124,11 +124,33 @@ html{
   --space-xl: 2rem;
   --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'IBM Plex Mono', ui-monospace, monospace;
-  --seq-0: #DEEBF7;
-  --seq-25: #9ECAE1;
-  --seq-50: #4292C6;
-  --seq-75: #2171B5;
-  --seq-100: #08306B;
+  /* Sequential ramps, quiet end first. A ramp has to be declared per theme
+     and not shared: it is read as a distance from the page, and a fixed hex
+     cannot hold that distance against two different backgrounds. The light
+     values (further down) put the quiet end 1.11:1 off a white page - a
+     whisper - and those same hexes were 14.51:1 against this dark one, which
+     is why the table glared here while the alpha-blended scatterplot blobs,
+     which re-derive themselves from whatever is behind them, looked right in
+     both. These dark values reproduce the light ladder - 1.11, 1.61, 3.13,
+     4.70, 11.71 - against #191919, so both figures sit at the same weight in
+     either theme. Quiet end first means the ramp inverts between themes: on
+     a dark page the low end is the dark one.
+     --ink-on-*: which ink reads on that ramp's quiet and loud ends. They
+     swap between themes, because the ends do. */
+  --seq-0: #080D11;
+  --seq-25: #253F55;
+  --seq-50: #396B97;
+  --seq-75: #4E89BC;
+  --seq-100: #C2D5E6;
+  --warm-0: #3C2517;
+  --warm-25: #5D351B;
+  --warm-50: #82461F;
+  --warm-75: #AC5F2B;
+  --warm-100: #D18F62;
+  --ink-on-seq-low: #FFFFFF;
+  --ink-on-seq-high: #0D1B2A;
+  --ink-on-warm-low: #FFFFFF;
+  --ink-on-warm-high: #3B1A02;
   --cat-1: #3987e5;
   --cat-2: #d95926;
   --cat-3: #199e70;
@@ -172,6 +194,15 @@ html[data-theme="light"] {
   --seq-50: #4292C6;
   --seq-75: #2171B5;
   --seq-100: #08306B;
+  --warm-0: #FDD8B3;
+  --warm-25: #FDAF6D;
+  --warm-50: #F87F2C;
+  --warm-75: #DB5108;
+  --warm-100: #9F3303;
+  --ink-on-seq-low: #0D1B2A;
+  --ink-on-seq-high: #FFFFFF;
+  --ink-on-warm-low: #3B1A02;
+  --ink-on-warm-high: #FFFFFF;
   --cat-1: #2a78d6;
   --cat-2: #eb6834;
   --cat-3: #1baf7a;

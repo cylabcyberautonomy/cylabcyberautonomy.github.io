@@ -72,6 +72,23 @@
     // titles, legend titles or the chart title, so none of the other blocks
     // apply and Vega's own default - black - wins by default; that is why the
     // facet labels used to sit invisibly on the dark background.
+    // The site's two sequential ramps, quiet end first, registered as Vega
+    // schemes so a spec can ask for one by name - "theme-cool" for the
+    // goals-style figures, "theme-warm" for the cost ones - instead of naming
+    // a built-in like "blues", which is fixed in absolute terms and so cannot
+    // follow the page. Re-registered on every render, which is what makes
+    // them change with the theme; see the ramp note in base.css for why a
+    // ramp has to be declared per theme rather than shared.
+    const STOPS = ["-0", "-25", "-50", "-75", "-100"];
+    const registerSchemes = () => {
+        if (typeof vega === "undefined" || !vega.scheme) return;
+        [["theme-cool", "--seq"], ["theme-warm", "--warm"]].forEach(([name, prefix]) => {
+            const stops = STOPS.map(k => css(prefix + k)).filter(Boolean);
+            if (stops.length === STOPS.length) vega.scheme(name, stops);
+            else W("incomplete ramp for " + name + "; leaving it alone");
+        });
+    };
+
     const theme = () => {
         const ramp = ["--seq-0", "--seq-50", "--seq-100"].map(css).filter(Boolean);
         const cats = ["--cat-1", "--cat-2", "--cat-3"].map(css).filter(Boolean);
@@ -369,6 +386,7 @@
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
                 }
+                registerSchemes();
                 // tooltip: the second half of stripTooltips - see there.
                 return vegaEmbed(inner, spec, {
                     config: theme(), renderer: "svg", logLevel: VERBOSE ? 3 : 1,

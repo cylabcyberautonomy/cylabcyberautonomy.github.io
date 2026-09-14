@@ -64,7 +64,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink-dim",
         "strokeWidth": 1
       },
       "encoding": {
@@ -115,7 +115,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink-dim",
         "strokeWidth": 1,
         "cornerRadiusTopLeft": 10
       },
@@ -167,7 +167,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink-dim",
         "strokeWidth": 1,
         "cornerRadiusTopRight": 10
       },
@@ -219,7 +219,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink-dim",
         "strokeWidth": 1,
         "cornerRadiusBottomLeft": 10
       },
@@ -271,7 +271,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink-dim",
         "strokeWidth": 1,
         "cornerRadiusBottomRight": 10
       },
@@ -357,9 +357,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#FFFFFF"
+            "value": "$ink-on-seq-high"
           },
-          "value": "#0D1B2A"
+          "value": "$ink-on-seq-low"
         }
       }
     }
