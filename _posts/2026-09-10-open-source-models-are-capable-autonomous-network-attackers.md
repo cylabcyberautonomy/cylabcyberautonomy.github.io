@@ -22,7 +22,7 @@ We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security ag
 | --- | --- | --- | --- |
 | [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `ExfiltrateData`, etc.) | High level actions are translated into a series of bash commands, executed via C2 server/agents |
 | [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Shell (via spawned sub-agents), coordinated through a shared note/TODO system |
-| Bash Shell | Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
+| Bash Shell (baseline)| Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
 
 </div>
 
@@ -38,15 +38,15 @@ When we first ran experiments with open weight models for Incalmo a year ago, we
 
 <p class="figure-caption">Each cell holds the mean percentage of goals achieved for that model/harness pair, averaged over every environment and trial. Qwen 3.8 Max leads on all three. </p>
 
+GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our environments, with Qwen 3.8 Max leading in performance on our benchmark.
+
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
 
 <p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
 However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
 
-With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run is on average lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
-
-When comparing GLM 5.2, Kimi K3, and Qwen3.8 Max, regardless of the harness they each had similar success rates however Kimi K3 had much more variable cost; at one point going up to an average of $16 per run with ARTEMIS. 
+With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run is on average lower than both the baseline shell harness and the multi-agent pentesting harness ARTEMIS. 
 
 ### Deep Dive
 
