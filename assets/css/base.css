@@ -749,6 +749,76 @@ a.entry-title:hover{
     text-decoration: none;
 }
 
+/* email signup (see _includes/modules/subscribe.html) */
+.visually-hidden{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+.subscribe{
+    display: block;
+}
+.content p.subscribe-label{
+    display: block;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--secondary-color);
+}
+.content p.subscribe-row,
+.subscribe-row{
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-block-start: var(--space-sm);
+}
+.subscribe-input{
+    flex: 1 1 14rem;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--secondary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    font-family: var(--font-body);
+    font-size: 15px;
+}
+.subscribe-input::placeholder{
+    color: var(--secondary-color);
+}
+a.subscribe-button,
+.subscribe-button{
+    display: inline-block;
+    flex: 0 0 auto;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--on-accent);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.subscribe-button:hover{
+    background-color: transparent;
+    color: var(--accent-color);
+}
+.content p.subscribe-note{
+    padding: 0;
+    margin-block-start: var(--space-xs);
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--secondary-color);
+}
+
 /* sidebar recent list */
 .recent-list{
     list-style: none;

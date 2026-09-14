@@ -5,6 +5,8 @@ description: Notes and updates from the CyLab Cyber Autonomy Initiative.
 permalink: /blogposts/
 ---
 
+{% include modules/subscribe.html %}
+
 {% assign entries = site.posts | sort: 'date' | reverse %}
 {% assign years = entries | group_by_exp: "entry", "entry.date | date: '%Y'" %}
 {% for year in years %}
