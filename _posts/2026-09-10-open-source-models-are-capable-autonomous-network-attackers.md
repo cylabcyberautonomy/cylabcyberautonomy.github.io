@@ -28,11 +28,11 @@ We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security ag
 
 These agents are evaluated on the MHBench cyber ranges, a set of network environments each with at
 least one multi-stage exploit. Further detail on the construction and scoring criteria of each of
-these environments can be found [here](https://arxiv.org/abs/2501.16466).
+these cyber ranges can be found [here](https://arxiv.org/abs/2501.16466).
 
 ### What did we find?
 
-GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our environments, with Qwen 3.8 Max leading in performance on our benchmark.
+GLM 5.2, Kimi K3, and Qwen 3.8 Max are able to achieve on average over 70% of the goals over all of our cyber ranges, with Qwen 3.8 Max leading in performance across all harnesses on our benchmark. Qwen 3.8 equipped with the Incalmo harness had the highest overall performance.
 
 <div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
 
@@ -70,7 +70,7 @@ Open-weight models are now a practical alternative for red team and penetration 
 
 ## What does this mean for security policy?
 
-We now have visibility into the abilities of cyber-offensive capable models without provider-enforced guardrails. As these models become cheaper and more capable, sophisticated offensive security capabilities will become more widespread, beyond the control of centralized model providers.
+We now have visibility into the abilities of cyber-offensive capable models without provider-enforced guardrails. Open-weight models are already extremely capable at executing real, multi-stage network attacks. As these models become cheaper and more capable, sophisticated offensive security capabilities will become more widespread, beyond the control of centralized model providers.
 
 ### What's next?
 
