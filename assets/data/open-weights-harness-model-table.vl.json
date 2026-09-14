@@ -64,7 +64,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "$ink",
+        "stroke": "#000000",
         "strokeWidth": 1
       },
       "encoding": {
@@ -80,7 +80,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -93,7 +95,9 @@
             "Shell"
           ],
           "axis": {
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "color": {
@@ -134,7 +138,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "$ink",
+        "stroke": "#000000",
         "strokeWidth": 1,
         "cornerRadiusTopLeft": 10
       },
@@ -151,7 +155,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -164,7 +170,9 @@
             "Shell"
           ],
           "axis": {
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "color": {
@@ -205,7 +213,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "$ink",
+        "stroke": "#000000",
         "strokeWidth": 1,
         "cornerRadiusTopRight": 10
       },
@@ -222,7 +230,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -235,7 +245,9 @@
             "Shell"
           ],
           "axis": {
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "color": {
@@ -276,7 +288,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "$ink",
+        "stroke": "#000000",
         "strokeWidth": 1,
         "cornerRadiusBottomLeft": 10
       },
@@ -293,7 +305,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -306,7 +320,9 @@
             "Shell"
           ],
           "axis": {
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "color": {
@@ -347,7 +363,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "$ink",
+        "stroke": "#000000",
         "strokeWidth": 1,
         "cornerRadiusBottomRight": 10
       },
@@ -364,7 +380,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -377,7 +395,9 @@
             "Shell"
           ],
           "axis": {
-            "labelFontWeight": 700
+            "labelFontWeight": 700,
+            "domain": false,
+            "ticks": false
           }
         },
         "color": {
@@ -427,7 +447,9 @@
           ],
           "axis": {
             "orient": "top",
-            "labelAngle": 0
+            "labelAngle": 0,
+            "domain": false,
+            "ticks": false
           }
         },
         "y": {
@@ -438,7 +460,11 @@
             "Incalmo",
             "Artemis",
             "Shell"
-          ]
+          ],
+          "axis": {
+            "domain": false,
+            "ticks": false
+          }
         },
         "text": {
           "field": "meanGoals",
