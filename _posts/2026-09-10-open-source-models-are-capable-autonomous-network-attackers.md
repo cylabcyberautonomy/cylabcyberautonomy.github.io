@@ -85,6 +85,6 @@ models' offensive capabilities, as well as their defensive capabilities.
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
-<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
+<!-- <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
-<p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p>
+<p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p> -->
