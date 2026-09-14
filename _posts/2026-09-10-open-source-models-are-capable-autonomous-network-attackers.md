@@ -6,7 +6,7 @@ description: We ran three of the latest open weight models on our cyber ranges (
 ---
 
 We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 Max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
 
 ### Why open weight models?
 
