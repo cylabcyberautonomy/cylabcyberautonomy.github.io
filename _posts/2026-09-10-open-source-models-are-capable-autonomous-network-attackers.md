@@ -6,7 +6,7 @@ description: We ran three of the latest open weight models on our cyber ranges (
 ---
 
 We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). The models can now chain exploits without specialized harnesses, yet with Incalmo we see dramatic performance improvements and reduced cost.
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
 
 ### Why open weight models?
 
@@ -20,7 +20,7 @@ We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security ag
 
 | Harness | Agent structure | Interface to the LLM | Execution mechanism |
 | --- | --- | --- | --- |
-| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | High level actions are translated into a series of bash commands, executed via C2 server/agents |
+| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `ExfiltrateData`, etc.) | High level actions are translated into a series of bash commands, executed via C2 server/agents |
 | [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Shell (via spawned sub-agents), coordinated through a shared note/TODO system |
 | Bash Shell | Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
 
@@ -34,12 +34,13 @@ these environments can be found [here](https://arxiv.org/abs/2501.16466).
 
 When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open weight models have come a long way from when we first evaluated them for offensive cyber tasks.
 
-The open weight models with the minimal harness (highlighted in green) showed that a bare shell
-alone can reach up to 100% average goal completion on an environment. 
+<div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
 
-<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
+<p class="figure-caption">Each cell holds the mean percentage of goals achieved for that model/harness pair, averaged over every environment and trial. Qwen 3.8 Max leads on all three. </p>
 
-<p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Use the toggle below the chart to switch the labeled regions between grouping by harness or by model. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
+
+<p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
 However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
 
@@ -89,6 +90,8 @@ take a look at our [Github](https://github.com/cylabcyberautonomy)!
 ### Appendix B: cost versus goals, by harness and model
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
+
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
 <p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p>
 
