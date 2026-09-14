@@ -14,9 +14,9 @@
     "type": "nominal",
     "title": null,
     "sort": [
+      "Shell",
       "Incalmo",
-      "Artemis",
-      "Shell"
+      "Artemis"
     ],
     "columns": 3,
     "header": {
