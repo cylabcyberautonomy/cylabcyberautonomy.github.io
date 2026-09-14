@@ -6,16 +6,15 @@ description: We ran three of the latest open weight models on our cyber ranges (
 ---
 
 We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo paper. The models can now chain exploits without specialized harnesses, yet with Incalmo we see dramatic performance improvements and reduced cost.
+5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). The models can now chain exploits without specialized harnesses, yet with Incalmo we see dramatic performance improvements and reduced cost.
 
 ### Why open weight models?
 
-Closed-weight frontier models have demonstrated increasingly strong cyber capabilities, as shown by the gamut of cyber benchmarks like CyBench, CyberGym, and Incalmo's MHBench. This has prompted a question we often hear from security practitioners and policy experts: can open-weight models do the same?
+Closed-weight frontier models have demonstrated increasingly strong offensive cyber capabilities, as shown by the gamut of cyber benchmarks like CyBench, CyberGym, and Incalmo's MHBench. This has prompted a question we often hear from security practitioners and policy experts: can open-weight models do the same?
 
 ### How did we test them?
 
-We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as
-autonomous offensive security agents, using 3 different agentic harnesses.
+We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security agents, using 3 different agentic harnesses.
 
 <div class="table-wrap" markdown="1">
 
@@ -42,10 +41,9 @@ alone can reach up to 100% average goal completion on an environment.
 
 <p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Use the toggle below the chart to switch the labeled regions between grouping by harness or by model. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
-
 However, there is a large variability in all 3 of the open weight models' performance across environments with just a bash shell, as well as a large variability in the cost of a run. 
 
-With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run be reliably lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
+With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run is on average lower than both the minimal harness and the multi-agent pentesting harness ARTEMIS. 
 
 When comparing GLM 5.2, Kimi K3, and Qwen3.8 Max, regardless of the harness they each had similar success rates however Kimi K3 had much more variable cost; at one point going up to an average of $16 per run with ARTEMIS. 
 
@@ -78,10 +76,10 @@ models' offensive capabilities, as well as their defensive capabilities.
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
-### Appendix: average goals achieved, by harness and model
+### Appendix: cost versus goals, by model and harness
 
-<div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
 
-<p class="figure-caption">One row per harness, one column per model. Each cell is that pair's mean percentage of goals achieved, averaged over every environment and trial; the darker cell in each row is the model that did best on that harness. Qwen 3.8 Max leads on all three.</p>
+<p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p>
 
 <p class="foot-note">Frontier closed-source models such as Anthropic's Claude Fable 5.1 and OpenAI's GPT-5.6 refuse to execute multi-stage network attacks.</p>
