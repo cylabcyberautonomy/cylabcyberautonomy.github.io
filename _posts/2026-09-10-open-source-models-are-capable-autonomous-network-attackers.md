@@ -44,7 +44,7 @@ When we first ran experiments with open weight models for Incalmo a year ago, we
 
 <p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
-However, there is a large variability in all 3 of the open weight models' performance across environments with the baseline shell harness, as well as a large variability in the cost of a run. 
+However, there is significant variability in all 3 of the open weight models' performance across environments with the baseline shell harness, as well as in the cost of a run. 
 
 With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run is on average lower than both the baseline shell harness and the multi-agent pentesting harness ARTEMIS. 
 
@@ -66,7 +66,11 @@ To analyze even more dimensions of this data, check out the raw dataset
 
 ## What does this mean for security practitioners?
 
-## What does this mean for   
+Open-weight models are now a practical alternative for red team and penetration testing assistance when frontier models refuse offensive-security tasks. On-prem hosted open-weight models also let organizations keep sensitive network data private while integrating agentic workflows into pentesting.
+
+## What does this mean for security policy?
+
+We now have visibility into the abilities of cyber-offensive capable models without provider-enforced guardrails. As these models become cheaper and more capable, sophisticated offensive security capabilities will become more widespread, beyond the control of centralized model providers.
 
 ### What's next?
 
