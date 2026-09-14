@@ -35,15 +35,15 @@ these cyber ranges can be found [here](https://arxiv.org/abs/2501.16466).
 
 ### What did we find?
 
-We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM
-5.2) and found a substantial increase in capability compared to the open weight models tested in the original Incalmo [paper](https://arxiv.org/abs/2501.16466). Qwen 3.8 Max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
 When we first ran experiments with open weight models for Incalmo a year ago, we observed that "\[Open weight\] models do not follow instructions and are unable to execute shell commands correctly." Open weight models have come a long way from when we first evaluated them for offensive cyber tasks.
+
+We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen 3.8 Max, and GLM 5.2). Qwen 3.8 Max currently leads on our cyber range benchmark MHBench, and with the Incalmo harness we see dramatic performance improvements and reduced cost.
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
 
 <p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
 
-However, there is significant variability in all 3 of the open weight models' performance across environments with the baseline shell harness, as well as in the cost of a run. 
+There is significant variability in all 3 of the open weight models' performance across environments with the baseline shell harness, as well as in the cost of a run. 
 
 With the Incalmo harness, we see the performance of these runs be significantly higher, and the cost of each run is on average lower than both the baseline shell harness and the multi-agent pentesting harness ARTEMIS. 
 
