@@ -81,8 +81,7 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -96,8 +95,7 @@
           ],
           "axis": {
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "color": {
@@ -156,8 +154,7 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -171,8 +168,7 @@
           ],
           "axis": {
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "color": {
@@ -231,8 +227,7 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -246,8 +241,7 @@
           ],
           "axis": {
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "color": {
@@ -306,8 +300,7 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -321,8 +314,7 @@
           ],
           "axis": {
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "color": {
@@ -381,8 +373,7 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -396,8 +387,7 @@
           ],
           "axis": {
             "labelFontWeight": 700,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "color": {
@@ -448,8 +438,7 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0,
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "y": {
@@ -462,8 +451,7 @@
             "Shell"
           ],
           "axis": {
-            "domain": false,
-            "ticks": false
+            "domain": false
           }
         },
         "text": {
