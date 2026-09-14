@@ -64,7 +64,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink",
         "strokeWidth": 1
       },
       "encoding": {
@@ -99,9 +99,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#2171B5"
+            "value": "$seq-75"
           },
-          "value": "#DEEBF7"
+          "value": "$seq-0"
         },
         "tooltip": [
           {
@@ -134,7 +134,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink",
         "strokeWidth": 1,
         "cornerRadiusTopLeft": 10
       },
@@ -170,9 +170,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#2171B5"
+            "value": "$seq-75"
           },
-          "value": "#DEEBF7"
+          "value": "$seq-0"
         },
         "tooltip": [
           {
@@ -205,7 +205,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink",
         "strokeWidth": 1,
         "cornerRadiusTopRight": 10
       },
@@ -241,9 +241,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#2171B5"
+            "value": "$seq-75"
           },
-          "value": "#DEEBF7"
+          "value": "$seq-0"
         },
         "tooltip": [
           {
@@ -276,7 +276,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink",
         "strokeWidth": 1,
         "cornerRadiusBottomLeft": 10
       },
@@ -312,9 +312,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#2171B5"
+            "value": "$seq-75"
           },
-          "value": "#DEEBF7"
+          "value": "$seq-0"
         },
         "tooltip": [
           {
@@ -347,7 +347,7 @@
       ],
       "mark": {
         "type": "rect",
-        "stroke": "#000000",
+        "stroke": "$ink",
         "strokeWidth": 1,
         "cornerRadiusBottomRight": 10
       },
@@ -383,9 +383,9 @@
         "color": {
           "condition": {
             "test": "datum.isBest",
-            "value": "#2171B5"
+            "value": "$seq-75"
           },
-          "value": "#DEEBF7"
+          "value": "$seq-0"
         },
         "tooltip": [
           {
