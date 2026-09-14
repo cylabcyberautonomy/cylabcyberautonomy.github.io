@@ -54,7 +54,7 @@
       "as": "isTop"
     },
     {
-      "calculate": "datum.model === 'GLM 5.2' ? 'first' : datum.model === 'Qwen 3.8 Max' ? 'last' : 'mid'",
+      "calculate": "datum.model === 'Kimi K3' ? 'first' : datum.model === 'Qwen 3.8 Max' ? 'last' : 'mid'",
       "as": "colPos"
     },
     {
@@ -86,8 +86,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
@@ -144,8 +144,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
@@ -202,8 +202,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
@@ -260,8 +260,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
@@ -318,8 +318,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
@@ -369,8 +369,8 @@
           "type": "nominal",
           "title": null,
           "sort": [
-            "GLM 5.2",
             "Kimi K3",
+            "GLM 5.2",
             "Qwen 3.8 Max"
           ],
           "axis": {
