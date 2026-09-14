@@ -51,7 +51,9 @@
     {
       "mark": {
         "type": "rect",
-        "stroke": null
+        "cornerRadius": 6,
+        "stroke": "#000000",
+        "strokeWidth": 1
       },
       "encoding": {
         "x": {
@@ -67,6 +69,9 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700
+          },
+          "scale": {
+            "paddingInner": 0.015
           }
         },
         "y": {
@@ -80,6 +85,9 @@
           ],
           "axis": {
             "labelFontWeight": 700
+          },
+          "scale": {
+            "paddingInner": 0.06
           }
         },
         "color": {
@@ -130,6 +138,9 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0
+          },
+          "scale": {
+            "paddingInner": 0.015
           }
         },
         "y": {
@@ -140,7 +151,10 @@
             "Incalmo",
             "Artemis",
             "Shell"
-          ]
+          ],
+          "scale": {
+            "paddingInner": 0.06
+          }
         },
         "text": {
           "field": "meanGoals",
