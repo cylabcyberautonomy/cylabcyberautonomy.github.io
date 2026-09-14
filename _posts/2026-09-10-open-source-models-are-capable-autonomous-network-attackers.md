@@ -41,7 +41,7 @@ We ran three of the latest open weight models on our cyber ranges (Kimi K3, Qwen
 
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
 
-<p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved.</p>
+<p class="figure-caption">Each point is the average goals achieved for one model/harness/environment experiment setup. Each highlighted region spans one standard deviation around its group's mean cost and mean goals achieved. Results using the Incalmo harness are highlighted with an outline for their higher performance and lower cost. </p>
 
 There is significant variability in all 3 of the open weight models' performance across environments with the baseline shell harness, as well as in the cost of a run. 
 
