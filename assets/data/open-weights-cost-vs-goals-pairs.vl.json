@@ -26,8 +26,8 @@
     }
   },
   "spec": {
-    "width": 200,
-    "height": 320,
+    "width": 240,
+    "height": 300,
     "layer": [
       {
         "transform": [
@@ -108,7 +108,12 @@
               "Incalmo",
               "Artemis",
               "Shell"
-            ]
+            ],
+            "legend": {
+              "orient": "bottom",
+              "direction": "horizontal",
+              "columns": 0
+            }
           },
           "stroke": {
             "field": "harness",
@@ -218,7 +223,12 @@
               "Incalmo",
               "Artemis",
               "Shell"
-            ]
+            ],
+            "legend": {
+              "orient": "bottom",
+              "direction": "horizontal",
+              "columns": 0
+            }
           },
           "tooltip": [
             {
