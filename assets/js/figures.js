@@ -80,6 +80,28 @@
         return spec;
     };
 
+    // `"width": "container"` is only honoured on single and layered specs, not
+    // faceted ones: a faceted chart renders at whatever fixed width its panels
+    // declare, so any column wider than that leaves a gap down the right. A
+    // faceted spec that wants to fill its column sets `_fitPanels` to its
+    // column count, and the panel width gets measured off the container here.
+    // MIN_PANEL keeps the panels legible on a phone instead of letting three
+    // of them divide a 360px screen; el's own `overflow-x: auto` scrolls when
+    // that floor makes the figure wider than the screen.
+    const MIN_PANEL = 150;
+    // room the shared y axis (labels + title) and the outer padding need, which
+    // sits outside the panels and so can't be divided among them
+    const FACET_CHROME = 68;
+    const fitPanels = (spec, el) => {
+        const n = spec._fitPanels;
+        if (!n || !spec.spec) return spec;
+        const avail = el.offsetWidth || 0;
+        if (!avail) return spec;
+        const gaps = (spec.spacing || 0) * (n - 1);
+        spec.spec.width = Math.max(Math.floor((avail - gaps - FACET_CHROME) / n), MIN_PANEL);
+        return spec;
+    };
+
     // Where the actual marks live. A plain spec is its own unit; a layered one
     // keeps them in .layer; a faceted one wraps the whole child chart (layers
     // and all) in .spec. The patches below all walk marks, so they all need to
@@ -181,6 +203,11 @@
         el._ro = new ResizeObserver(() => {
             const nowMobile = isMobile();
             if (nowMobile !== el._mobile) { el._mobile = nowMobile; render(el); return; }
+            // A fit-to-container facet has its panel width baked into the spec,
+            // so view.resize() can't widen it - only a re-render can. Wait for a
+            // change worth the work, so dragging a window edge doesn't re-embed
+            // on every animation frame.
+            if (el._fitWidth && Math.abs(el.offsetWidth - el._fitWidth) > 24) { render(el); return; }
             if (el._view) el._view.resize().run();
         });
         el._ro.observe(el);
@@ -237,7 +264,13 @@
                     spec = stripTooltips(spec);
                     L("no hover available: tooltips stripped");
                 }
+                if (spec._fitPanels) {
+                    spec = fitPanels(spec, el);
+                    el._fitWidth = el.offsetWidth;
+                    L("facet fitted to container:", el._fitWidth, "-> panel width", spec.spec.width);
+                }
                 delete spec._minMobileWidth;
+                delete spec._fitPanels;
                 if (VERBOSE && typeof vegaLite !== "undefined" && vegaLite.compile) {
                     try { const c = vegaLite.compile(spec); L("vl.compile OK; vega marks:", (c.spec.marks || []).length); }
                     catch (e) { E("vl.compile FAILED:", e.message); throw e; }
