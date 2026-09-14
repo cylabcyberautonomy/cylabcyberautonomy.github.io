@@ -20,7 +20,7 @@ We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security ag
 
 | Harness | Agent structure | Interface to the LLM | Execution mechanism |
 | --- | --- | --- | --- |
-| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | Actions are executed via a C2 server |
+| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `Reconnaissance`, etc.) | High level actions are translated into a series of bash commands, executed via C2 server/agents |
 | [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Shell (via spawned sub-agents), coordinated through a shared note/TODO system |
 | Bash Shell | Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
 
@@ -62,6 +62,10 @@ We also provide the cost for these experiments, in the interest of transparency.
 
 To analyze even more dimensions of this data, check out the raw dataset
 [here]({{ '/data/open-weights-attacker-dataset/' | relative_url }})!
+
+## What does this mean for security practitioners?
+
+## What does this mean for   
 
 ### What's next?
 
