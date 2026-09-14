@@ -58,7 +58,7 @@
       "as": "colPos"
     },
     {
-      "calculate": "datum.harness === 'Incalmo' ? 'first' : datum.harness === 'Shell' ? 'last' : 'mid'",
+      "calculate": "datum.harness === 'Incalmo' ? 'first' : datum.harness === 'Artemis' ? 'last' : 'mid'",
       "as": "rowPos"
     }
   ],
@@ -103,8 +103,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "labelFontWeight": 700,
@@ -161,8 +161,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "labelFontWeight": 700,
@@ -219,8 +219,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "labelFontWeight": 700,
@@ -277,8 +277,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "labelFontWeight": 700,
@@ -335,8 +335,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "labelFontWeight": 700,
@@ -385,8 +385,8 @@
           "title": null,
           "sort": [
             "Incalmo",
-            "Artemis",
-            "Shell"
+            "Shell",
+            "Artemis"
           ],
           "axis": {
             "domain": false
