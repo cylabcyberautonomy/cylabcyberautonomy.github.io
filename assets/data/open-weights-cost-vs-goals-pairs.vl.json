@@ -37,10 +37,11 @@
           "layout (bounds:full) then widens the gutter to match - so the offset and",
           "the gutter chase each other. -26 with spacing 0 is the fixed point that",
           "measurement settles on: ~50px gutters with the sides centred in them to",
-          "within the stroke's own width. `spacing` is 0 because the gutter is now",
-          "produced entirely by these bounds; re-measure if either changes.",
-          "y stays within 0..child_height on purpose: reaching below would push the",
-          "axis down by the same amount every time, which never converges."
+          "within the stroke's own width. Re-measure if either changes.",
+          "Vertically there is no such chase any more: the panel name is a mark",
+          "inside the plot area and the x axis is pulled inside it too (see the",
+          "negative axis offset below), so nothing outside the panel is positioned",
+          "off these bounds - only the legend, which simply moves down."
         ],
         "transform": [
           {
@@ -71,10 +72,10 @@
             "expr": "child_width + 26"
           },
           "y": {
-            "expr": "0"
+            "expr": "-14"
           },
           "y2": {
-            "expr": "child_height"
+            "expr": "child_height + 18"
           }
         }
       },
@@ -250,7 +251,8 @@
             },
             "axis": {
               "format": "$,.0f",
-              "tickCount": 4
+              "tickCount": 4,
+              "offset": -46
             }
           },
           "y": {
@@ -259,7 +261,7 @@
             "title": "% goals achieved",
             "scale": {
               "domain": [
-                0,
+                -22,
                 116
               ]
             },
@@ -271,7 +273,8 @@
                 60,
                 80,
                 100
-              ]
+              ],
+              "domain": false
             }
           },
           "color": {
