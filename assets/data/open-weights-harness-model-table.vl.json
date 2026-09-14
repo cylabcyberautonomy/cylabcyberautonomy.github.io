@@ -104,28 +104,7 @@
             "value": "$seq-75"
           },
           "value": "$seq-0"
-        },
-        "tooltip": [
-          {
-            "field": "harness",
-            "title": "Harness"
-          },
-          {
-            "field": "model",
-            "title": "Model"
-          },
-          {
-            "field": "meanGoals",
-            "type": "quantitative",
-            "format": ".1f",
-            "title": "Mean % goals achieved"
-          },
-          {
-            "field": "runs",
-            "type": "quantitative",
-            "title": "Runs"
-          }
-        ]
+        }
       }
     },
     {
@@ -177,28 +156,7 @@
             "value": "$seq-75"
           },
           "value": "$seq-0"
-        },
-        "tooltip": [
-          {
-            "field": "harness",
-            "title": "Harness"
-          },
-          {
-            "field": "model",
-            "title": "Model"
-          },
-          {
-            "field": "meanGoals",
-            "type": "quantitative",
-            "format": ".1f",
-            "title": "Mean % goals achieved"
-          },
-          {
-            "field": "runs",
-            "type": "quantitative",
-            "title": "Runs"
-          }
-        ]
+        }
       }
     },
     {
@@ -250,28 +208,7 @@
             "value": "$seq-75"
           },
           "value": "$seq-0"
-        },
-        "tooltip": [
-          {
-            "field": "harness",
-            "title": "Harness"
-          },
-          {
-            "field": "model",
-            "title": "Model"
-          },
-          {
-            "field": "meanGoals",
-            "type": "quantitative",
-            "format": ".1f",
-            "title": "Mean % goals achieved"
-          },
-          {
-            "field": "runs",
-            "type": "quantitative",
-            "title": "Runs"
-          }
-        ]
+        }
       }
     },
     {
@@ -323,28 +260,7 @@
             "value": "$seq-75"
           },
           "value": "$seq-0"
-        },
-        "tooltip": [
-          {
-            "field": "harness",
-            "title": "Harness"
-          },
-          {
-            "field": "model",
-            "title": "Model"
-          },
-          {
-            "field": "meanGoals",
-            "type": "quantitative",
-            "format": ".1f",
-            "title": "Mean % goals achieved"
-          },
-          {
-            "field": "runs",
-            "type": "quantitative",
-            "title": "Runs"
-          }
-        ]
+        }
       }
     },
     {
@@ -396,28 +312,7 @@
             "value": "$seq-75"
           },
           "value": "$seq-0"
-        },
-        "tooltip": [
-          {
-            "field": "harness",
-            "title": "Harness"
-          },
-          {
-            "field": "model",
-            "title": "Model"
-          },
-          {
-            "field": "meanGoals",
-            "type": "quantitative",
-            "format": ".1f",
-            "title": "Mean % goals achieved"
-          },
-          {
-            "field": "runs",
-            "type": "quantitative",
-            "title": "Runs"
-          }
-        ]
+        }
       }
     },
     {
