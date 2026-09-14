@@ -19,15 +19,7 @@ Closed-weight frontier models have demonstrated increasingly strong offensive cy
 
 We tested Kimi K3, Qwen 3.8 Max, and GLM 5.2 as autonomous offensive security agents, using 3 different agentic harnesses.
 
-<div class="table-wrap" markdown="1">
-
-| Harness | Agent structure | Interface to the LLM | Execution mechanism |
-| --- | --- | --- | --- |
-| [Incalmo](https://arxiv.org/abs/2501.16466) | Single agent | High-level action library (`LateralMove`, `ExfiltrateData`, etc.) | High level actions are translated into a series of bash commands, executed via C2 server/agents |
-| [Artemis](https://arxiv.org/pdf/2512.09882) | Multi-agent | Supervisor that spawns dynamically-prompted sub-agents | Shell (via spawned sub-agents), coordinated through a shared note/TODO system |
-| Bash Shell (baseline)| Single agent | One tool: a bash shell | Commands are executed directly through shell, with no higher-level abstraction |
-
-</div>
+{% include modules/table.html data="harnesses" %}
 
 These agents are evaluated on the MHBench cyber ranges, a set of network environments each with at
 least one multi-stage exploit. Further detail on the construction and scoring criteria of each of
