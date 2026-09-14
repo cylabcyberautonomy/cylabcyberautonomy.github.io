@@ -129,14 +129,14 @@
           "condition": [
             {
               "test": "datum.isTop",
-              "value": "$seq-100"
+              "value": "$warm-100"
             },
             {
               "test": "datum.isBest",
-              "value": "$seq-75"
+              "value": "$warm-75"
             }
           ],
-          "value": "$seq-0"
+          "value": "$warm-0"
         }
       }
     },
@@ -187,14 +187,14 @@
           "condition": [
             {
               "test": "datum.isTop",
-              "value": "$seq-100"
+              "value": "$warm-100"
             },
             {
               "test": "datum.isBest",
-              "value": "$seq-75"
+              "value": "$warm-75"
             }
           ],
-          "value": "$seq-0"
+          "value": "$warm-0"
         }
       }
     },
@@ -245,14 +245,14 @@
           "condition": [
             {
               "test": "datum.isTop",
-              "value": "$seq-100"
+              "value": "$warm-100"
             },
             {
               "test": "datum.isBest",
-              "value": "$seq-75"
+              "value": "$warm-75"
             }
           ],
-          "value": "$seq-0"
+          "value": "$warm-0"
         }
       }
     },
@@ -303,14 +303,14 @@
           "condition": [
             {
               "test": "datum.isTop",
-              "value": "$seq-100"
+              "value": "$warm-100"
             },
             {
               "test": "datum.isBest",
-              "value": "$seq-75"
+              "value": "$warm-75"
             }
           ],
-          "value": "$seq-0"
+          "value": "$warm-0"
         }
       }
     },
@@ -361,14 +361,14 @@
           "condition": [
             {
               "test": "datum.isTop",
-              "value": "$seq-100"
+              "value": "$warm-100"
             },
             {
               "test": "datum.isBest",
-              "value": "$seq-75"
+              "value": "$warm-75"
             }
           ],
-          "value": "$seq-0"
+          "value": "$warm-0"
         }
       }
     },
@@ -412,13 +412,26 @@
           "format": ".1f"
         },
         "color": {
-          "condition": {
-            "test": "datum.isBest",
-            "value": "$ink-on-seq-high"
-          },
-          "value": "$ink-on-seq-low"
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$ink-on-warm-high"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "#FFFFFF"
+            }
+          ],
+          "value": "$ink-on-warm-low"
         }
-      }
+      },
+      "_comment": [
+        "Three fills, so three inks. The quiet and loud ends of the ramp take",
+        "the ramp's own ink tokens, which swap between themes because the ends",
+        "do. The middle tier is the exception: white reads best on $warm-75 in",
+        "both themes (4.0:1 light, 4.7:1 dark), and neither token is white in",
+        "both - so it is written literally, the way the heatmap cell labels are."
+      ]
     }
   ],
   "_minMobileWidth": 430
