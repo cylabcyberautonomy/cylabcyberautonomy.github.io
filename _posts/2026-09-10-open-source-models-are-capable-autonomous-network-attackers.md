@@ -78,4 +78,10 @@ models' offensive capabilities, as well as their defensive capabilities.
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
+### Appendix: cost versus goals, by model and harness
+
+<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
+
+<p class="figure-caption">The same points as the chart at the top of the post, with one rectangle per model/harness pair instead of a toggle between the two groupings. Each of the nine rectangles spans one standard deviation around that pair's mean cost and mean goals achieved. Colour is the harness, point shape is the model.</p>
+
 <p class="foot-note">Frontier closed-source models such as Anthropic's Claude Fable 5.1 and OpenAI's GPT-5.6 refuse to execute multi-stage network attacks.</p>
