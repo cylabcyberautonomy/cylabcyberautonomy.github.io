@@ -1,0 +1,161 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "/assets/data/open-weights-runs.json"
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.exfiltrated)"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "exfiltrated",
+          "as": "meanGoals"
+        },
+        {
+          "op": "count",
+          "as": "runs"
+        }
+      ],
+      "groupby": [
+        "harness",
+        "model"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "meanGoals",
+          "as": "rowMax"
+        }
+      ],
+      "groupby": [
+        "harness"
+      ]
+    },
+    {
+      "calculate": "datum.meanGoals >= datum.rowMax - 0.0001",
+      "as": "isBest"
+    }
+  ],
+  "width": "container",
+  "height": 170,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": null
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ],
+          "axis": {
+            "labelFontWeight": 700
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#2171B5"
+          },
+          "value": "#DEEBF7"
+        },
+        "tooltip": [
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ]
+        },
+        "text": {
+          "field": "meanGoals",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#FFFFFF"
+          },
+          "value": "#0D1B2A"
+        }
+      }
+    }
+  ],
+  "_minMobileWidth": 430
+}
