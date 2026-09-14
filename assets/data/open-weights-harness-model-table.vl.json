@@ -39,6 +39,14 @@
     {
       "calculate": "datum.meanGoals >= datum.rowMax - 0.0001",
       "as": "isBest"
+    },
+    {
+      "calculate": "datum.model === 'GLM 5.2' ? 'first' : datum.model === 'Qwen 3.8 Max' ? 'last' : 'mid'",
+      "as": "colPos"
+    },
+    {
+      "calculate": "datum.harness === 'Incalmo' ? 'first' : datum.harness === 'Shell' ? 'last' : 'mid'",
+      "as": "rowPos"
     }
   ],
   "width": "container",
@@ -49,9 +57,13 @@
   },
   "layer": [
     {
+      "transform": [
+        {
+          "filter": "!((datum.colPos === 'first' && datum.rowPos === 'first') || (datum.colPos === 'last' && datum.rowPos === 'first') || (datum.colPos === 'first' && datum.rowPos === 'last') || (datum.colPos === 'last' && datum.rowPos === 'last'))"
+        }
+      ],
       "mark": {
         "type": "rect",
-        "cornerRadius": 6,
         "stroke": "#000000",
         "strokeWidth": 1
       },
@@ -69,9 +81,6 @@
             "orient": "top",
             "labelAngle": 0,
             "labelFontWeight": 700
-          },
-          "scale": {
-            "paddingInner": 0.015
           }
         },
         "y": {
@@ -85,9 +94,290 @@
           ],
           "axis": {
             "labelFontWeight": 700
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#2171B5"
           },
-          "scale": {
-            "paddingInner": 0.06
+          "value": "#DEEBF7"
+        },
+        "tooltip": [
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'first' && datum.rowPos === 'first'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "#000000",
+        "strokeWidth": 1,
+        "cornerRadiusTopLeft": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ],
+          "axis": {
+            "labelFontWeight": 700
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#2171B5"
+          },
+          "value": "#DEEBF7"
+        },
+        "tooltip": [
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'last' && datum.rowPos === 'first'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "#000000",
+        "strokeWidth": 1,
+        "cornerRadiusTopRight": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ],
+          "axis": {
+            "labelFontWeight": 700
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#2171B5"
+          },
+          "value": "#DEEBF7"
+        },
+        "tooltip": [
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'first' && datum.rowPos === 'last'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "#000000",
+        "strokeWidth": 1,
+        "cornerRadiusBottomLeft": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ],
+          "axis": {
+            "labelFontWeight": 700
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.isBest",
+            "value": "#2171B5"
+          },
+          "value": "#DEEBF7"
+        },
+        "tooltip": [
+          {
+            "field": "harness",
+            "title": "Harness"
+          },
+          {
+            "field": "model",
+            "title": "Model"
+          },
+          {
+            "field": "meanGoals",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean % goals achieved"
+          },
+          {
+            "field": "runs",
+            "type": "quantitative",
+            "title": "Runs"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'last' && datum.rowPos === 'last'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "#000000",
+        "strokeWidth": 1,
+        "cornerRadiusBottomRight": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "GLM 5.2",
+            "Kimi K3",
+            "Qwen 3.8 Max"
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Artemis",
+            "Shell"
+          ],
+          "axis": {
+            "labelFontWeight": 700
           }
         },
         "color": {
@@ -138,9 +428,6 @@
           "axis": {
             "orient": "top",
             "labelAngle": 0
-          },
-          "scale": {
-            "paddingInner": 0.015
           }
         },
         "y": {
@@ -151,10 +438,7 @@
             "Incalmo",
             "Artemis",
             "Shell"
-          ],
-          "scale": {
-            "paddingInner": 0.06
-          }
+          ]
         },
         "text": {
           "field": "meanGoals",
