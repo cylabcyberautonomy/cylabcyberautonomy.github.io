@@ -25,6 +25,24 @@
       ]
     },
     {
+      "_comment": "Column order, written down once. The x sort and the corner-rounding below both read this, so reordering the table is a one-array edit.",
+      "calculate": "indexof([\"Qwen 3.8 Max\", \"GLM 5.2\", \"Kimi K3\"], datum.model)",
+      "as": "modelOrder"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "modelOrder",
+          "as": "modelOrderMax"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.modelOrder === 0 ? 'first' : datum.modelOrder === datum.modelOrderMax ? 'last' : 'mid'",
+      "as": "colPos"
+    },
+    {
       "joinaggregate": [
         {
           "op": "max",
@@ -54,10 +72,6 @@
       "as": "isTop"
     },
     {
-      "calculate": "datum.model === 'Kimi K3' ? 'first' : datum.model === 'Qwen 3.8 Max' ? 'last' : 'mid'",
-      "as": "colPos"
-    },
-    {
       "calculate": "datum.harness === 'Incalmo' ? 'first' : datum.harness === 'Artemis' ? 'last' : 'mid'",
       "as": "rowPos"
     }
@@ -85,11 +99,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
@@ -143,11 +157,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
@@ -201,11 +215,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
@@ -259,11 +273,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
@@ -317,11 +331,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
@@ -368,11 +382,11 @@
           "field": "model",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "Kimi K3",
-            "GLM 5.2",
-            "Qwen 3.8 Max"
-          ],
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
           "axis": {
             "orient": "top",
             "labelAngle": 0,
