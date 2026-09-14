@@ -81,16 +81,6 @@ models' offensive capabilities, as well as their defensive capabilities.
 For more information on the work we're doing and the open source systems we publish to enable it,
 take a look at our [Github](https://github.com/cylabcyberautonomy)!
 
-### Appendix A: average goals achieved, by harness and model
-
-<div class="figure" data-vega="/assets/data/open-weights-harness-model-table.vl.json"></div>
-
-<p class="figure-caption">One row per harness, one column per model. Each cell is that pair's mean percentage of goals achieved, averaged over every environment and trial; the darker cell in each row is the model that did best on that harness. Qwen 3.8 Max leads on all three.</p>
-
-### Appendix B: cost versus goals, by harness and model
-
-<div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals-pairs.vl.json"></div>
-
 <div class="figure" data-vega="/assets/data/open-weights-cost-vs-goals.vl.json"></div>
 
 <p class="figure-caption">The same points as the chart at the top of the post, split into one panel per harness so that every model/harness pair gets its own rectangle: nine in total, each spanning one standard deviation around that pair's mean cost and mean goals achieved. Colour is the model, and all three panels share the same axes, so the three models can be compared within a harness by colour and across harnesses by position.</p>
