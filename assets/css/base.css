@@ -902,15 +902,16 @@ a.entry-title:hover{
        figure wider than the viewport that means scrolling the figure across
        to reach it, which is the trade: the button belongs to the image.
 
-       has-actions' reserved 38px gutter goes, because that gutter was a strip
-       of empty space to scroll past before the chart started. The button gets
-       a small solid chip instead, so it stays legible over whatever part of
-       the chart ends up behind it. */
+       has-actions' reserved 38px gutter stays, and now does its job: with the
+       box hugging the chart, that gutter is 38px of clear space added to the
+       chart's right edge, so the button sits beside the last column label
+       instead of on top of it. (It was briefly set to 0 while the box was
+       pinned to the viewport - there the gutter could not help, since the
+       chart scrolled underneath the button whatever the padding was, and all
+       it bought was empty space to scroll past.) The chip below is belt and
+       braces for a chart whose content does reach under the button. */
     .content .figure .vega-embed{
         width: max-content;
-    }
-    .content .figure .vega-embed.has-actions{
-        padding-right: 0;
     }
     .content .figure .vega-embed summary{
         padding: 2px 4px;
