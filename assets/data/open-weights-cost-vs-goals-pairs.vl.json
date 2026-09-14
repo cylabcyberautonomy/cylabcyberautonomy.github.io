@@ -6,6 +6,10 @@
   "transform": [
     {
       "filter": "isValid(datum.cost)"
+    },
+    {
+      "calculate": "indexof([\"Shell\", \"Incalmo\", \"Artemis\"], datum.harness)",
+      "as": "harnessOrder"
     }
   ],
   "spacing": 18,
@@ -13,11 +17,11 @@
     "field": "harness",
     "type": "nominal",
     "title": null,
-    "sort": [
-      "Shell",
-      "Incalmo",
-      "Artemis"
-    ],
+    "sort": {
+      "field": "harnessOrder",
+      "op": "min",
+      "order": "ascending"
+    },
     "columns": 3,
     "header": {
       "labelFontSize": 13,
@@ -29,6 +33,40 @@
     "width": 240,
     "height": 300,
     "layer": [
+      {
+        "transform": [
+          {
+            "aggregate": [
+              {
+                "op": "count",
+                "as": "n"
+              }
+            ],
+            "groupby": [
+              "harnessOrder"
+            ]
+          },
+          {
+            "filter": "datum.harnessOrder > 0"
+          }
+        ],
+        "mark": {
+          "type": "rule",
+          "stroke": "$ink-dim",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "x": {
+            "value": -9
+          },
+          "y": {
+            "value": 0
+          },
+          "y2": {
+            "value": "height"
+          }
+        }
+      },
       {
         "transform": [
           {
