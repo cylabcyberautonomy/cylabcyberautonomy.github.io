@@ -33,15 +33,16 @@
           "Rings Incalmo only - the harness the post is arguing for. Its sides land",
           "in the two gutters, where the dividers used to be, just turned up and",
           "joined at the ends.",
-          "Reaching into the gutter counts towards the panel's bounds, and the facet",
-          "layout (bounds:full) then widens the gutter to match - so the offset and",
-          "the gutter chase each other. -26 with spacing 0 is the fixed point that",
-          "measurement settles on: ~50px gutters with the sides centred in them to",
-          "within the stroke's own width. Re-measure if either changes.",
-          "Vertically there is no such chase any more: the panel name is a mark",
-          "inside the plot area and the x axis is pulled inside it too (see the",
-          "negative axis offset below), so nothing outside the panel is positioned",
-          "off these bounds - only the legend, which simply moves down."
+          "Every number here is measured rather than derived, because each one moves",
+          "the thing it is being measured against. Horizontally: reaching into the",
+          "gutter counts towards the panel's bounds, and the facet layout",
+          "(bounds:full) widens the gutter to match, so -26 with spacing 0 is the",
+          "fixed point - ~50px gutters with the sides centred in them. Vertically:",
+          "while the rect is the lowest thing in the panel the x axis is placed off",
+          "its bounds and follows it down, so the axis offset below and this y2 have",
+          "to be solved together. child_height - 2 with offset -51 puts the axis line",
+          "on zero and leaves ~13px under the Cost title. Re-measure both together if",
+          "either changes."
         ],
         "transform": [
           {
@@ -75,7 +76,7 @@
             "expr": "-14"
           },
           "y2": {
-            "expr": "child_height + 18"
+            "expr": "child_height - 2"
           }
         }
       },
@@ -145,7 +146,13 @@
           },
           "y": {
             "field": "y0",
-            "type": "quantitative"
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                -22,
+                116
+              ]
+            }
           },
           "y2": {
             "field": "y1"
@@ -252,7 +259,8 @@
             "axis": {
               "format": "$,.0f",
               "tickCount": 4,
-              "offset": -46
+              "offset": -51.0,
+              "_comment": "Negative: pulls the axis up into the plot area so the box can enclose it, and leaves no empty band between the y axis's 0 and the x axis. Solved together with the ring's y2 - see the comment on that layer."
             }
           },
           "y": {
@@ -274,7 +282,9 @@
                 80,
                 100
               ],
-              "domain": false
+              "domain": false,
+              "offset": 14,
+              "_comment": "Positive: pushes the shared y axis away from the first panel. It is the axis for all three, but sitting flush against Shell it read as Shell's own."
             }
           },
           "color": {
