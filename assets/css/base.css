@@ -661,6 +661,17 @@ html[data-theme="light"] .icon-cmu{
     color: var(--secondary-color);
 }
 
+/* A raster figure is a fixed-size image, not a chart that can lay itself out
+   again, so it gets the opposite treatment to a chart's svg: scale down to
+   the text column rather than keep its natural width. The screenshots are
+   saved at 2x for sharp rendering on dense displays, so their intrinsic
+   width is well past the column and this is what brings them back to it. */
+.content .figure img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 .figure-placeholder{
     display: flex;
     align-items: center;
