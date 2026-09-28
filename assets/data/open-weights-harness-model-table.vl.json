@@ -1,0 +1,438 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "/assets/data/open-weights-runs.json"
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.exfiltrated)"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "exfiltrated",
+          "as": "meanGoals"
+        },
+        {
+          "op": "count",
+          "as": "runs"
+        }
+      ],
+      "groupby": [
+        "harness",
+        "model"
+      ]
+    },
+    {
+      "_comment": "Column order, written down once. The x sort and the corner-rounding below both read this, so reordering the table is a one-array edit.",
+      "calculate": "indexof([\"Qwen 3.8 Max\", \"GLM 5.2\", \"Kimi K3\"], datum.model)",
+      "as": "modelOrder"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "modelOrder",
+          "as": "modelOrderMax"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.modelOrder === 0 ? 'first' : datum.modelOrder === datum.modelOrderMax ? 'last' : 'mid'",
+      "as": "colPos"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "meanGoals",
+          "as": "rowMax"
+        }
+      ],
+      "groupby": [
+        "harness"
+      ]
+    },
+    {
+      "calculate": "datum.meanGoals >= datum.rowMax - 0.0001",
+      "as": "isBest"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "meanGoals",
+          "as": "tableMax"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.meanGoals >= datum.tableMax - 0.0001",
+      "as": "isTop"
+    },
+    {
+      "calculate": "datum.harness === 'Incalmo' ? 'first' : datum.harness === 'Artemis' ? 'last' : 'mid'",
+      "as": "rowPos"
+    }
+  ],
+  "width": "container",
+  "height": 170,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "!((datum.colPos === 'first' && datum.rowPos === 'first') || (datum.colPos === 'last' && datum.rowPos === 'first') || (datum.colPos === 'first' && datum.rowPos === 'last') || (datum.colPos === 'last' && datum.rowPos === 'last'))"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "$ink-dim",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$warm-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$warm-75"
+            }
+          ],
+          "value": "$warm-0"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'first' && datum.rowPos === 'first'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "$ink-dim",
+        "strokeWidth": 1,
+        "cornerRadiusTopLeft": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$warm-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$warm-75"
+            }
+          ],
+          "value": "$warm-0"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'last' && datum.rowPos === 'first'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "$ink-dim",
+        "strokeWidth": 1,
+        "cornerRadiusTopRight": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$warm-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$warm-75"
+            }
+          ],
+          "value": "$warm-0"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'first' && datum.rowPos === 'last'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "$ink-dim",
+        "strokeWidth": 1,
+        "cornerRadiusBottomLeft": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$warm-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$warm-75"
+            }
+          ],
+          "value": "$warm-0"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.colPos === 'last' && datum.rowPos === 'last'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "stroke": "$ink-dim",
+        "strokeWidth": 1,
+        "cornerRadiusBottomRight": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "labelFontWeight": 700,
+            "domain": false
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$warm-100"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "$warm-75"
+            }
+          ],
+          "value": "$warm-0"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14
+      },
+      "encoding": {
+        "x": {
+          "field": "model",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "modelOrder",
+            "op": "min",
+            "order": "ascending"
+          },
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "harness",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Incalmo",
+            "Shell",
+            "Artemis"
+          ],
+          "axis": {
+            "domain": false
+          }
+        },
+        "text": {
+          "field": "meanGoals",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.isTop",
+              "value": "$ink-on-warm-high"
+            },
+            {
+              "test": "datum.isBest",
+              "value": "#FFFFFF"
+            }
+          ],
+          "value": "$ink-on-warm-low"
+        }
+      },
+      "_comment": [
+        "Three fills, so three inks. The quiet and loud ends of the ramp take",
+        "the ramp's own ink tokens, which swap between themes because the ends",
+        "do. The middle tier is the exception: white reads best on $warm-75 in",
+        "both themes (4.0:1 light, 4.7:1 dark), and neither token is white in",
+        "both - so it is written literally, the way the heatmap cell labels are."
+      ]
+    }
+  ],
+  "_minMobileWidth": 430
+}

@@ -1,0 +1,42 @@
+title: Cyber Autonomy Initiative
+description: Research from the Cyber Autonomy Initiative at CMU CyLab on the scientific foundations of autonomous cybersecurity.
+url: https://cylabcyberautonomy.github.io
+timezone: "America/New_York"
+
+permalink: /blogposts/:title/
+
+collections:
+  datasets:
+    output: true
+    permalink: /data/:name/
+  publications:
+    output: false
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: "entry" }
+  - scope: { path: "", type: "datasets" }
+    values: { layout: "entry" }
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - claude_changelog.txt
+  - vendor
+
+plugins:
+  - jekyll-sitemap
+
+# Email signup. The form at _includes/modules/subscribe.html renders only when
+# `action` is set, so it stays invisible until there is a list behind it.
+#
+# For a Mailman list at lists.andrew.cmu.edu, `action` is the list's subscribe
+# endpoint and the field it expects is `email` - checked against a live
+# listinfo page, whose form posts email/fullname/pw/pw-conf/digest and needs
+# only the first. Mailman mails a confirmation link, so nothing is added to the
+# list without the reader confirming, and it handles unsubscribes and archives.
+#
+subscribe:
+  url: https://lists.andrew.cmu.edu/mailman/listinfo/cylab-cyberautonomy

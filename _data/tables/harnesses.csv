@@ -1,0 +1,4 @@
+Harness,Agent structure,Interface to the LLM,Execution mechanism
+[Incalmo](https://arxiv.org/abs/2501.16466),Single agent,"High-level action library (`LateralMove`, `ExfiltrateData`, etc.)","High level actions are translated into a series of bash commands, executed via C2 server/agents"
+[Artemis](https://arxiv.org/pdf/2512.09882),Multi-agent,Supervisor that spawns dynamically-prompted sub-agents,"Shell (via spawned sub-agents), coordinated through a shared note/TODO system"
+Bash Shell (baseline),Single agent,One tool: a bash shell,"Commands are executed directly through shell, with no higher-level abstraction"

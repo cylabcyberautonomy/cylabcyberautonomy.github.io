@@ -1,0 +1,18 @@
+{%- assign recent = '' | split: '' -%}
+{%- if site.posts %}{% assign recent = recent | concat: site.posts %}{% endif -%}
+{%- if site.datasets %}{% assign recent = recent | concat: site.datasets %}{% endif -%}
+{%- if site.publications %}{% assign recent = recent | concat: site.publications %}{% endif -%}
+{%- assign recent = recent | sort: 'date' | reverse -%}
+<h2>Recent</h2>
+<ul class="recent-list">
+    {%- for entry in recent limit: 3 %}
+    <li>
+        {%- if entry.collection == 'publications' -%}
+        <a href="{{ entry.links[0].url }}">{{ entry.title }}</a>
+        {%- else -%}
+        <a href="{{ entry.url | relative_url }}">{{ entry.title }}</a>
+        {%- endif %}
+        <span class="recent-meta">{{ entry.date | date: "%b %Y" }}</span>
+    </li>
+    {%- endfor %}
+</ul>
