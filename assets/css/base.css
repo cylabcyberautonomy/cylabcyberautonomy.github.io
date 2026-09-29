@@ -467,6 +467,8 @@ html[data-theme="light"] .icon-cmu{
 .content > h3{ --flow: var(--space-lg); }
 .content > :is(h2, h3) + *{ --flow: var(--space-md); }
 .content > h2 + .entry-meta{ --flow: var(--space-xs); }
+.content > h2 + .entry-subtitle{ --flow: var(--space-xs); }
+.content > .entry-subtitle + .entry-meta{ --flow: var(--space-sm); }
 .content > .figure,
 .content > .figure + *{ --flow: var(--space-xl); }
 .content > .foot-note{ --flow: var(--space-lg); }
@@ -701,6 +703,95 @@ html[data-theme="light"] .icon-cmu{
 }
 .content > .figure + .figure-caption{ --flow: var(--space-xs); }
 .content > .figure-caption + *{ --flow: var(--space-xl); }
+
+/* optional front-matter subtitle under an entry's title */
+.content p.entry-subtitle{
+    padding: 0;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+/* light-background raster/SVG figures sit on the page as a rounded card */
+.content .figure-image img{
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+/* a single, compact chart: keep it narrower than the column and centred.
+   The spec uses width "container", so it fits this box on a phone too. */
+.content .figure-centered .vega-embed{
+    display: block;
+    width: min(100%, 460px) !important;
+    margin: 0 auto;
+}
+
+/* call-to-action box */
+.content .callout{
+    margin-inline: 1rem;
+    padding: .9rem 1.1rem;
+    border: 1px solid var(--accent-color);
+    border-left-width: 4px;
+    border-radius: 6px;
+    background: var(--panel-bg);
+}
+.content .callout p{
+    padding: 0;
+    margin: 0;
+}
+.content .callout p + p{
+    margin-top: .4rem;
+}
+
+/* icon button that copies an address without printing it; see copy-email.js */
+.content .copy-email{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: -3px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0 2px;
+    border: 0;
+    background: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.content .copy-email:hover,
+.content .copy-email:focus-visible{
+    color: var(--accent-color);
+}
+.content .copy-email-tip{
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--accent-color);
+    color: var(--ink-on-accent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s;
+}
+.content .copy-email-tip.show{
+    opacity: 1;
+}
+
+/* numbered reference list at the foot of a post; [n] links land on these */
+.content ol.references{
+    font-size: 14px;
+}
+.content ol.references li{
+    scroll-margin-top: 1rem;
+}
+.content ol.references li:target{
+    color: var(--accent-color);
+}
 
 
 /* entry cards: blog, data, publications */
