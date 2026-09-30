@@ -7,7 +7,7 @@ description: AI-evolved programs that score better on their benchmark can crash,
 
 <div class="figure figure-image"><img src="{{ '/assets/img/posts/ai-evolved-systems/aichilles-overview.svg' | relative_url }}?v={{ site.time | date: '%s' }}" alt="Diagram. An initial program P and a workload W feed AI evolution, which produces an evolved program P′. Both P and P′ go into AIChilles, which searches new inputs W′ and reports weakness types: system crashes, slowdowns, memory blowups, or P′ performing worse than the original P."></div>
 
-<p class="figure-caption"><strong>Fig. 1.</strong> AI evolution optimizes a program for a higher KPI on a fixed workload <em>W</em>. AIChilles <a href="#ref-1">[1]</a> takes the initial program <em>P</em> and the evolved program <em>P′</em>, searches new inputs <em>W′</em>, and exposes where <em>P′</em> crashes, slows down, blows up memory, or performs worse than <em>P</em>.</p>
+<p class="figure-caption figure-caption-lg"><strong>Fig. 1.</strong> AI evolution optimizes a program for a higher KPI on a fixed workload <em>W</em>. AIChilles <a href="#ref-1">[1]</a> takes the initial program <em>P</em> and the evolved program <em>P′</em>, searches new inputs <em>W′</em>, and exposes where <em>P′</em> crashes, slows down, blows up memory, or performs worse than <em>P</em>.</p>
 
 AI-driven system evolution promises to revolutionize how we innovate computer systems. Traditionally, optimizing system heuristics takes specialized expertise and huge engineering effort. AI evolution provides a new possibility: why not give AI agents a system program, an evaluator, and enough iterations, and let them automatically discover better implementations?
 
@@ -21,7 +21,7 @@ Motivated by this observation, we designed **AIChilles** ([paper](https://arxiv.
 
 <div class="figure figure-centered" data-vega="/assets/data/ai-evolved-prism-scalability.vl.json"></div>
 
-<p class="figure-caption"><strong>Fig. 2.</strong> AIChilles searches beyond the workloads used by the original evaluator. It finds valid inputs where the AI-evolved program behaves much worse relative to the baseline. Here, evolved programs have scalability issues on larger input workloads.</p>
+<p class="figure-caption figure-caption-lg"><strong>Fig. 2.</strong> Worst-case execution time (log scale) as the number of GPUs in the workload grows. <em>P</em> is the initial program; each <em>P′</em> is the program that Engram <a href="#ref-3">[3]</a> or OpenEvolve <a href="#ref-4">[4]</a> evolved from it. AIChilles <a href="#ref-1">[1]</a> searches beyond the workloads used by the original evaluator and finds valid, larger inputs where the evolved programs scale badly: at 32 GPUs, Engram’s <em>P′</em> takes 89&nbsp;s and OpenEvolve’s 0.027&nbsp;s, while <em>P</em> stays around 6&nbsp;ms.</p>
 
 We reported our findings to teams working on AI-evolution frameworks (AdaEvolve [[2]](#ref-2) and Engram [[3]](#ref-3)), and they acknowledged the issues found by AIChilles. They agree that when an evaluator rewards only benchmark score, AI evolution may exploit that objective aggressively and reveal gaps in the evaluator (see [blog](https://ucbskyadrs.github.io/blog/aichilles/)).
 

@@ -701,6 +701,10 @@ html[data-theme="light"] .icon-cmu{
     line-height: 1.45;
     color: var(--secondary-color);
 }
+.content p.figure-caption-lg{
+    font-size: 15px;
+    line-height: 1.5;
+}
 .content > .figure + .figure-caption{ --flow: var(--space-xs); }
 .content > .figure-caption + *{ --flow: var(--space-xl); }
 

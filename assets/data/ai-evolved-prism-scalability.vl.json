@@ -10,145 +10,145 @@
   "data": {
     "values": [
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 2,
         "time": 0.007432,
         "runs": 2
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 5,
         "time": 0.004716,
         "runs": 1
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 6,
         "time": 0.004774,
         "runs": 1
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 7,
         "time": 0.004861,
         "runs": 1
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 10,
         "time": 0.004731,
         "runs": 1
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 11,
         "time": 0.005317,
         "runs": 1
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 16,
         "time": 0.005141,
         "runs": 3
       },
       {
-        "program": "P (initial)",
+        "program": "P (initial program)",
         "gpus": 32,
         "time": 0.006205,
         "runs": 7
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 2,
         "time": 0.05381,
         "runs": 2
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 5,
         "time": 0.478665,
         "runs": 1
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 6,
         "time": 0.655164,
         "runs": 1
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 7,
         "time": 1.177487,
         "runs": 1
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 10,
         "time": 2.970752,
         "runs": 1
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 11,
         "time": 3.768262,
         "runs": 1
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 16,
         "time": 11.546382,
         "runs": 3
       },
       {
-        "program": "P' Engram",
+        "program": "P′ Engram-evolved program",
         "gpus": 32,
         "time": 88.52529,
         "runs": 7
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 2,
         "time": 0.007186,
         "runs": 2
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 5,
         "time": 0.005564,
         "runs": 1
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 6,
         "time": 0.005814,
         "runs": 1
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 7,
         "time": 0.005477,
         "runs": 1
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 10,
         "time": 0.006165,
         "runs": 1
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 11,
         "time": 0.006566,
         "runs": 1
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 16,
         "time": 0.009667,
         "runs": 3
       },
       {
-        "program": "P' OpenEvolve",
+        "program": "P′ OpenEvolve-evolved program",
         "gpus": 32,
         "time": 0.026979,
         "runs": 7
@@ -215,9 +215,9 @@
       "title": null,
       "scale": {
         "domain": [
-          "P (initial)",
-          "P' Engram",
-          "P' OpenEvolve"
+          "P (initial program)",
+          "P′ Engram-evolved program",
+          "P′ OpenEvolve-evolved program"
         ],
         "range": [
           "$cat-1",
@@ -227,13 +227,15 @@
       },
       "legend": {
         "orient": "top",
-        "direction": "horizontal",
+        "direction": "vertical",
         "labelFontSize": 14,
         "symbolSize": 110,
         "symbolStrokeWidth": 0,
         "columnPadding": 18,
         "offset": 14,
-        "symbolDash": []
+        "symbolDash": [],
+        "labelLimit": 320,
+        "rowPadding": 6
       }
     },
     "shape": {
@@ -242,9 +244,9 @@
       "title": null,
       "scale": {
         "domain": [
-          "P (initial)",
-          "P' Engram",
-          "P' OpenEvolve"
+          "P (initial program)",
+          "P′ Engram-evolved program",
+          "P′ OpenEvolve-evolved program"
         ],
         "range": [
           "circle",
@@ -267,9 +269,9 @@
           "title": null,
           "scale": {
             "domain": [
-              "P (initial)",
-              "P' Engram",
-              "P' OpenEvolve"
+              "P (initial program)",
+              "P′ Engram-evolved program",
+              "P′ OpenEvolve-evolved program"
             ],
             "range": [
               [
