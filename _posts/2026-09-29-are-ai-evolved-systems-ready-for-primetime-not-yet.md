@@ -5,6 +5,16 @@ authors: [lesley-zhou, vyas-sekar]
 description: AI-evolved programs that score better on their benchmark can crash, slow down, or return worse results on new workloads. We built AIChilles to expose these weaknesses automatically, and found them even in a spec-driven multi-agent workflow.
 ---
 
+<div class="callout tldr">
+  <p class="tldr-label">TL;DR</p>
+  <ul>
+    <li>Researchers across industry and academia are using AI agents to evolve systems, reporting impressive gains (LLM routing, R&amp;D, etc).</li>
+    <li>But these gains can give us false confidence. We find AI-evolved systems may crash or violate their own specifications under new conditions.</li>
+    <li>We built AIChilles to automatically uncover these weaknesses.</li>
+    <li>We should temper the exuberance around AI-evolved solutions and stress test their performance and reliability.</li>
+  </ul>
+</div>
+
 <div class="figure figure-image"><img src="{{ '/assets/img/posts/ai-evolved-systems/aichilles-overview.svg' | relative_url }}?v={{ site.time | date: '%s' }}" alt="Diagram. An initial program P and a workload W feed AI evolution, which produces an evolved program P′. Both P and P′ go into AIChilles, which searches new inputs W′ and reports weakness types: system crashes, slowdowns, memory blowups, or P′ performing worse than the original P."></div>
 
 <p class="figure-caption figure-caption-lg"><strong>Fig. 1.</strong> AI evolution optimizes a program for a higher KPI on a fixed workload <em>W</em>. AIChilles <a href="#ref-1">[1]</a> takes the initial program <em>P</em> and the evolved program <em>P′</em>, searches new inputs <em>W′</em>, and exposes where <em>P′</em> crashes, slows down, blows up memory, or performs worse than <em>P</em>.</p>

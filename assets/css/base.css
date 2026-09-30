@@ -746,6 +746,16 @@ html[data-theme="light"] .icon-cmu{
 .content .callout p + p{
     margin-top: .4rem;
 }
+.content .callout.tldr .tldr-label{
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: .3rem;
+}
+.content .callout.tldr ul{
+    margin: 0;
+    padding: 0 0 0 1.2rem;
+}
 
 /* icon button that copies an address without printing it; see copy-email.js */
 .content .copy-email{
