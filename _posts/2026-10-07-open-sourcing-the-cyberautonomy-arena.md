@@ -84,11 +84,11 @@ The arena brings three new systems to the table.
 
 #### 1. An abstraction for expressing attackers and defenders
 
-Allows researchers to describe attack and defense strategies at a high level and combine components into complete systems methodically. This lets researchers to quickly iterate on attack/defense design.
+Allows researchers to describe attack and defense strategies at a high level and combine components into complete systems methodically. We can now quickly iterate on attack/defense design.
 
 #### 2. Standardized interfaces for connecting systems and networks
 
-We allow attacker systems, defender systems, and network deployment systems to be treated like black boxes, as long as they expose a set of standardized functions the arena uses to drive an experiment lifecycle. Researchers can swap components and explore new combinations without rebuilding the experiment around each implementation.
+We enable attacker systems, defender systems, and network deployment systems to be treated like black boxes, as long as they expose a set of standardized functions the arena uses to drive an experiment lifecycle. A large variety of systems can be evaluated without rebuilding the experiment around each implementation.
 
 #### 3. A network specification and deployment framework
 
