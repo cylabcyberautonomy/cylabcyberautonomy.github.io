@@ -32,8 +32,8 @@ description: Network defenses need to drastically evolve to match AI-assisted at
   <p class="tldr-label">TL;DR</p>
   <ul>
     <li>LLM cyber capabilities have enabled cyberattackers to execute exploits at machine speed, and machine scale.</li>
-    <li>Network defenders are overwhelmed and current defense systems are ill-equipped to handle these constantly evolving threats. We need data to inform how we design a new paradigm of evolving, autonomous network defenses.</li>
-    <li>The CyberAutonomy Arena enables large scale experimentation by allowing any autonomous attacker to be played against any autonomous defender on any network using a universal interface. We open source the arena <a href="https://github.com/cylabcyberautonomy/CyberAutonomyArena">here</a> <em></em>.</li>
+    <li>Current defense systems are ill-equipped to handle these constantly evolving threats. We need data to inform how we design a new paradigm of evolving, autonomous network defenses.</li>
+    <li>The CyberAutonomy Arena enables large scale experimentation, allowing any autonomous attacker to be played against any autonomous defender on any network using a universal interface. We open source the arena <a href="https://github.com/cylabcyberautonomy/CyberAutonomyArena">here</a> <em></em>.</li>
   </ul>
 </div>
 
@@ -46,7 +46,7 @@ description: Network defenses need to drastically evolve to match AI-assisted at
   <img class="tv tv-mobile tv-light" src="{{ '/assets/img/posts/cyberautonomy-arena/today-vision-mobile-light.png' | relative_url }}" alt="Stacked comparison. Today: human and AI attackers act at machine timescale while human defenders observe and react at human timescale against rigid defenses that can't adapt in real time. Our Vision: human and AI defenders scale exponentially, operate at machine timescale, observe attacker-defender interactions, and run adaptable, personalized defenses that evolve in real time." width="1168" height="1896">
 </div>
 
-<p class="figure-caption"><strong>Today vs. our vision.</strong> Defenders are outpaced by machine-speed attackers and run rigid defenses that can't adapt in real time. We envision defenders operating at machine scale, observing each network's interactions and evolving adaptable, personalized defenses in real time.</p>
+<p class="figure-caption"><strong>Today's defense systems vs. our vision of autonomous security.</strong> Defenders are outpaced by machine-speed attackers and run rigid defenses that can't adapt in real time. We envision defenders operating at machine scale, observing each network's interactions and evolving adaptable, personalized defenses in real time.</p>
 
 Today, network defenders face two main challenges:
 
@@ -70,7 +70,7 @@ The CyberAutonomy Arena helps us move toward this autonomous future by enabling 
   <img class="tv tv-mobile tv-light" src="{{ '/assets/img/posts/cyberautonomy-arena/why-mobile-light.webp' | relative_url }}" alt="Progression across three stages, stacked vertically. Isolated component evaluations: an intrusion detection system is evaluated on labeled network traffic datasets and an exploit generator on a set of vulnerable programs. End-to-end system evaluations: a complete defender system and a complete attacker system are deployed against each other on a real network. Collection of systems evaluations: multiple defender systems and multiple attacker systems compete on the network." width="777" height="2000">
 </div>
 
-<p class="figure-caption">From isolated components to end-to-end systems to collections of competing systems: prior work evaluates single components in isolation, while the arena evaluates complete attacker and defender systems against one another.</p>
+<p class="figure-caption">Prior work evaluates single components in isolation, while the arena evaluates complete attacker and defender systems against one another. Researchers can methodically generate systems at scale for bulk experimentation and data generation. </p>
 
 Current work in evaluating security measures and exploits tends to be component based, evaluating components on their efficacy in isolation, on benchmarks of static files. These evaluations are static, quickly saturate, and don't necessarily reflect how these components behave when implemented in end-to-end systems in the real world.
 
@@ -88,18 +88,34 @@ Allows researchers to describe attack and defense strategies at a high level and
 
 #### 2. Standardized interfaces for connecting systems and networks
 
-We allow attacker systems, defender systems, and network deployment systems to be treated like black boxes, as long as they expose a set of 10 functions the arena uses to drive an experiment lifecycle. Researchers can swap components and explore new combinations without rebuilding the experiment around each implementation.
+We allow attacker systems, defender systems, and network deployment systems to be treated like black boxes, as long as they expose a set of standardized functions the arena uses to drive an experiment lifecycle. Researchers can swap components and explore new combinations without rebuilding the experiment around each implementation.
 
 #### 3. A network specification and deployment framework
 
-We provide a way of configuring a network through just one YAML file. Using our vulnerability catalogue &mdash; a public set of software setup scripts associated with each vulnerability &mdash; we can instantiate a huge set of varied networks and attack chains. Our network deployment orchestrator is able to optimize this deployment, reducing network deployment times from 6&ndash;8 hours to an average of 30 minutes on our networks.
+We were able to reduce network deployment times from from 6&ndash;8 hours to an average of 30 minutes on our networks. These optimizations were enabled using our network deployment framework, allowing us to configure a network and its vulnerabilities through just one YAML file. Researchers are now able to instantiate a huge set of varied networks and seeded attack chains quickly and methodically.
 
 ### How can I use the arena?
 
-The arena is designed to support your choice of attacker, defender, and network deployment system through its standardized interfaces. Simply write a plugin that exposes the functions required for the arena interface to deploy your own attacker and defender systems on any existing network deployment infrastructure you support.
+The arena is designed to support your choice of attacker, defender, and network deployment system through its standardized interfaces. Simply write plugins that expose the functions required for the arena interface for the attacker, defender and existing network deployment system you wish to experiment with.
 
-If you would like to replicate our setup, we use three projects: Incalmo for attack systems, Perry for defense systems, and MHBench for network deployment. To get started with the same components, clone the repositories and follow the setup instructions in their READMEs:
+If you would like to replicate our setup, we use Incalmo for attack systems, Perry for defense systems, and MHBench for network deployment. To get started with the same components, clone the repositories and follow the setup instructions in their READMEs:
 
 * [Incalmo](https://github.com/cylabcyberautonomy/Incalmo): our autonomous attack system
 * [MHBench](https://github.com/cylabcyberautonomy/MHBench): our multi-host network deployment system
 * [Perry](https://github.com/cylabcyberautonomy/Perry): our repository for autonomous defenses
+
+### Sneak peek: autonomous attackers v. autonomous defenders 
+
+We plan on releasing all of the data we collect with the CyberAutonomy arena for public use, as we believe it is critical for this data to be free for the research community to build, evaluate, and improve autonomous defenses.
+
+Here’s a look at the results from one set of experiments: how a simple Sonnet 5-driven SOC defense fares against attackers driven by the latest open-source LLMs.
+
+<insert image here of the >
+
+We can see that Sonnet 5 was great at quickly and effectively blocking the LLM-driven attackers from exfiltrating data from the networks. 
+
+We are systematically conducting more of these attacker versus defender experiments, and extending the arena to enable more realistic experimentation setups and higher quality data. 
+
+We will be releasing more details along with more data from these experiments in the future. Stay tuned!
+
+
