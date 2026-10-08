@@ -121,6 +121,8 @@ Here’s a look at the results from one set of experiments: how a simple Sonnet 
 
 We can see that Sonnet 5 was great at quickly and effectively blocking the LLM-driven attackers from exfiltrating data from the networks. 
 
-We are systematically conducting more of these attacker versus defender experiments, and extending the arena to enable more realistic experimentation setups and higher quality data. We will be releasing more details along with more data from these experiments in the future. Stay tuned!
+<div class="callout">
+  <p>We are systematically conducting more of these attacker versus defender experiments, and extending the arena to enable more realistic experimentation setups and higher quality data. We will be releasing more details along with more data from these experiments in the future. Stay tuned!</p>
+</div>
 
 
